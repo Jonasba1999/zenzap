@@ -1,1 +1,28 @@
-@import './modules/pricingCards.css';
+[data-copy-button] {
+  [data-label] {
+    display: none;
+  }
+
+  &:hover {
+    [data-label] {
+      display: block;
+    }
+  }
+}
+
+.ai-compare-dot {
+  transition: all 0.3s ease-in-out;
+}
+
+.ai-compare-dot.active {
+  opacity: 100;
+  width: 32px;
+}
+
+/* Pricing Cards styles */
+.pricing-cards_package-trigger.is-active {
+  .pricing-cards_package-radio {
+    background-color: #007aff;
+    border-color: #007aff;
+  }
+}

@@ -201,7 +201,7 @@ function createSliders(containers: HTMLElement[], onChange: (index: number) => v
     let currentIndex = 0;
 
     function getIndexFromX(clientX: number): number {
-      const rect = track.getBoundingClientRect();
+      const rect = track!.getBoundingClientRect();
       const percent = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
       return Math.round(percent * (SNAP_POINTS - 1));
     }
