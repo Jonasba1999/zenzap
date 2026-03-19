@@ -1,0 +1,14 @@
+.midmarket-guides_accordion_item.is-open {
+  .midmarket-guides_accordion_vert-line {
+    display: none;
+  }
+
+  h4 {
+    font-weight: 700;
+  }
+
+  .midmarket-guides_accordion_horizontal-line,
+  .midmarket-guides_accordion_vert-line {
+    background-color: black;
+  }
+}

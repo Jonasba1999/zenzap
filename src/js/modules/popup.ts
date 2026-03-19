@@ -6,6 +6,7 @@ export function popup(): void {
   if (!triggers.length) return;
 
   function openPopup(popup: HTMLElement): void {
+    popup.style.display = 'flex';
     gsap.to(popup, {
       autoAlpha: 1,
       duration: 0.3,
@@ -17,6 +18,9 @@ export function popup(): void {
     gsap.to(popup, {
       autoAlpha: 0,
       duration: 0.2,
+      onComplete: () => {
+        popup.style.display = 'none';
+      },
     });
   }
 
@@ -27,9 +31,7 @@ export function popup(): void {
 
     if (!popup) return;
 
-    const closeTriggers = document.querySelectorAll<HTMLElement>(
-      `[data-popup-close="${popupName}"]`
-    );
+    const closeTriggers = popup.querySelectorAll<HTMLElement>('[data-popup-close]');
 
     closeTriggers.forEach((trigger) => {
       trigger.addEventListener('click', () => {
