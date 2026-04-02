@@ -42,10 +42,12 @@
 }
 
 .testimonials_card {
-  transition: transform 300ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  .testimonials_image {
+    transition: transform 400ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
 
-  &:hover {
-    transform: scale(1.05);
+  &:hover .testimonials_image {
+    transform: scale(1.1);
   }
 }
 
@@ -69,4 +71,9 @@
 [data-fade-up] {
   opacity: 0;
   transform: translateY(32px);
+}
+
+/* Featurre Card 2 hover gradient */
+.feature-cards2_card:hover .feature-cards2_hover-gradient {
+  opacity: 100;
 }

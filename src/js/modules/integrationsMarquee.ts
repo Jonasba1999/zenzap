@@ -51,7 +51,7 @@ export function integrationsMarquee() {
       scrub: true,
       onUpdate: (self: any) => {
         const velocity = Math.abs(self.getVelocity());
-        const speedFactor = Math.max(1, velocity / 150);
+        const speedFactor = Math.max(1, velocity / 280);
         updateSpeed(speedFactor);
 
         clearTimeout(scrollTimeout);
