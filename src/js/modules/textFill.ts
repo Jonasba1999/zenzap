@@ -1,6 +1,5 @@
-declare const gsap: any;
-declare const ScrollTrigger: any;
-declare const SplitText: any;
+import gsap from 'gsap';
+import { SplitText } from 'gsap/SplitText';
 
 export function textFill() {
   const fillBlocks = document.querySelectorAll<HTMLElement>('[data-fill-text]');
@@ -13,7 +12,7 @@ export function textFill() {
       linesClass: 'line',
     });
 
-    split.lines.forEach((line: HTMLElement, i: number) => {
+    split.lines.forEach((line: Element, i: number) => {
       gsap.fromTo(
         line,
         { '--fill': '0%' },
