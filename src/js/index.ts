@@ -1,8 +1,8 @@
-declare const gsap: any;
-declare const ScrollTrigger: any;
-declare const SplitText: any;
-
 import '../css/index.css';
+
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { SplitText } from 'gsap/SplitText';
 
 import { pricingCards } from './modules/pricingCards';
 import { aiSetup, compareTableMobileScroll } from './modules/aiDropLanding';

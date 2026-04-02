@@ -1,8 +1,6 @@
-declare const gsap: any;
-declare const ScrollTrigger: any;
-declare const SplitText: any;
+import gsap from 'gsap';
 
-gsap.registerPlugin(ScrollTrigger, SplitText);
+import { SplitText } from 'gsap/SplitText';
 
 export function textLineReveal(): void {
   const targets = document.querySelectorAll<HTMLElement>('[data-line-reveal]');
@@ -43,7 +41,7 @@ export function fadeUpAnimation(): void {
     const targets = group.querySelectorAll<HTMLElement>('[data-fade-up]');
     if (!targets.length) return;
 
-    const stagger = group.dataset.stagger ?? 0.15;
+    const stagger = Number(group.dataset.stagger ?? 0.15);
 
     gsap
       .timeline({
