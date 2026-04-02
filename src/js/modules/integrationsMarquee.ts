@@ -1,5 +1,5 @@
-declare const gsap: any;
-declare const ScrollTrigger: any;
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 export function integrationsMarquee() {
   const sections = document.querySelectorAll<HTMLElement>('[data-integrations-marquee]');
