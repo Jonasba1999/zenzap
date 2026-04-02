@@ -1,4 +1,10 @@
 @import './modules/accordion.css';
+@import './modules/swiper.css';
+@import './modules/buttons.css';
+
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
 
 [data-copy-button] {
   [data-label] {
@@ -27,4 +33,40 @@
     background-color: #007aff;
     border-color: #007aff;
   }
+}
+
+/* Testimonials Swiper */
+.testimonials_swiper-nav-btn.swiper-button-disabled {
+  border-color: rgba(157, 157, 157, 1);
+  color: rgba(157, 157, 157, 1);
+}
+
+.testimonials_card {
+  transition: transform 300ms cubic-bezier(0.215, 0.61, 0.355, 1);
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+/* Text Fill */
+[data-fill-text] .line {
+  color: transparent;
+  background-image: linear-gradient(
+    to right,
+    rgba(17, 17, 17, 1) var(--fill, 0%),
+    rgba(17, 17, 17, 0.2) var(--fill, 0%)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+/* Text line reveal and fade up animation initial states */
+[data-line-reveal] .line {
+  transform: translateY(100%);
+}
+
+[data-fade-up] {
+  opacity: 0;
+  transform: translateY(32px);
 }
