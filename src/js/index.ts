@@ -14,6 +14,10 @@ import { testimonialsSlider } from './modules/testimonialsSlider';
 import { textFill } from './modules/textFill';
 import { integrationsMarquee } from './modules/integrationsMarquee';
 import { textLineReveal, fadeUpAnimation } from './modules/animations';
+import { logoRotate } from './modules/logoRotate';
+import { desktopMenu } from './modules/desktopMenu';
+import { mobileMenu } from './modules/mobileMenu';
+import { navSolutionsCustomer } from './modules/desktopMenu';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -31,4 +35,8 @@ window.Webflow.push(() => {
   integrationsMarquee();
   textLineReveal();
   fadeUpAnimation();
+  logoRotate();
+  desktopMenu();
+  mobileMenu();
+  navSolutionsCustomer();
 });

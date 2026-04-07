@@ -1,4 +1,4 @@
-declare const gsap: any;
+import gsap from 'gsap';
 
 export function accordion(): void {
   const accordions = document.querySelectorAll<HTMLElement>('[data-accordion]');

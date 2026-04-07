@@ -47,7 +47,7 @@
   }
 
   &:hover .testimonials_image {
-    transform: scale(1.1);
+    transform: scale(1.08);
   }
 }
 
@@ -76,4 +76,15 @@
 /* Featurre Card 2 hover gradient */
 .feature-cards2_card:hover .feature-cards2_hover-gradient {
   opacity: 100;
+}
+
+/* Nav */
+.nav_link-wrap {
+  .nav_dropdown-icon {
+    transition: transform 200ms ease-out;
+  }
+
+  &:hover .nav_dropdown-icon {
+    transform: rotate(-180deg);
+  }
 }
