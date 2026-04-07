@@ -11,9 +11,6 @@ importers:
       '@finsweet/ts-utils':
         specifier: ^0.40.0
         version: 0.40.0
-      '@floating-ui/dom':
-        specifier: ^1.7.6
-        version: 1.7.6
       gsap:
         specifier: ^3.14.2
         version: 3.14.2
