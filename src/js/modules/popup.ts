@@ -1,4 +1,4 @@
-declare const gsap: any;
+import gsap from 'gsap';
 
 export function popup(): void {
   const triggers = document.querySelectorAll<HTMLElement>('[data-popup-trigger]');

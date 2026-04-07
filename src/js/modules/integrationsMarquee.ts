@@ -7,61 +7,72 @@ export function integrationsMarquee() {
   if (!sections.length) return;
 
   sections.forEach((section) => {
-    const marqueeRows = section.querySelectorAll<HTMLElement>('[data-row]');
+    const desktopMarquee = section.querySelector<HTMLElement>('[data-desktop-marquee]');
+    const mobileMarquee = section.querySelector<HTMLElement>('[data-mobile-marquee]');
 
-    if (!marqueeRows.length) return;
+    if (!desktopMarquee && !mobileMarquee) return;
 
-    const tweens: any[] = [];
+    const mm = gsap.matchMedia();
 
-    marqueeRows.forEach((row) => {
-      const isReverse = row.dataset.row === 'reverse';
-      const content = row.querySelector('.integrations_marquee-content');
+    function setupMarquee(container: HTMLElement, duration: number, gap: number) {
+      const rows = container.querySelectorAll<HTMLElement>('[data-row]');
+      const tweens: gsap.core.Tween[] = [];
 
-      if (!content) return;
+      rows.forEach((row) => {
+        const isReverse = row.dataset.row === 'reverse';
+        const content = row.querySelector('.integrations_marquee-content');
 
-      const contentWidth = content.scrollWidth + 90;
+        if (!content) return;
 
-      const tween = gsap.to(row, {
-        x: isReverse ? contentWidth : -contentWidth,
-        duration: 20,
-        ease: 'linear',
-        repeat: -1,
+        const contentWidth = content.scrollWidth + gap;
+
+        const tween = gsap.to(row, {
+          x: isReverse ? contentWidth : -contentWidth,
+          duration,
+          ease: 'linear',
+          repeat: -1,
+        });
+
+        tweens.push(tween);
       });
 
-      tweens.push(tween);
+      const updateSpeed = (speedFactor: number) => {
+        tweens.forEach((tween) => {
+          gsap.killTweensOf(tween, 'timeScale');
+          gsap.to(tween, {
+            timeScale: speedFactor,
+            duration: 0.5,
+            ease: 'power2.out',
+          });
+        });
+      };
+
+      let scrollTimeout: ReturnType<typeof setTimeout>;
+
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top bottom',
+        end: 'bottom top',
+        onUpdate: (self) => {
+          const velocity = Math.abs(self.getVelocity());
+          const speedFactor = Math.max(1, velocity / 280);
+          updateSpeed(speedFactor);
+
+          clearTimeout(scrollTimeout);
+          scrollTimeout = setTimeout(() => updateSpeed(1), 100);
+        },
+        onLeave: () => updateSpeed(1),
+        onEnterBack: () => updateSpeed(1),
+        onLeaveBack: () => updateSpeed(1),
+      });
+    }
+
+    mm.add('(min-width: 992px)', () => {
+      if (desktopMarquee) setupMarquee(desktopMarquee, 20, 90);
     });
 
-    const updateSpeed = (speedFactor: number) => {
-      tweens.forEach((tween) => {
-        gsap.killTweensOf(tween, 'timeScale');
-        gsap.to(tween, {
-          timeScale: speedFactor,
-          duration: 0.5,
-          ease: 'power2.out',
-        });
-      });
-    };
-
-    let scrollTimeout: ReturnType<typeof setTimeout>;
-
-    ScrollTrigger.create({
-      trigger: section,
-      start: 'top bottom',
-      end: 'bottom top',
-      scrub: true,
-      onUpdate: (self: any) => {
-        const velocity = Math.abs(self.getVelocity());
-        const speedFactor = Math.max(1, velocity / 280);
-        updateSpeed(speedFactor);
-
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => {
-          updateSpeed(1);
-        }, 100);
-      },
-      onLeave: () => updateSpeed(1),
-      onEnterBack: () => updateSpeed(1),
-      onLeaveBack: () => updateSpeed(1),
+    mm.add('(max-width: 991px)', () => {
+      if (mobileMarquee) setupMarquee(mobileMarquee, 12, 48);
     });
   });
 }
