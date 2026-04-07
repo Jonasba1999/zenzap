@@ -71,7 +71,7 @@ export function mobileMenu(): void {
         });
       } else {
         gsap.set(content, {
-          display: 'block',
+          display: 'flex',
         });
       }
     });

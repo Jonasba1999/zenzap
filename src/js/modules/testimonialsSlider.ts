@@ -17,6 +17,8 @@ export function testimonialsSlider() {
       slidesPerView: 1.2,
       spaceBetween: 16,
 
+      speed: 600,
+
       breakpoints: {
         768: {
           slidesPerView: 3.3,

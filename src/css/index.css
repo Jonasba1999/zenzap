@@ -46,8 +46,10 @@
     transition: transform 400ms cubic-bezier(0.215, 0.61, 0.355, 1);
   }
 
-  &:hover .testimonials_image {
-    transform: scale(1.08);
+  @media (hover: hover) {
+    &:hover .testimonials_image {
+      transform: scale(1.05);
+    }
   }
 }
 
