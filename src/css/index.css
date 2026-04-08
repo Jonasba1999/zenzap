@@ -65,16 +65,6 @@
   -webkit-background-clip: text;
 }
 
-/* Text line reveal and fade up animation initial states */
-[data-line-reveal] .line {
-  transform: translateY(100%);
-}
-
-[data-fade-up] {
-  opacity: 0;
-  transform: translateY(32px);
-}
-
 /* Featurre Card 2 hover gradient */
 .feature-cards2_card:hover .feature-cards2_hover-gradient {
   opacity: 100;

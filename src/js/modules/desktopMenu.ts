@@ -1,4 +1,4 @@
-import { computePosition, shift, offset, autoUpdate } from '@floating-ui/dom';
+import { autoUpdate, computePosition, offset, shift } from '@floating-ui/dom';
 import gsap from 'gsap';
 
 export function desktopMenu() {

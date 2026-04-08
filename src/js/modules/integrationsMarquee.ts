@@ -55,7 +55,7 @@ export function integrationsMarquee() {
         end: 'bottom top',
         onUpdate: (self) => {
           const velocity = Math.abs(self.getVelocity());
-          const speedFactor = Math.max(1, velocity / 280);
+          const speedFactor = Math.max(1, velocity / 350);
           updateSpeed(speedFactor);
 
           clearTimeout(scrollTimeout);
@@ -67,12 +67,12 @@ export function integrationsMarquee() {
       });
     }
 
-    mm.add('(min-width: 992px)', () => {
-      if (desktopMarquee) setupMarquee(desktopMarquee, 20, 90);
+    mm.add('(min-width: 768px)', () => {
+      if (desktopMarquee) setupMarquee(desktopMarquee, 40, 90);
     });
 
-    mm.add('(max-width: 991px)', () => {
-      if (mobileMarquee) setupMarquee(mobileMarquee, 12, 48);
+    mm.add('(max-width: 767px)', () => {
+      if (mobileMarquee) setupMarquee(mobileMarquee, 24, 48);
     });
   });
 }

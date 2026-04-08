@@ -1,8 +1,17 @@
 import gsap from 'gsap';
 
+function stopVideoInPopup(popup: HTMLElement): void {
+  const iframe = popup.querySelector<HTMLIFrameElement>('iframe');
+  if (!iframe) return;
+  const src = iframe.src;
+  iframe.src = '';
+  setTimeout(() => {
+    iframe.src = src;
+  }, 200);
+}
+
 export function popup(): void {
   const triggers = document.querySelectorAll<HTMLElement>('[data-popup-trigger]');
-
   if (!triggers.length) return;
 
   function openPopup(popup: HTMLElement): void {
@@ -15,6 +24,7 @@ export function popup(): void {
   }
 
   function closePopup(popup: HTMLElement): void {
+    stopVideoInPopup(popup);
     gsap.to(popup, {
       autoAlpha: 0,
       duration: 0.2,
@@ -26,21 +36,14 @@ export function popup(): void {
 
   triggers.forEach((trigger) => {
     const popupName = trigger.dataset.popupTrigger;
-
     const popup = document.querySelector<HTMLElement>(`[data-popup="${popupName}"]`);
-
     if (!popup) return;
 
     const closeTriggers = popup.querySelectorAll<HTMLElement>('[data-popup-close]');
-
-    closeTriggers.forEach((trigger) => {
-      trigger.addEventListener('click', () => {
-        closePopup(popup);
-      });
+    closeTriggers.forEach((closeTrigger) => {
+      closeTrigger.addEventListener('click', () => closePopup(popup));
     });
 
-    trigger.addEventListener('click', () => {
-      openPopup(popup);
-    });
+    trigger.addEventListener('click', () => openPopup(popup));
   });
 }

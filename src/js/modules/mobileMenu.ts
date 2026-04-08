@@ -30,7 +30,7 @@ export function mobileMenu(): void {
   });
 
   function openMenu(): void {
-    let tl = gsap.timeline({ defaults: { overwrite: 'auto' } });
+    const tl = gsap.timeline({ defaults: { overwrite: 'auto' } });
 
     tl.set(menu, {
       autoAlpha: 1,
