@@ -18,7 +18,7 @@ import { logoRotate } from './modules/logoRotate';
 import { desktopMenu } from './modules/desktopMenu';
 import { mobileMenu } from './modules/mobileMenu';
 import { navSolutionsCustomer } from './modules/desktopMenu';
-import { partnersLogos } from './modules/partnersLogos';
+import { partnersLogos, partnersLogosSequential } from './modules/partnersLogos';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -40,5 +40,6 @@ window.Webflow.push(() => {
   desktopMenu();
   mobileMenu();
   navSolutionsCustomer();
-  partnersLogos();
+  // partnersLogos();
+  partnersLogosSequential();
 });
