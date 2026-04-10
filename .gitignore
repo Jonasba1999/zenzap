@@ -26,3 +26,9 @@ typings/
 
 # Built files
 dist/
+
+# Local SSL certificates
+localhost.key
+localhost.cert
+localhost+1.pem
+localhost+1-key.pem

@@ -24,6 +24,9 @@ export function integrationsMarquee() {
 
         if (!content) return;
 
+        // Promote rows to their own compositor layer for GPU acceleration
+        row.style.willChange = 'transform';
+
         const contentWidth = content.scrollWidth + gap;
 
         const tween = gsap.to(row, {
@@ -31,48 +34,63 @@ export function integrationsMarquee() {
           duration,
           ease: 'linear',
           repeat: -1,
+          force3D: true,
         });
 
         tweens.push(tween);
       });
+
+      return tweens;
+    }
+
+    mm.add('(min-width: 768px)', () => {
+      const tweens = desktopMarquee ? setupMarquee(desktopMarquee, 40, 90) : [];
+      setupScrollTrigger(tweens);
+    });
+
+    mm.add('(max-width: 767px)', () => {
+      const tweens = mobileMarquee ? setupMarquee(mobileMarquee, 24, 48) : [];
+      setupScrollTrigger(tweens);
+    });
+
+    function setupScrollTrigger(tweens: gsap.core.Tween[]) {
+      if (!tweens.length) return;
 
       const updateSpeed = (speedFactor: number) => {
         tweens.forEach((tween) => {
           gsap.killTweensOf(tween, 'timeScale');
           gsap.to(tween, {
             timeScale: speedFactor,
-            duration: 0.5,
+            duration: 0.4,
             ease: 'power2.out',
           });
         });
       };
 
       let scrollTimeout: ReturnType<typeof setTimeout>;
+      let lastUpdate = 0;
+      const THROTTLE_MS = 50;
 
       ScrollTrigger.create({
         trigger: section,
         start: 'top bottom',
         end: 'bottom top',
         onUpdate: (self) => {
+          const now = Date.now();
+          if (now - lastUpdate < THROTTLE_MS) return;
+          lastUpdate = now;
+
           const velocity = Math.abs(self.getVelocity());
           const speedFactor = Math.max(1, velocity / 350);
           updateSpeed(speedFactor);
 
           clearTimeout(scrollTimeout);
-          scrollTimeout = setTimeout(() => updateSpeed(1), 100);
+          scrollTimeout = setTimeout(() => updateSpeed(1), 150);
         },
         onLeave: () => updateSpeed(1),
         onEnterBack: () => updateSpeed(1),
         onLeaveBack: () => updateSpeed(1),
       });
     }
-
-    mm.add('(min-width: 768px)', () => {
-      if (desktopMarquee) setupMarquee(desktopMarquee, 40, 90);
-    });
-
-    mm.add('(max-width: 767px)', () => {
-      if (mobileMarquee) setupMarquee(mobileMarquee, 24, 48);
-    });
   });
 }
