@@ -12,3 +12,9 @@
     background-color: black;
   }
 }
+
+.agents-accordion_item {
+  &.is-open .agents-accordion_chevron {
+    transform: rotate(180deg);
+  }
+}
