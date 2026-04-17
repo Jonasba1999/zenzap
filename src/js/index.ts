@@ -19,6 +19,7 @@ import { desktopMenu } from './modules/desktopMenu';
 import { mobileMenu } from './modules/mobileMenu';
 import { navSolutionsCustomer } from './modules/desktopMenu';
 import { partnersLogos, partnersLogosSequential } from './modules/partnersLogos';
+import { imageSync } from './modules/imageSync';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -40,6 +41,7 @@ window.Webflow.push(() => {
   desktopMenu();
   mobileMenu();
   navSolutionsCustomer();
-  // partnersLogos();
+  // partnersLogos(); Removed because using partnersLogosSequential
   partnersLogosSequential();
+  imageSync();
 });

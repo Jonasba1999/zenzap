@@ -144,7 +144,7 @@ export function partnersLogos(): void {
             yPercent: -100,
             duration: 0.7,
             ease: 'back.inOut(1.2)',
-            onComplete: () => gsap.set(outImg, { yPercent: 100 }),
+            onComplete: () => void gsap.set(outImg, { yPercent: 100 }),
           });
           gsap.to(inImg, { yPercent: 0, duration: 0.7, ease: 'back.inOut(1.2)' });
 
