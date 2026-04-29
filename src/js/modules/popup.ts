@@ -12,6 +12,7 @@ function stopVideoInPopup(popup: HTMLElement): void {
 
 export function popup(): void {
   const triggers = document.querySelectorAll<HTMLElement>('[data-popup-trigger]');
+
   if (!triggers.length) return;
 
   function openPopup(popup: HTMLElement): void {
