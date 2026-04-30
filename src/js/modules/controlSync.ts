@@ -4,82 +4,52 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 export function controlSync(): void {
-  const INTERVAL = 3000;
+  const INTERVAL = 3;
 
-  const sections = document.querySelectorAll<HTMLElement>('[data-control-sync]');
-
-  if (!sections.length) return;
-
-  sections.forEach((section) => {
-    const triggers = section.querySelectorAll<HTMLElement>('[data-trigger]');
-
+  document.querySelectorAll<HTMLElement>('[data-control-sync]').forEach((section) => {
+    const triggers = Array.from(section.querySelectorAll<HTMLElement>('[data-trigger]'));
     if (!triggers.length) return;
 
-    let currentIndex = 0;
-    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+    const items = triggers.map((trigger) => ({
+      trigger,
+      image: section.querySelector<HTMLElement>(`[data-image="${trigger.dataset.trigger}"]`),
+      loader: trigger.querySelector<HTMLElement>('[data-loader]'),
+    }));
 
-    const pairs: Array<{
-      trigger: HTMLElement;
-      image: HTMLElement | null;
-      loader: HTMLElement | null;
-    }> = [];
+    let activeIndex = -1;
+    let nextCall: gsap.core.Tween | null = null;
 
-    function activate(index: number): void {
-      const pair = pairs[index];
-      gsap.to(pair.image, { autoAlpha: 1, duration: 0.8, ease: 'power2.out' });
-      gsap.to(pair.loader, { yPercent: 0, duration: INTERVAL / 1000 - 0.05, ease: 'linear' });
-      pair.trigger.classList.add('is-active');
-    }
+    function setActive(index: number): void {
+      items.forEach((item, i) => {
+        const isActive = i === index;
+        item.trigger.classList.toggle('is-active', isActive);
+        gsap.to(item.image, { autoAlpha: isActive ? 1 : 0, duration: 0.8, ease: 'power2.out' });
+        gsap.killTweensOf(item.loader);
+        gsap.fromTo(
+          item.loader,
+          { yPercent: -100 },
+          isActive
+            ? { yPercent: 0, duration: INTERVAL, ease: 'linear' }
+            : { yPercent: -100, duration: 0 }
+        );
+      });
+      activeIndex = index;
 
-    function deactivate(index: number): void {
-      const pair = pairs[index];
-      gsap.to(pair.image, { autoAlpha: 0, duration: 0.8, ease: 'power2.out' });
-      gsap.killTweensOf(pair.loader);
-      gsap.set(pair.loader, { yPercent: -100 });
-      pair.trigger.classList.remove('is-active');
-    }
-
-    function scheduleNext(): void {
-      timeoutId = setTimeout(() => {
-        const nextIndex = (currentIndex + 1) % pairs.length;
-        deactivate(currentIndex);
-        currentIndex = nextIndex;
-        activate(currentIndex);
-        scheduleNext();
-      }, INTERVAL);
-    }
-
-    function goTo(index: number): void {
-      if (index === currentIndex) return;
-      if (timeoutId !== null) clearTimeout(timeoutId);
-      deactivate(currentIndex);
-      currentIndex = index;
-      activate(currentIndex);
-      scheduleNext();
-    }
-
-    function startLoop(): void {
-      activate(currentIndex);
-      scheduleNext();
+      nextCall?.kill();
+      nextCall = gsap.delayedCall(INTERVAL, () => setActive((activeIndex + 1) % items.length));
     }
 
     triggers.forEach((trigger, index) => {
-      const name = trigger.dataset.trigger;
-      const image = section.querySelector<HTMLElement>(`[data-image="${name}"]`);
-      const loader = trigger.querySelector<HTMLElement>('[data-loader]');
-
-      gsap.set(loader, { yPercent: -100 });
-      if (index !== 0) gsap.set(image, { autoAlpha: 0 });
-
-      pairs.push({ trigger, image, loader });
-
-      trigger.addEventListener('click', () => goTo(index));
+      trigger.addEventListener('click', () => {
+        if (index !== activeIndex) setActive(index);
+      });
     });
 
     ScrollTrigger.create({
       trigger: section,
       start: 'top 90%',
-      onEnter: () => startLoop(),
+      once: true,
+      onEnter: () => setActive(0),
     });
   });
 }
