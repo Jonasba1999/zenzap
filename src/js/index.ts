@@ -21,6 +21,7 @@ import { navSolutionsCustomer } from './modules/desktopMenu';
 import { partnersLogos, partnersLogosSequential } from './modules/partnersLogos';
 import { imageSync } from './modules/imageSync';
 import { controlSync } from './modules/controlSync';
+import { stickyCta } from './modules/stickyCta';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -46,4 +47,5 @@ window.Webflow.push(() => {
   partnersLogosSequential();
   imageSync();
   controlSync();
+  stickyCta();
 });

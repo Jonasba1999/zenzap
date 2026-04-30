@@ -54,3 +54,7 @@ export function getPricingData(isUk: boolean): PricingData {
 
   return pricingData;
 }
+
+export function toggleScroll(enabled: boolean): void {
+  document.body.classList.toggle('scroll-disabled', !enabled);
+}

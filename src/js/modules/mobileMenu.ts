@@ -1,4 +1,5 @@
 import gsap from 'gsap';
+import { toggleScroll } from './utils';
 
 export function mobileMenu(): void {
   const menu = document.querySelector<HTMLElement>('[data-mobile-menu]');
@@ -30,6 +31,8 @@ export function mobileMenu(): void {
   });
 
   function openMenu(): void {
+    toggleScroll(false);
+
     const tl = gsap.timeline({ defaults: { overwrite: 'auto' } });
 
     tl.set(menu, {
@@ -44,6 +47,7 @@ export function mobileMenu(): void {
   }
 
   function closeMenu(): void {
+    toggleScroll(true);
     let tl = gsap.timeline({ defaults: { overwrite: 'auto' } });
 
     tl.to(menu, {
