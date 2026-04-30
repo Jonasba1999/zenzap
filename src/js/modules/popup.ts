@@ -1,13 +1,21 @@
 import gsap from 'gsap';
+import { toggleScroll } from './utils';
 
-function stopVideoInPopup(popup: HTMLElement): void {
+function pauseVideoInPopup(popup: HTMLElement): void {
   const iframe = popup.querySelector<HTMLIFrameElement>('iframe');
-  if (!iframe) return;
-  const src = iframe.src;
-  iframe.src = '';
-  setTimeout(() => {
-    iframe.src = src;
-  }, 200);
+  if (!iframe?.contentWindow) return;
+
+  // Try multiple message formats — different players accept different shapes
+  const messages = [
+    JSON.stringify({ method: 'pause' }),
+    JSON.stringify({ method: 'pause', value: '' }),
+    JSON.stringify({ event: 'command', func: 'pauseVideo' }), // YouTube format
+    'pause',
+  ];
+
+  messages.forEach((msg) => {
+    iframe.contentWindow!.postMessage(msg, '*');
+  });
 }
 
 export function popup(): void {
@@ -16,6 +24,7 @@ export function popup(): void {
   if (!triggers.length) return;
 
   function openPopup(popup: HTMLElement): void {
+    toggleScroll(false);
     popup.style.display = 'flex';
     gsap.to(popup, {
       autoAlpha: 1,
@@ -25,7 +34,8 @@ export function popup(): void {
   }
 
   function closePopup(popup: HTMLElement): void {
-    stopVideoInPopup(popup);
+    toggleScroll(true);
+    pauseVideoInPopup(popup);
     gsap.to(popup, {
       autoAlpha: 0,
       duration: 0.2,
