@@ -4,39 +4,66 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 export function controlSync(): void {
-  const INTERVAL = 3;
-
   document.querySelectorAll<HTMLElement>('[data-control-sync]').forEach((section) => {
     const triggers = Array.from(section.querySelectorAll<HTMLElement>('[data-trigger]'));
     if (!triggers.length) return;
 
-    const items = triggers.map((trigger) => ({
-      trigger,
-      image: section.querySelector<HTMLElement>(`[data-image="${trigger.dataset.trigger}"]`),
-      loader: trigger.querySelector<HTMLElement>('[data-loader]'),
-    }));
+    const items = triggers.map((trigger) => {
+      const wrapper = section.querySelector<HTMLElement>(
+        `[data-video="${trigger.dataset.trigger}"]`
+      );
+      return {
+        trigger,
+        wrapper,
+        videoEl: wrapper?.querySelector<HTMLVideoElement>('video') ?? null,
+        loader: trigger.querySelector<HTMLElement>('[data-loader]'),
+      };
+    });
 
     let activeIndex = -1;
-    let nextCall: gsap.core.Tween | null = null;
+    let endedHandler: (() => void) | null = null;
 
     function setActive(index: number): void {
+      const prevIndex = activeIndex;
+
+      if (prevIndex >= 0 && items[prevIndex].videoEl && endedHandler) {
+        items[prevIndex].videoEl!.removeEventListener('ended', endedHandler);
+        endedHandler = null;
+      }
+
       items.forEach((item, i) => {
         const isActive = i === index;
         item.trigger.classList.toggle('is-active', isActive);
-        gsap.to(item.image, { autoAlpha: isActive ? 1 : 0, duration: 0.8, ease: 'power2.out' });
-        gsap.killTweensOf(item.loader);
-        gsap.fromTo(
-          item.loader,
-          { yPercent: -100 },
-          isActive
-            ? { yPercent: 0, duration: INTERVAL, ease: 'linear' }
-            : { yPercent: -100, duration: 0 }
-        );
-      });
-      activeIndex = index;
+        gsap.to(item.wrapper, { autoAlpha: isActive ? 1 : 0, duration: 0, ease: 'power2.out' });
 
-      nextCall?.kill();
-      nextCall = gsap.delayedCall(INTERVAL, () => setActive((activeIndex + 1) % items.length));
+        if (!isActive) {
+          gsap.killTweensOf(item.loader);
+          gsap.set(item.loader, { yPercent: -100 });
+          if (i === prevIndex && item.videoEl) {
+            item.videoEl.pause();
+            item.videoEl.currentTime = 0;
+          }
+        }
+      });
+
+      activeIndex = index;
+      const activeItem = items[index];
+
+      if (activeItem.videoEl) {
+        activeItem.videoEl.currentTime = 0;
+        activeItem.videoEl.play().then(() => {
+          const duration = activeItem.videoEl!.duration;
+          gsap.killTweensOf(activeItem.loader);
+          gsap.fromTo(
+            activeItem.loader,
+            { yPercent: -100 },
+            { yPercent: 0, duration, ease: 'linear' }
+          );
+        });
+
+        endedHandler = () => setActive((activeIndex + 1) % items.length);
+        activeItem.videoEl.addEventListener('ended', endedHandler, { once: true });
+      }
     }
 
     triggers.forEach((trigger, index) => {
