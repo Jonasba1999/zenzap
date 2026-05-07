@@ -11,7 +11,7 @@ export function testimonialsSlider() {
 
     if (!target) return;
 
-    const swiper = new Swiper(target, {
+    new Swiper(target, {
       modules: [Navigation, Pagination],
 
       slidesPerView: 1.2,
@@ -21,7 +21,7 @@ export function testimonialsSlider() {
 
       breakpoints: {
         768: {
-          slidesPerView: 3.3,
+          slidesPerView: 3,
           spaceBetween: 32,
         },
       },
