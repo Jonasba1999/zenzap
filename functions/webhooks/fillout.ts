@@ -11,12 +11,17 @@ export async function onRequestPost(context: { request: Request }) {
     return new Response('Invalid JSON body', { status: 400 });
   }
 
-  const fields = Object.entries(body).map(([name, value]) => ({ name, value }));
+  const { pageUri, pageName, ...formFields } = body;
+
+  const fields = Object.entries(formFields).map(([name, value]) => ({ name, value }));
 
   const response = await fetch(HUBSPOT_API_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ fields }),
+    body: JSON.stringify({
+      fields,
+      context: { pageUri, pageName },
+    }),
   });
 
   if (!response.ok) {
