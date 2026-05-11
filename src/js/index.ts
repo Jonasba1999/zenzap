@@ -4,7 +4,6 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 
-import { filloutDemoForm } from './modules/filloutDemoForm';
 import { pricingCards } from './modules/pricingCards';
 import { aiSetup, compareTableMobileScroll } from './modules/aiDropLanding';
 import { copyButton } from './modules/copyButton';
@@ -28,7 +27,6 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 window.Webflow ||= [];
 window.Webflow.push(() => {
-  filloutDemoForm();
   pricingCards();
   aiSetup();
   compareTableMobileScroll();
