@@ -22,7 +22,7 @@ import { partnersLogos, partnersLogosSequential } from './modules/partnersLogos'
 import { imageSync } from './modules/imageSync';
 import { controlSync } from './modules/controlSync';
 import { stickyCta } from './modules/stickyCta';
-import { trackBtnClick } from './modules/gtm';
+import { trackBtnClick, trackFormSubmit } from './modules/gtm';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -50,10 +50,5 @@ window.Webflow.push(() => {
   controlSync();
   stickyCta();
   trackBtnClick();
-});
-
-window.addEventListener('message', function (event) {
-  if (event.origin.includes('fillout.com')) {
-    console.log('Fillout message:', JSON.stringify(event.data));
-  }
+  trackFormSubmit();
 });

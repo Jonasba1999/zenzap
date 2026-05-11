@@ -45,3 +45,24 @@ export function trackBtnClick(): void {
     });
   });
 }
+
+export function trackFormSubmit(): void {
+  window.addEventListener('message', (event) => {
+    if (!event.origin.includes('fillout.com')) return;
+
+    // Only react to the structured submit event, not the string one
+    if (event.data?.type !== 'form_submit') return;
+
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'bookDemoForm' });
+
+    const companySize = event.data.questions?.find(
+      (q: { name: string; value: string }) => q.name === 'Company Size'
+    )?.value;
+
+    if (companySize && companySize !== '0-20') {
+      window.dataLayer.push({ event: 'bookDemoFormMetaLead' });
+      console.log('✅ bookDemoFormMetaLead pushed, company size:', companySize);
+    }
+  });
+}
