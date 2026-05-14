@@ -23,6 +23,7 @@ import { imageSync } from './modules/imageSync';
 import { controlSync } from './modules/controlSync';
 import { stickyCta } from './modules/stickyCta';
 import { trackBtnClick, trackFormSubmit } from './modules/gtm';
+import { videoFallback } from './modules/videoFallback';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -51,4 +52,5 @@ window.Webflow.push(() => {
   stickyCta();
   trackBtnClick();
   trackFormSubmit();
+  videoFallback();
 });
