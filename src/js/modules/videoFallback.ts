@@ -1,3 +1,5 @@
+import gsap from 'gsap';
+
 export function videoFallback(): void {
   const videoBlocks = document.querySelectorAll<HTMLElement>('[data-video-fallback]');
   if (!videoBlocks.length) return;
@@ -10,13 +12,29 @@ export function videoFallback(): void {
     if (!videoWrap || !video || !image) return;
 
     const showFallback = () => {
-      videoWrap.style.display = 'none';
-      image.style.display = 'block';
+      gsap.to(videoWrap, {
+        autoAlpha: 0,
+        duration: 0.2,
+        ease: 'power2.out',
+      });
+
+      gsap.to(image, {
+        autoAlpha: 1,
+        duration: 0.2,
+        ease: 'power2.out',
+      });
     };
 
     const showVideo = () => {
-      videoWrap.style.display = 'block';
-      image.style.display = 'none';
+      gsap.set(videoWrap, {
+        autoAlpha: 1,
+      });
+
+      gsap.to(image, {
+        autoAlpha: 0,
+        duration: 0.4,
+        ease: 'power2.out',
+      });
     };
 
     video
