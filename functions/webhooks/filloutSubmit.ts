@@ -3,7 +3,7 @@ const HUBSPOT_FORM_GUID = '8f7d78bf-0f85-40e1-9ce4-5d1185accda0';
 const HUBSPOT_API_URL = `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_GUID}`;
 
 export async function onRequestPost(context: { request: Request }) {
-  let body: Record<string, string>;
+  let body: Record<string, unknown>;
 
   try {
     body = await context.request.json();
@@ -11,17 +11,18 @@ export async function onRequestPost(context: { request: Request }) {
     return new Response('Invalid JSON body', { status: 400 });
   }
 
-  // Extract page_url separately so it doesn't get sent as a form field
   const { page_url, ...formFields } = body;
 
-  const fields = Object.entries(formFields).map(([name, value]) => ({ name, value }));
+  const fields = Object.entries(formFields)
+    .filter(([_, value]) => value !== null && value !== undefined && value !== '')
+    .map(([name, value]) => ({ name, value: String(value) }));
 
   const payload: {
     fields: { name: string; value: string }[];
     context?: { pageUri?: string };
   } = { fields };
 
-  if (page_url) {
+  if (page_url && typeof page_url === 'string') {
     payload.context = { pageUri: page_url };
   }
 
