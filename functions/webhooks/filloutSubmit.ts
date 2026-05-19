@@ -13,9 +13,24 @@ export async function onRequestPost(context: { request: Request }) {
 
   const { page_url, ...formFields } = body;
 
+  const reasonCheckbox = Array.isArray(formFields.reason_checkbox)
+    ? (formFields.reason_checkbox as string[]).join(', ')
+    : '';
+  const reasonText = typeof formFields.reason_text === 'string' ? formFields.reason_text : '';
+  const reasonForContact = [reasonCheckbox, reasonText].filter(Boolean).join('\n');
+
   const fields = Object.entries(formFields)
     .filter(([_, value]) => value !== null && value !== undefined && value !== '')
-    .map(([name, value]) => ({ name, value: String(value) }));
+    .flatMap(([name, value]) => {
+      if (name === 'reason_checkbox' || name === 'reason_text') {
+        return [];
+      }
+      return [{ name, value: String(value) }];
+    });
+
+  if (reasonForContact) {
+    fields.push({ name: 'reason_for_contact', value: reasonForContact });
+  }
 
   const payload: {
     fields: { name: string; value: string }[];
