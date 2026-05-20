@@ -25,12 +25,12 @@ export async function pricingCards(): Promise<void> {
   function updatePrices(
     period: string,
     tier: string,
-    proEl: HTMLElement,
-    businessEl: HTMLElement
+    proEl: HTMLElement | null,
+    businessEl: HTMLElement | null
   ): void {
     const currency = isUk ? '£' : '$';
-    proEl.textContent = currency + pricingData.pro[period][tier];
-    businessEl.textContent = currency + pricingData.business[period][tier];
+    if (proEl) proEl.textContent = currency + pricingData.pro[period][tier];
+    if (businessEl) businessEl.textContent = currency + pricingData.business[period][tier];
   }
 
   function toggleCustomPricing(
@@ -119,7 +119,10 @@ export async function pricingCards(): Promise<void> {
     // Period triggers
     const periodTriggers = section.querySelectorAll<HTMLElement>('[data-period-trigger]');
 
-    if (!proFixedPriceEl || !businessFixedPriceEl) {
+    // Period text elements
+    const periodTextEls = section.querySelectorAll<HTMLElement>('[data-period-text]');
+
+    if (!proFixedPriceEl && !businessFixedPriceEl) {
       return;
     }
 
@@ -159,11 +162,17 @@ export async function pricingCards(): Promise<void> {
           if (proUserPriceEl && businessUserPriceEl) {
             updatePrices(currentPeriod, 'per-user', proUserPriceEl, businessUserPriceEl);
           }
+          periodTextEls.forEach((el) => {
+            el.style.display = el.dataset.periodText === currentPeriod ? 'block' : 'none';
+          });
         });
       });
     }
 
     // Init on load
+    periodTextEls.forEach((el) => {
+      el.style.display = el.dataset.periodText === currentPeriod ? 'block' : 'none';
+    });
     updatePrices(currentPeriod, tierPlan, proFixedPriceEl, businessFixedPriceEl);
     updateUserCountText(userCountEl, 0);
     togglePackageType('fixed', fixedPackageEl, userPackageEl);

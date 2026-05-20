@@ -84,3 +84,10 @@
 .scroll-disabled {
   overflow: hidden;
 }
+
+/* Medical pricing */
+.pricing-cards_period-btn.is-medical:not(.is-active) {
+  .pricing-tab-sale-tb {
+    background: white;
+  }
+}
