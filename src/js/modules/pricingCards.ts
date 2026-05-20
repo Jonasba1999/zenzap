@@ -25,12 +25,12 @@ export async function pricingCards(): Promise<void> {
   function updatePrices(
     period: string,
     tier: string,
-    proEl: HTMLElement | null,
-    businessEl: HTMLElement | null
+    proEls: NodeListOf<HTMLElement>,
+    businessEls: NodeListOf<HTMLElement>
   ): void {
     const currency = isUk ? '£' : '$';
-    if (proEl) proEl.textContent = currency + pricingData.pro[period][tier];
-    if (businessEl) businessEl.textContent = currency + pricingData.business[period][tier];
+    proEls.forEach((el) => (el.textContent = currency + pricingData.pro[period][tier]));
+    businessEls.forEach((el) => (el.textContent = currency + pricingData.business[period][tier]));
   }
 
   function toggleCustomPricing(
@@ -92,14 +92,14 @@ export async function pricingCards(): Promise<void> {
     let tierPlan = tiersData[0].plan;
 
     // Fixed package price placeholders
-    const proFixedPriceEl = section.querySelector<HTMLElement>('[data-fixed-price="pro"]');
-    const businessFixedPriceEl = section.querySelector<HTMLElement>(
+    const proFixedPriceEl = section.querySelectorAll<HTMLElement>('[data-fixed-price="pro"]');
+    const businessFixedPriceEl = section.querySelectorAll<HTMLElement>(
       '[data-fixed-price="business"]'
     );
 
     // User package price placeholders
-    const proUserPriceEl = section.querySelector<HTMLElement>('[data-user-price="pro"]');
-    const businessUserPriceEl = section.querySelector<HTMLElement>('[data-user-price="business"]');
+    const proUserPriceEl = section.querySelectorAll<HTMLElement>('[data-user-price="pro"]');
+    const businessUserPriceEl = section.querySelectorAll<HTMLElement>('[data-user-price="business"]');
 
     // Custom and Tier pricing elements
     const customPricingEl = section.querySelectorAll<HTMLElement>('[data-pricing="custom"]');
@@ -122,7 +122,7 @@ export async function pricingCards(): Promise<void> {
     // Period text elements
     const periodTextEls = section.querySelectorAll<HTMLElement>('[data-period-text]');
 
-    if (!proFixedPriceEl && !businessFixedPriceEl) {
+    if (!proFixedPriceEl.length && !businessFixedPriceEl.length) {
       return;
     }
 
@@ -159,7 +159,7 @@ export async function pricingCards(): Promise<void> {
           currentPeriod = trigger.dataset.periodTrigger ?? '';
           setActiveItem(periodTriggers, 'periodTrigger', currentPeriod);
           updatePrices(currentPeriod, tierPlan, proFixedPriceEl, businessFixedPriceEl);
-          if (proUserPriceEl && businessUserPriceEl) {
+          if (proUserPriceEl.length && businessUserPriceEl.length) {
             updatePrices(currentPeriod, 'per-user', proUserPriceEl, businessUserPriceEl);
           }
           periodTextEls.forEach((el) => {
@@ -177,7 +177,7 @@ export async function pricingCards(): Promise<void> {
     updateUserCountText(userCountEl, 0);
     togglePackageType('fixed', fixedPackageEl, userPackageEl);
     toggleCustomPricing(false, customPricingEl, tierPricingEl);
-    if (proUserPriceEl && businessUserPriceEl) {
+    if (proUserPriceEl.length && businessUserPriceEl.length) {
       updatePrices(currentPeriod, 'per-user', proUserPriceEl, businessUserPriceEl);
     }
     if (tooltips.length) {
