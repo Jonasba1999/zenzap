@@ -12,3 +12,7 @@
 .swiper-button-disabled {
   pointer-events: none;
 }
+
+.swiper-pagination-fraction {
+  width: auto !important;
+}

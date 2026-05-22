@@ -27,14 +27,14 @@ export function testimonialsSlider() {
       },
 
       navigation: {
-        nextEl: section.querySelector<HTMLElement>('[data-swiper-next]'),
-        prevEl: section.querySelector<HTMLElement>('[data-swiper-prev]'),
+        nextEl: Array.from(section.querySelectorAll<HTMLElement>('[data-swiper-next]')),
+        prevEl: Array.from(section.querySelectorAll<HTMLElement>('[data-swiper-prev]')),
       },
 
       pagination: {
         el: section.querySelector<HTMLElement>('[data-swiper-pagination]'),
-        type: 'bullets',
-        bulletClass: 'zenzap-swiper-bullet',
+        type: 'fraction',
+        // bulletClass: 'zenzap-swiper-bullet',
       },
     });
   });

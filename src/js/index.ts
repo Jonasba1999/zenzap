@@ -4,6 +4,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 
+import { refreshScrollTriggers } from './modules/gsap';
 import { pricingCards } from './modules/pricingCards';
 import { aiSetup, compareTableMobileScroll } from './modules/aiDropLanding';
 import { copyButton } from './modules/copyButton';
@@ -24,11 +25,13 @@ import { controlSync } from './modules/controlSync';
 import { stickyCta } from './modules/stickyCta';
 import { trackBtnClick, trackFormSubmit } from './modules/gtm';
 import { videoFallback } from './modules/videoFallback';
+import { horizontalScrollSteps } from './modules/horizontalScrollSteps';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 window.Webflow ||= [];
 window.Webflow.push(() => {
+  refreshScrollTriggers();
   pricingCards();
   aiSetup();
   compareTableMobileScroll();
@@ -53,4 +56,5 @@ window.Webflow.push(() => {
   trackBtnClick();
   trackFormSubmit();
   videoFallback();
+  horizontalScrollSteps();
 });

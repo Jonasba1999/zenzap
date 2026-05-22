@@ -18,3 +18,7 @@
     transform: rotate(180deg);
   }
 }
+
+.faq_item.is-open .faq_chevron {
+  transform: rotate(-180deg);
+}
