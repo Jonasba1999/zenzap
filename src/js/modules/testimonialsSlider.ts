@@ -11,6 +11,8 @@ export function testimonialsSlider() {
 
     if (!target) return;
 
+    console.log(`Slides count: ${section.querySelectorAll<HTMLElement>('.swiper-slide').length}`);
+
     new Swiper(target, {
       modules: [Navigation, Pagination],
 
@@ -33,8 +35,17 @@ export function testimonialsSlider() {
 
       pagination: {
         el: section.querySelector<HTMLElement>('[data-swiper-pagination]'),
-        type: 'fraction',
-        // bulletClass: 'zenzap-swiper-bullet',
+        type: 'custom',
+        renderCustom(swiper, current) {
+          const slideCount = swiper.slides.length;
+          const perView = Math.floor(swiper.params.slidesPerView as number) || 1;
+          if (perView <= 1) {
+            return `${current} / ${slideCount}`;
+          } else {
+            const end = Math.min(current + perView - 1, slideCount);
+            return `${current}–${end} / ${slideCount}`;
+          }
+        },
       },
     });
   });
