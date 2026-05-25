@@ -13,6 +13,8 @@ export function testimonialsSlider() {
 
     console.log(`Slides count: ${section.querySelectorAll<HTMLElement>('.swiper-slide').length}`);
 
+    const isDesktop = () => window.innerWidth >= 768;
+
     new Swiper(target, {
       modules: [Navigation, Pagination],
 
@@ -25,6 +27,8 @@ export function testimonialsSlider() {
         768: {
           slidesPerView: 3,
           spaceBetween: 32,
+          slidesPerGroup: 3,
+          speed: 900,
         },
       },
 
@@ -35,15 +39,23 @@ export function testimonialsSlider() {
 
       pagination: {
         el: section.querySelector<HTMLElement>('[data-swiper-pagination]'),
-        type: 'custom',
-        renderCustom(swiper, current) {
-          const slideCount = swiper.slides.length;
-          const perView = Math.floor(swiper.params.slidesPerView as number) || 1;
-          if (perView <= 1) {
-            return `${current} / ${slideCount}`;
-          } else {
-            const end = Math.min(current + perView - 1, slideCount);
-            return `${current}–${end} / ${slideCount}`;
+        type: isDesktop() ? 'bullets' : 'fraction',
+        bulletClass: 'zenzap-swiper-bullet',
+        bulletActiveClass: 'zenzap-swiper-bullet--active',
+        renderBullet(_index, className) {
+          return `<span class="${className}"></span>`;
+        },
+      },
+
+      on: {
+        breakpoint(sw) {
+          const type = isDesktop() ? 'bullets' : 'fraction';
+          if (sw.params.pagination && typeof sw.params.pagination === 'object') {
+            sw.params.pagination.type = type;
+            sw.pagination.destroy();
+            sw.pagination.init();
+            sw.pagination.render();
+            sw.pagination.update();
           }
         },
       },

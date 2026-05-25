@@ -4,7 +4,7 @@
   border-radius: 100px;
   background-color: rgba(214, 214, 214, 1);
 
-  &.swiper-pagination-bullet-active {
+  &.zenzap-swiper-bullet--active {
     background-color: rgba(43, 43, 43, 1);
   }
 }
@@ -13,6 +13,7 @@
   pointer-events: none;
 }
 
-.swiper-pagination-fraction {
+.swiper-pagination-fraction,
+.swiper-pagination-bullets.swiper-pagination-horizontal {
   width: auto !important;
 }
