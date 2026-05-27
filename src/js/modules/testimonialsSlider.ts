@@ -11,8 +11,6 @@ export function testimonialsSlider() {
 
     if (!target) return;
 
-    console.log(`Slides count: ${section.querySelectorAll<HTMLElement>('.swiper-slide').length}`);
-
     const isDesktop = () => window.innerWidth >= 768;
 
     new Swiper(target, {
