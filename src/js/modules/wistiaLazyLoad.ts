@@ -17,8 +17,6 @@ export function wistiaLazyLoad(): void {
 function loadWistiaVideo(wistiaId: string): void {
   const wistiaEmbed = document.querySelector<HTMLElement>(`[data-wistia-embed="${wistiaId}"]`);
 
-  if (!wistiaEmbed) return;
-
   if (!wistiaEmbed || wistiaEmbed.querySelector('iframe')) return; // already inserted
 
   wistiaEmbed.innerHTML = `

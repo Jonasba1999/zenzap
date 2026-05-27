@@ -25,7 +25,6 @@ export function popup(): void {
 
   function openPopup(popup: HTMLElement): void {
     toggleScroll(false);
-    popup.style.display = 'flex';
     gsap.to(popup, {
       autoAlpha: 1,
       duration: 0.3,
@@ -39,9 +38,6 @@ export function popup(): void {
     gsap.to(popup, {
       autoAlpha: 0,
       duration: 0.2,
-      onComplete: () => {
-        popup.style.display = 'none';
-      },
     });
   }
 
