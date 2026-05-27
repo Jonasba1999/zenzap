@@ -26,6 +26,7 @@ import { stickyCta } from './modules/stickyCta';
 import { trackBtnClick, trackFormSubmit } from './modules/gtm';
 import { videoFallback } from './modules/videoFallback';
 import { horizontalScrollSteps } from './modules/horizontalScrollSteps';
+import { wistiaLazyLoad } from './modules/wistiaLazyLoad';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -57,4 +58,5 @@ window.Webflow.push(() => {
   trackFormSubmit();
   videoFallback();
   horizontalScrollSteps();
+  wistiaLazyLoad();
 });
