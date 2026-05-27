@@ -28,7 +28,7 @@ function loadWistiaVideo(wistiaId: string): void {
             allowfullscreen
             frameborder="0"
             scrolling="no"
-            style="position:absolute;inset:0;width:100%;height:100%;">
+            style="position:absolute;inset:0;width:100%;height:100%;transform:translateZ(0);-webkit-transform:translateZ(0);">
           </iframe>
         </div>
       `;
