@@ -91,3 +91,9 @@
     background: white;
   }
 }
+
+/* Pagination */
+.list-pagination_button.is-list-pagination-disabled {
+  color: rgba(157, 157, 157, 1);
+  border-color: rgba(157, 157, 157, 1);
+}
