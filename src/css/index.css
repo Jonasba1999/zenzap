@@ -97,3 +97,8 @@
   color: rgba(157, 157, 157, 1);
   border-color: rgba(157, 157, 157, 1);
 }
+
+/* Marketplace filters */
+.filter-radio-all-integrations.active {
+  border-color: #111;
+}

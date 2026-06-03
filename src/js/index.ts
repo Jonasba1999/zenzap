@@ -27,6 +27,7 @@ import { trackBtnClick, trackFormSubmit } from './modules/gtm';
 import { videoFallback } from './modules/videoFallback';
 import { horizontalScrollSteps } from './modules/horizontalScrollSteps';
 import { wistiaLazyLoad } from './modules/wistiaLazyLoad';
+import { marketplaceTitle, clearTopicsOnSearch } from './modules/marketplaceFilters';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -59,4 +60,6 @@ window.Webflow.push(() => {
   videoFallback();
   horizontalScrollSteps();
   wistiaLazyLoad();
+  marketplaceTitle();
+  clearTopicsOnSearch();
 });
