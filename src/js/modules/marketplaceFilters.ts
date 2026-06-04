@@ -87,7 +87,8 @@ export function clearTopicsOnSearch(): void {
 
   if (!searchInput || !clearButton) return;
 
-  searchInput.addEventListener('input', () => {
+  searchInput.addEventListener('beforeinput', () => {
+    console.log('test');
     clearButton.click();
   });
 }
