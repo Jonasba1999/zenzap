@@ -1,6 +1,7 @@
 @import './modules/accordion.css';
 @import './modules/swiper.css';
 @import './modules/buttons.css';
+@import './modules/marquee.css';
 
 @import 'swiper/css';
 @import 'swiper/css/navigation';

@@ -1,0 +1,14 @@
+@keyframes logo-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - 64px));
+  }
+}
+
+@media (max-width: 991px) {
+  .logos_collection {
+    animation: trusted-marquee 30s linear infinite;
+  }
+}
