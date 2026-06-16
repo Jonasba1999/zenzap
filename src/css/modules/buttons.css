@@ -40,3 +40,7 @@
   transform: scaleX(1);
   transform-origin: left; /* in: expands from left to right */
 }
+
+[data-hipaa-trigger] + .header_hamburger-btn {
+  display: none;
+}
