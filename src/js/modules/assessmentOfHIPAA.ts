@@ -25,6 +25,7 @@ export function assessmentOfHIPAA() {
 
   if (root) {
     const progressEl = root.querySelector<HTMLElement>('[data-progress]');
+    const btnPrev = root.querySelector<HTMLElement>('[data-prev-question]');
     const questionEl = root.querySelector<HTMLElement>('[data-question]');
     const indicatorEl = root.querySelector<HTMLElement>('[data-question-indicator]');
 
@@ -79,6 +80,25 @@ export function assessmentOfHIPAA() {
       });
     });
 
+    if (btnPrev) {
+      btnPrev.addEventListener('click', () => {
+        if (currentQuestion > 0) {
+          currentQuestion--;
+
+          answers.pop();
+
+          if (currentQuestion === 0) {
+            btnPrev.classList.add('disabled');
+          }
+          indicators.forEach((indicator, index) => {
+            indicator.classList.toggle('is-active', index === currentQuestion);
+          });
+
+          render();
+        }
+      });
+    }
+
     const finish = () => {
       const yesCount = answers.filter(Boolean).length;
       const yesIndices = answers
@@ -108,6 +128,10 @@ export function assessmentOfHIPAA() {
 
     const answerQuestion = (answer: boolean) => {
       answers.push(answer);
+
+      if (btnPrev) {
+        btnPrev.classList.remove('disabled');
+      }
       currentQuestion++;
 
       indicators.forEach((indicator, index) => {
