@@ -28,7 +28,7 @@ export function assessmentOfHIPAA() {
     const questionEl = root.querySelector<HTMLElement>('[data-question]');
     const indicatorEl = root.querySelector<HTMLElement>('[data-question-indicator]');
 
-    const openTriggers = document.querySelectorAll('[data-hipaa-trigger');
+    const openTriggers = document.querySelectorAll<HTMLElement>('[data-hipaa-trigger');
 
     if (openTriggers.length) {
       openTriggers.forEach((btn) => {
@@ -36,6 +36,10 @@ export function assessmentOfHIPAA() {
           e.preventDefault();
           document.querySelector('.hipaa-assessment_inactive')?.classList.add('hidden');
           document.querySelector('.hipaa-assessment_active')?.classList.remove('hidden');
+
+          openTriggers.forEach((b) => {
+            b.style.display = 'none';
+          });
         });
       });
     }
