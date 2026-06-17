@@ -100,8 +100,9 @@ export function assessmentOfHIPAA() {
     }
 
     const finish = () => {
-      const yesCount = Math.min(answers.filter(Boolean).length, questions.length);
-      const yesIndices = answers
+      const answerSlice = answers.slice(0, questions.length);
+      const yesCount = answerSlice.filter(Boolean).length;
+      const yesIndices = answerSlice
         .map((answer, index) => (answer ? index : null))
         .filter((index) => index !== null) as number[];
 
