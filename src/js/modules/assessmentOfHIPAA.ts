@@ -100,7 +100,7 @@ export function assessmentOfHIPAA() {
     }
 
     const finish = () => {
-      const yesCount = answers.filter(Boolean).length;
+      const yesCount = Math.min(answers.filter(Boolean).length, questions.length);
       const yesIndices = answers
         .map((answer, index) => (answer ? index : null))
         .filter((index) => index !== null) as number[];
@@ -186,7 +186,7 @@ export function assessmentOfHIPAA() {
     }
 
     if (qGaps) {
-      const gaps = quizData.totalQuestions - quizData.yesCount;
+      const gaps = Math.max(0, quizData.totalQuestions - quizData.yesCount);
       qGaps.innerHTML = gaps.toString();
     }
 
