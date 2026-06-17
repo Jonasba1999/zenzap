@@ -151,6 +151,9 @@ export function assessmentOfHIPAA() {
   const renderResult = (): void => {
     const templateItem = document.querySelector<HTMLElement>('[data-result-q-wrap]');
 
+    const isInPlaceIcon = document.querySelector<HTMLElement>('[data-controls-in-place="yes"]');
+    const isNotInPlaceIcon = document.querySelector<HTMLElement>('[data-controls-in-place="no"]');
+
     if (!templateItem || !questions.length) return;
 
     // Get quiz data from sessionStorage
@@ -175,6 +178,11 @@ export function assessmentOfHIPAA() {
     }
     if (totalQinPlace) {
       totalQinPlace.innerHTML = quizData.yesCount.toString();
+
+      if (quizData.yesCount > 0) {
+        isInPlaceIcon?.classList.remove('hidden');
+        isNotInPlaceIcon?.classList.add('hidden');
+      }
     }
 
     if (qGaps) {
