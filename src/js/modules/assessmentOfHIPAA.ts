@@ -3,10 +3,10 @@ export function assessmentOfHIPAA() {
 
   let currentQuestion = 0;
 
-  const resultUrlRoot = 'https://zenzap.webflow.io/';
-  const resultUrlSuccess = 'hipaa-risk-assessment-results-is-in-great-shape';
-  const resultUrlWarning = 'hipaa-risk-assessment-results-has-compliance-gaps';
-  const resultUrlError = 'hipaa-risk-assessment-results-has-serious-risk';
+  const resultUrlRoot = window.location.origin;
+  const resultUrlSuccess = '/hipaa-risk-assessment-results-is-in-great-shape';
+  const resultUrlWarning = '/hipaa-risk-assessment-results-has-compliance-gaps';
+  const resultUrlError = '/hipaa-risk-assessment-results-has-serious-risk';
 
   const questions = [
     'We have a signed BAA with every vendor that handles PHI - not just our EHR vendor.',
