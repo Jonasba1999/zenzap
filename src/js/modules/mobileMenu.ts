@@ -7,6 +7,8 @@ export function mobileMenu(): void {
 
   if (!menu || !hamburger) return;
 
+  const closeTriggers = document.querySelectorAll<HTMLElement>('[data-mobile-menu-close]');
+
   let menuOpen = false;
   let drillOpen = false;
 
@@ -125,4 +127,14 @@ export function mobileMenu(): void {
       closeMenu();
     }
   });
+
+  if (closeTriggers.length) {
+    closeTriggers.forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        if (menuOpen) {
+          hamburger.click();
+        }
+      });
+    });
+  }
 }

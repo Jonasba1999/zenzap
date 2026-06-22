@@ -1,4 +1,4 @@
-import { autoUpdate, computePosition, offset, shift } from '@floating-ui/dom';
+import { autoUpdate, computePosition, offset, shift, type Placement } from '@floating-ui/dom';
 import gsap from 'gsap';
 
 export function desktopMenu() {
@@ -35,6 +35,9 @@ export function desktopMenu() {
   }
 
   function setMenuPosition(trigger: HTMLElement, menu: HTMLElement) {
+    // Dropdown position
+    const menuPosition = (trigger.dataset.menuPosition ?? 'bottom-start') as Placement;
+
     computePosition(trigger, menu, {
       placement: 'bottom-start',
       middleware: [offset({ mainAxis: 0, crossAxis: -24 }), shift({ padding: 40 })],
