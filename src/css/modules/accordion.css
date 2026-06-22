@@ -34,8 +34,7 @@
   transform: rotate(180deg);
 }
 
-.assessment-result_questions-accordion-item.is-open .hide-tablet,
-.assessment-result_questions-accordion-item.is-open .show-mobile {
+.assessment-result_questions-accordion-item.is-open .hide-when-open {
   display: none;
 }
 .assessment-result_questions-accordion-item.is-open .show-when-open {
