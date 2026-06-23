@@ -30,7 +30,7 @@
   display: block;
 }
 
-.assessment-result_questions-accordion-item.is-open .btn-icon {
+.assessment-result_questions-accordion-item.is-open .btn-icon:not(.no-rotate) {
   transform: rotate(180deg);
 }
 

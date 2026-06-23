@@ -311,13 +311,20 @@ export function assessmentOfHIPAA() {
   const getShareUrl = (): string | null => {
     const quizDataStr = sessionStorage.getItem('quizData');
 
-    if (!quizDataStr) {
-      return null;
+    if (quizDataStr) {
+      const quizData = JSON.parse(quizDataStr) as QuizData;
+
+      return quizData.shareUrl ?? null;
     }
 
-    const quizData = JSON.parse(quizDataStr) as QuizData;
+    // Fallback for re-share
 
-    return quizData.shareUrl ?? null;
+    const params = new URLSearchParams(window.location.search);
+    const answersParam = params.get('a');
+
+    if (params && answersParam) {
+      return window.location.href;
+    }
   };
 
   const renderResult = (): void => {
@@ -406,6 +413,7 @@ export function assessmentOfHIPAA() {
       fragment.appendChild(clone);
     });
 
+    // Regular - initial result flow
     if (shareButton && shareUrl) {
       (shareButton as HTMLAnchorElement).href = shareUrl;
 
