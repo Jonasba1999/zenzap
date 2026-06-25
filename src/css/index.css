@@ -104,3 +104,8 @@
 .filter-radio-all-integrations.active {
   border-color: #111;
 }
+
+/* Demo video */
+.book-lp-hero_video-trigger:hover .book-lp-hero_play-btn {
+  transform: scale(0.9);
+}
