@@ -1,7 +1,7 @@
 import gsap from 'gsap';
 
 export function logoRotate() {
-  const logoSections = document.querySelectorAll<HTMLElement>('.clients-wall_grid.is-desktop');
+  const logoSections = document.querySelectorAll<HTMLElement>('[data-logo-rotate-section]');
 
   if (!logoSections.length) return;
 
