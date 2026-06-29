@@ -33,6 +33,31 @@ export function trackFormSubmit(): void {
     // Only react to the structured submit event, not the string one
     if (event.data?.type !== 'form_submit') return;
 
+    const PERSONAL_DOMAINS = [
+      'gmail.com',
+      'yahoo.com',
+      'icloud.com',
+      'outlook.com',
+      'hotmail.com',
+      'aol.com',
+      'me.com',
+      'live.com',
+      'btinternet.com',
+      'msn.com',
+      'mail.com',
+      'protonmail.com',
+      'comcast.net',
+      'mac.com',
+      'att.net',
+    ];
+
+    function isPersonalEmail(email: string): boolean {
+      if (!email) return false;
+
+      const domain = (email.split('@').pop() ?? '').toLowerCase().trim();
+      return PERSONAL_DOMAINS.includes(domain);
+    }
+
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ event: 'bookDemoForm' });
 
@@ -40,7 +65,14 @@ export function trackFormSubmit(): void {
       (q: { name: string; value: string }) => q.name === 'Company Size'
     )?.value;
 
-    if (companySize && companySize !== '0-20') {
+    const email = event.data.questions?.find(
+      (q: { name: string; value: string }) => q.name === 'Work Email'
+    )?.value;
+
+    const isBusinessEmail = !isPersonalEmail(email);
+
+    // Meta lead event
+    if (companySize && companySize !== '0-20' && isBusinessEmail) {
       window.dataLayer.push({ event: 'bookDemoFormMetaLead' });
       console.log('✅ bookDemoFormMetaLead pushed, company size:', companySize);
     }
