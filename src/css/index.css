@@ -3,6 +3,7 @@
 @import './modules/buttons.css';
 @import './modules/marquee.css';
 @import './modules/typography.css';
+@import './modules/survey.css';
 
 @import 'swiper/css';
 @import 'swiper/css/navigation';

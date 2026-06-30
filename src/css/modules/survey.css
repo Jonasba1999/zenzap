@@ -1,0 +1,358 @@
+#arriveAfterHoursGrid,
+#messagingAppsGrid {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+#messagingAppsGrid {
+  margin-bottom: 4rem;
+}
+#chart-group-chats-offboarding {
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-auto-columns: 1fr;
+  margin-bottom: 3rem;
+  display: grid;
+}
+
+#chart-group-chats-offboarding div:first-child {
+  grid-area: 1 / 2 / 2 / 6;
+}
+
+#chart-group-chats-offboarding div:nth-child(2) {
+  grid-area: 1 / 7 / 2 / 12;
+}
+
+.chart-group-chats-offboarding .legend-row {
+  order: -1;
+}
+#chart-group-chat-fate {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4rem;
+  padding-left: 7.625rem;
+  padding-right: 7.625rem;
+}
+.wm-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+.wm-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 20px);
+  gap: 4px;
+}
+.wm-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #2c2c2a;
+  transition: background 0.05s;
+}
+.wm-pct {
+  font-family: 'Figtree';
+
+  font-size: 2rem;
+  font-weight: 600;
+  margin-top: 1.25rem;
+  margin-bottom: 2rem;
+}
+.wm-label {
+  font-size: 1.125rem;
+  font-family: 'Figtree';
+  color: #fff;
+  font-weight: 400;
+  text-align: center;
+}
+#messagingAppsGrid .wm-label {
+  color: #111;
+}
+.wm-sub {
+  font-family: 'Figtree';
+  font-size: 1rem;
+  color: #919191;
+  text-align: center;
+  margin-top: 0.5rem;
+  min-height: 20px;
+}
+
+[data-progress-fill] {
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+/* [data-progress]::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: var(--progress-pct, 0%);
+  background: #e34948;
+  border-radius: 0 2px 2px 0;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+} */
+
+/* Horizontal result grid */
+
+.icon-grid-label-inline,
+.icon-grid-pct-inline {
+  color: var(--text--secondary);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 2rem;
+}
+
+.icon-grid-label {
+  color: var(--white);
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 2rem;
+}
+
+.icon-grid-pct-below {
+  font-size: 28px;
+  font-weight: 500;
+  margin: 12px 0 4px;
+  color: var(--text-primary);
+}
+.icon-grid-label-below {
+  font-size: 14px;
+  color: var(--text-secondary);
+  text-align: center;
+  margin: 0;
+}
+
+.group-chats_result-content-wrap .icon-grid-label {
+  color: var(--_zenzap---text--primary);
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 2rem;
+}
+.time-spent_content-left {
+  grid-area: 1 / 2 / 2 / 7;
+}
+.time-spent_content-left canvas {
+  width: 100% !important;
+}
+.time-spent_content-right {
+  grid-area: 1 / 8 / 2 / 12;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  gap: 3rem;
+}
+
+/*--- Donuts ---*/
+#ring-always-on,
+#ring-privacy-consent,
+.donut-chart--privacy-old-messages .donut-chart__canvas-wrap,
+.donut-chart__canvas-wrap {
+  position: relative;
+}
+.donut-chart--privacy-old-messages .donut-chart__canvas-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('../../assets/images/survey/chartEye.png');
+  background-position: center;
+  background-size: 50%;
+  background-repeat: no-repeat;
+}
+#chart-time-searching .donut-chart__canvas-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('../../assets/images/survey/chartSearch.png');
+  background-position: center;
+  background-size: 50%;
+  background-repeat: no-repeat;
+}
+.donut-chart__canvas-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('../../assets/images/survey/chartGroupChats.png');
+  background-position: center;
+  background-size: 50%;
+  background-repeat: no-repeat;
+}
+#ring-privacy-consent::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('../../assets/images/survey/chartPrivacy.png');
+  background-position: center;
+  background-size: 70%;
+  background-repeat: no-repeat;
+}
+#ring-always-on::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('../../assets/images/survey/chartAlwaysOn.png');
+  background-position: center;
+  background-size: 50%;
+  background-repeat: no-repeat;
+}
+
+#ring-always-on,
+#ring-privacy-consent {
+  width: 100%;
+}
+#ring-always-on {
+  background: #000;
+  overflow: hidden;
+  border-radius: 100%;
+}
+#ring-always-on > div,
+#ring-always-on svg,
+#ring-privacy-consent > div,
+#ring-privacy-consent svg {
+  width: 100% !important;
+  height: auto !important;
+}
+/* Default */
+.donut-chart {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}
+
+.donut-chart--legend-left {
+  flex-direction: row-reverse;
+}
+
+.donut-chart__canvas-wrap {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  flex-shrink: 0;
+}
+
+.donut-chart__canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.donut-chart__center-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.donut-chart__legend {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.donut-chart__title {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0 0 8px;
+  line-height: 1.3;
+}
+
+.donut-chart__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.donut-chart__label {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--segment-color);
+}
+
+.donut-chart__pct {
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--text-primary);
+  min-width: 52px;
+  text-align: right;
+}
+
+/* Overides */
+.donut-chart--privacy-old-messages .donut-chart__title {
+  font-size: 18px;
+}
+
+.donut-chart--time-searching .donut-chart__legend {
+  gap: 16px;
+}
+
+.donut-chart--group-chats-offboarding .donut-chart__canvas-wrap {
+  width: 320px;
+  height: 320px;
+}
+
+/* --- Gauge Chart --- */
+.gauge-chart__canvas-wrap {
+  position: relative;
+  width: 100% !important;
+}
+
+.gauge-chart__needle {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  width: 2.5rem;
+  height: 45%;
+  background: #202124;
+  clip-path: polygon(50% 0%, 65% 88%, 35% 88%);
+  transform-origin: bottom center;
+  transform: translateX(-50%) rotate(-90deg);
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gauge-chart__pivot {
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  width: 28px;
+  height: 28px;
+  background: #202124;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.gauge-chart__label {
+  color: var(--_zenzap---text--primary);
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 2rem;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.gauge-gauge-chart__endpoint-label {
+  color: #4a4a4a;
+  text-align: center;
+
+  font-family: 'Figtree';
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+.gauge-chart__endpoints {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

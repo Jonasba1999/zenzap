@@ -25,6 +25,7 @@ import { partnersLogos, partnersLogosSequential } from './modules/partnersLogos'
 import { popup } from './modules/popup';
 import { pricingCards } from './modules/pricingCards';
 import { stickyCta } from './modules/stickyCta';
+import { surveyLanding } from './modules/survey/surveyLanding';
 import { testimonialsSlider } from './modules/testimonialsSlider';
 import { textFill } from './modules/textFill';
 import { videoFallback } from './modules/videoFallback';
@@ -64,4 +65,5 @@ window.Webflow.push(() => {
   marketplaceTitle();
   clearTopicsOnSearch();
   assessmentOfHIPAA();
+  surveyLanding();
 });
