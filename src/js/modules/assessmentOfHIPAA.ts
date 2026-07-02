@@ -153,7 +153,7 @@ export function assessmentOfHIPAA() {
     const questionEl = root.querySelector<HTMLElement>('[data-question]');
     const indicatorEl = root.querySelector<HTMLElement>('[data-question-indicator]');
 
-    const openTriggers = document.querySelectorAll<HTMLElement>('[data-hipaa-trigger');
+    const openTriggers = document.querySelectorAll<HTMLElement>('[data-hipaa-trigger]');
 
     if (openTriggers.length) {
       openTriggers.forEach((btn) => {
@@ -199,8 +199,15 @@ export function assessmentOfHIPAA() {
     };
 
     root.querySelectorAll<HTMLElement>('[data-answer]').forEach((button) => {
+      const answerValue = button.dataset.answer?.trim().toLowerCase();
+      const isYes =
+        answerValue === 'yes' ||
+        answerValue === 'true' ||
+        answerValue === '1' ||
+        answerValue === 'y';
+
       button.addEventListener('click', () => {
-        answerQuestion(button.dataset.answer === 'yes');
+        answerQuestion(isYes);
       });
     });
 
