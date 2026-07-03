@@ -19,6 +19,7 @@ export function renderMessagingApps(counts: Record<string, number>, total: numbe
   renderDotColumnGrid(counts, total, {
     containerId: 'messagingAppsGrid',
     columns: APP_COLUMNS,
+    inactiveColor: '#DCDCDC',
     totalDots: 100,
     dotsPerCol: 20,
     dotSize: 22,

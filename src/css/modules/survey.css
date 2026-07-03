@@ -3,37 +3,237 @@
   padding-left: 2.5rem;
   padding-right: 2.5rem;
 }
+@media (max-width: 768px) {
+  #arriveAfterHoursGrid,
+  #messagingAppsGrid {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  #arriveAfterHoursGrid .wm-col {
+    flex-direction: column-reverse !important;
+  }
+
+  #arriveAfterHoursGrid .wm-label-wrap {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  #arriveAfterHoursGrid .wm-label {
+    font-size: 16px;
+    line-height: 24px;
+    text-align: left !important;
+  }
+  #arriveAfterHoursGrid .wm-sub {
+    margin: 0;
+    text-align: left !important;
+  }
+
+  #arriveAfterHoursGrid .wm-pct {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 32px;
+    letter-spacing: -0.64px;
+    margin: 0;
+  }
+}
+#arriveAfterHoursGrid {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
 #messagingAppsGrid {
   margin-bottom: 4rem;
 }
+@media (max-width: 768px) {
+  #arriveAfterHoursGrid {
+    display: flex;
+    flex-direction: column;
+  }
+  #messagingAppsGrid {
+    flex-direction: column;
+    margin-bottom: 2.5rem;
+  }
+}
+
 #chart-group-chats-offboarding {
-  grid-column-gap: 16px;
-  grid-row-gap: 16px;
-  grid-template-rows: auto;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-auto-columns: 1fr;
-  margin-bottom: 3rem;
-  display: grid;
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 0;
 }
 
-#chart-group-chats-offboarding div:first-child {
-  grid-area: 1 / 2 / 2 / 6;
+#chart-group-chats-offboarding .donut-chart__title {
+  color: var(--_zenzap---text--primary);
+  letter-spacing: -0.02em;
+  margin-top: 0;
+  margin-bottom: 3.5rem;
+  font-size: 2.5rem;
+  font-weight: 600;
+  line-height: 2.5rem;
+}
+#chart-group-chats-offboarding .donut-chart__row:not(:last-child) {
+  margin-bottom: 1.5rem;
+}
+#chart-group-chats-offboarding .donut-chart__canvas-wrap {
+  width: 60%;
+  height: auto;
+  padding-left: 8rem;
 }
 
-#chart-group-chats-offboarding div:nth-child(2) {
-  grid-area: 1 / 7 / 2 / 12;
+#chart-group-chats-offboarding .donut-chart__legend {
+  width: 40%;
 }
 
+#chart-group-chats-offboarding .donut-chart__label,
+#chart-group-chats-offboarding .donut-chart__pct {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 2rem;
+}
+
+#grid-ex-employees {
+  width: 100%;
+}
+#grid-ex-employees,
+#grid-remained-after-leaving,
+#grid-messages-after-leaving,
+#grid-ex-employees > div,
+#grid-remained-after-leaving > div,
+#grid-messages-after-leaving > div {
+  width: 100%;
+}
+#chart-time-searching .donut-chart__canvas-wrap,
+#chart-old-messages-access .donut-chart__canvas-wrap {
+  width: calc(60% - 3rem);
+  height: auto;
+}
+#chart-time-searching .donut-chart__legend,
+#chart-old-messages-access .donut-chart__legend {
+  width: 40%;
+}
+
+#chart-time-searching .donut-chart__canvas-wrap {
+  padding-right: 4rem;
+}
+#chart-old-messages-access .donut-chart__canvas-wrap {
+  padding-left: 4rem;
+}
+#chart-old-messages-access .donut-chart__row {
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  align-items: center;
+}
+#chart-old-messages-access .donut-chart__row:not(:last-child) {
+  margin-bottom: 1.5rem;
+}
+#chart-old-messages-access .donut-chart__label {
+  font-family: 'Figtree';
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 28px;
+}
+#chart-old-messages-access .donut-chart__pct {
+  font-family: 'Figtree';
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 40px;
+  letter-spacing: -0.8px;
+  margin-right: 0.75rem;
+}
+#chart-time-searching .donut-chart__label,
+#chart-time-searching .donut-chart__pct {
+  font-family: 'Figtree';
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
+}
+
+#chart-time-searching .donut-chart__title {
+  font-family: Figtree;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 40px;
+  letter-spacing: -0.8px;
+}
+#chart-time-searching .donut-chart__row:not(:last-child) {
+  margin-bottom: 2rem;
+}
+#chart-time-searching {
+  width: 100%;
+}
+.offboarding_chart-embed {
+  padding-left: 10.4375rem;
+  padding-right: 10.4375rem;
+}
 .chart-group-chats-offboarding .legend-row {
   order: -1;
 }
 #chart-group-chat-fate {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 4rem;
   padding-left: 7.625rem;
   padding-right: 7.625rem;
 }
+
+@media (max-width: 768px) {
+  #chart-group-chat-fate {
+    padding-left: 0;
+    padding-right: 0;
+    flex-direction: column;
+    gap: 3rem !important;
+  }
+  #chart-group-chat-fate > div {
+    width: 100% !important;
+    justify-content: flex-end;
+    min-height: 8.75rem !important;
+    position: relative !important;
+    flex-direction: column-reverse !important;
+    align-items: flex-start !important;
+    gap: 0.25rem !important;
+    text-align: left !important;
+  }
+
+  #chart-group-chat-fate > div .chart-col-label {
+    max-width: 100% !important;
+  }
+  #chart-group-chat-fate > div > div:first-child {
+    transform: rotate(90deg);
+    height: calc(100vw - 7rem) !important;
+    width: 4.5rem !important;
+    transform-origin: center;
+    left: calc(50% - 2.2rem);
+    margin: 0 !important;
+    position: absolute !important;
+    top: -14rem;
+  }
+  #chart-group-chat-fate > div svg {
+    transform: rotate(-90deg);
+  }
+
+  .disconnect_result-detail-block .icon-grid-label,
+  .group-chats_result-content-wrap .icon-grid-label {
+    font-size: 16px !important;
+    line-height: 24px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  #chart-group-chat-fate > div > div:first-child {
+    top: -3.5rem;
+    left: calc(50% - 2.5rem);
+    height: calc(100vw - 5rem) !important;
+  }
+}
+
 .wm-col {
   display: flex;
   flex-direction: column;
@@ -46,11 +246,182 @@
   grid-template-columns: repeat(5, 20px);
   gap: 4px;
 }
+@media (max-width: 768px) {
+  .wm-col {
+    width: 100%;
+  }
+
+  .privacy_chart-embed > div div:nth-child(2),
+  .wm-grid {
+    width: 100%;
+
+    grid-template-columns: repeat(20, 1fr) !important;
+    gap: 2px !important;
+  }
+  .privacy_chart-embed > div div:nth-child(2),
+  .disconnect_result-detail-block .w-embed > div {
+    width: 100%;
+  }
+
+  .wm-grid {
+    grid-template-columns: repeat(20, 1fr) !important;
+  }
+  .chart-col-icon-dot {
+    width: auto !important;
+  }
+  #arriveAfterHoursGrid .wm-grid .chart-col-icon-dot svg,
+  .chart-col-icon-dot svg,
+  .group-chats_icons-embed > div > div > div svg,
+  .search-experience_embed > div > div:nth-child(2) svg,
+  .privacy_chart-embed > div div:nth-child(2) div svg {
+    width: 100% !important;
+    height: auto !important;
+  }
+  #arriveAfterHoursGrid .wm-grid,
+  .search-experience_embed div > div:nth-child(2),
+  .group-chats_icons-embed > div > div,
+  .disconnect_result-detail-block .w-embed > div > div {
+    grid-template-columns: repeat(20, 1fr) !important;
+    gap: 2px !important;
+  }
+  .disconnect_result-detail-block .w-embed > div > div {
+    gap: 2px !important;
+  }
+  .privacy_chart-embed ~ div svg,
+  .disconnect_result-detail-block svg {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  .offboarding_chart-embed {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  #chart-old-messages-access,
+  #chart-group-chats-offboarding {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  #chart-old-messages-access {
+    gap: 2rem;
+  }
+  #chart-time-searching {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  #chart-time-searching .donut-chart__canvas-wrap {
+    padding-right: 0 !important;
+    width: 100% !important;
+  }
+  #chart-old-messages-access .donut-chart__canvas-wrap,
+  #chart-group-chats-offboarding .donut-chart__canvas-wrap {
+    padding-left: 0 !important;
+    width: 100% !important;
+  }
+
+  #chart-time-searching .donut-chart__legend,
+  #chart-group-chats-offboarding .donut-chart__legend {
+    width: 100% !important;
+    gap: 1rem !important;
+  }
+
+  #chart-old-messages-access .donut-chart__legend {
+    width: 100% !important;
+
+    gap: 0 !important;
+  }
+  #chart-group-chats-offboarding .donut-chart__title {
+    font-family: 'Figtree';
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 32px;
+    margin-bottom: 0.5rem;
+  }
+
+  #chart-time-searching .donut-chart__title {
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 32px;
+    margin-bottom: 0;
+  }
+
+  #chart-time-searching .donut-chart__row,
+  #chart-group-chats-offboarding .donut-chart__row {
+    margin-bottom: 0 !important;
+  }
+
+  #chart-old-messages-access .donut-chart__row:not(:last-child) {
+    margin-bottom: 2rem !important;
+  }
+
+  #chart-time-searching .donut-chart__label,
+  #chart-time-searching .donut-chart__pct,
+  #chart-old-messages-access .donut-chart__label,
+  #chart-group-chats-offboarding .donut-chart__label,
+  #chart-group-chats-offboarding .donut-chart__pct {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+  }
+
+  #chart-old-messages-access .donut-chart__pct {
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 32px;
+    letter-spacing: -0.64px;
+  }
+
+  .offboarding_chart-embed .donut-chart__canvas-wrap::before {
+    margin-left: 0 !important;
+  }
+
+  .overload_content-right w.embed {
+    max-width: 100% !important;
+  }
+  .overload_content-right {
+    padding-left: 0 !important;
+  }
+
+  .messages_chart-embed .wm-col {
+    flex-direction: column-reverse !important;
+    gap: 12px;
+  }
+
+  .messages_chart-embed .wm-label-wrap {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .messages_chart-embed .wm-label {
+    font-size: 16px;
+
+    font-weight: 600;
+    line-height: 24px;
+  }
+
+  .messages_chart-embed .wm-pct {
+    margin: 0;
+  }
+}
+
+.wm-label-wrap {
+  text-align: center;
+}
+
 .wm-dot {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: #2c2c2a;
+  background: #dcdcdc;
   transition: background 0.05s;
 }
 .wm-pct {
@@ -67,6 +438,10 @@
   color: #fff;
   font-weight: 400;
   text-align: center;
+}
+.chart-col-icon-dot {
+  width: 22px;
+  height: auto;
 }
 #messagingAppsGrid .wm-label {
   color: #111;
@@ -95,6 +470,18 @@
   transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 } */
 
+.chart-col-label {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+@media (max-width: 768px) {
+  .chart-col-label {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
 /* Horizontal result grid */
 
 .icon-grid-label-inline,
@@ -104,12 +491,22 @@
   font-weight: 600;
   line-height: 2rem;
 }
-
+@media (max-width: 768px) {
+  .icon-grid-label-inline,
+  .icon-grid-pct-inline {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+  }
+}
 .icon-grid-label {
   color: var(--white);
   font-size: 1.75rem;
   font-weight: 600;
   line-height: 2rem;
+  margin: 0;
+  margin-top: 1rem;
 }
 
 .icon-grid-pct-below {
@@ -162,6 +559,7 @@
   background-position: center;
   background-size: 50%;
   background-repeat: no-repeat;
+  margin-left: 4rem;
 }
 #chart-time-searching .donut-chart__canvas-wrap::before {
   content: '';
@@ -171,8 +569,18 @@
   background-position: center;
   background-size: 50%;
   background-repeat: no-repeat;
+  margin-right: 4rem;
 }
-.donut-chart__canvas-wrap::before {
+
+@media (max-width: 768px) {
+  .donut-chart--privacy-old-messages .donut-chart__canvas-wrap::before {
+    margin-left: 0;
+  }
+  #chart-time-searching .donut-chart__canvas-wrap::before {
+    margin-right: 0;
+  }
+}
+.offboarding_chart-embed .donut-chart__canvas-wrap::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -180,6 +588,7 @@
   background-position: center;
   background-size: 50%;
   background-repeat: no-repeat;
+  margin-left: 8rem;
 }
 #ring-privacy-consent::before {
   content: '';
@@ -355,4 +764,61 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.section_survey-filter::before,
+.section_survey-filter::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  width: 7.5rem;
+  height: 7.5rem;
+  pointer-events: none;
+  z-index: 2;
+
+  border-radius: 50%;
+  display: none;
+  transition: none;
+}
+
+.section_survey-filter::before {
+  left: 0;
+  box-shadow: -15rem -15rem 0 15rem #f5f5f3;
+}
+
+.section_survey-filter::after {
+  left: calc(100% - 7.5rem);
+  box-shadow: 15rem -15rem 0 15rem #f5f5f3;
+}
+
+.section_survey-filter.is-stuck::before,
+.section_survey-filter.is-stuck::after {
+  display: block;
+}
+
+/* Mobil Filter */
+
+.survey-filter_group-label {
+  color: #4a4a4a;
+  font-family: 'Figtree';
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  margin-bottom: 1rem;
+}
+
+.survey-filter_group-item:last-of-type .survey-filter_pills {
+  border: none !important;
+}
+
+/* Icon Sizing */
+.chart-col-icon-dot svg,
+.disconnect_result-detail-block svg,
+.search-experience_embed svg,
+.group-chats_icons-embed svg,
+.privacy_chart-embed svg,
+.chart-col-icon-dot svg {
+  width: 100% !important;
+  height: auto !important;
 }

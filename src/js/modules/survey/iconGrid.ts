@@ -33,6 +33,7 @@ export interface IconGridConfig {
 
 export class IconGrid {
   private config: Required<IconGridConfig>;
+  private grid: HTMLElement | null = null;
   private dots: SVGSVGElement[] = [];
   private labelEl: HTMLElement | null = null;
   private pctEl: HTMLElement | null = null;
@@ -44,7 +45,7 @@ export class IconGrid {
       totalDots: 100,
       dotsPerRow: 25,
       dotSize: 32,
-      gap: 4,
+      gap: 8,
       animationInterval: 12,
       layout: 'below',
       orientation: 'horizontal',
@@ -103,12 +104,14 @@ export class IconGrid {
     } else {
       grid.style.cssText = `
         display: grid;
-        grid-template-columns: repeat(${dotsPerRow}, ${dotSize}px);
+        grid-template-columns: repeat(${dotsPerRow}, 1fr);
         gap: ${gap}px;
+        width: 100%;
       `;
     }
 
     this.dots = [];
+    this.grid = grid;
 
     if (orientation === 'vertical') {
       // dotsPerRow here means "number of columns"; totalDots / dotsPerRow = rows per column
@@ -130,9 +133,11 @@ export class IconGrid {
       }
     } else {
       for (let i = 0; i < this.config.totalDots; i++) {
+        const divWrap = document.createElement('div');
         const svg = this.createSvgDot(this.config.inactiveColor);
-        grid.appendChild(svg);
-        this.dots.push(svg);
+        divWrap.appendChild(svg);
+        grid.appendChild(divWrap);
+        this.dots.push(divWrap);
       }
     }
 
@@ -211,14 +216,32 @@ export class IconGrid {
       return order;
     }
 
-    // Horizontal: bottom row first, left to right (matches dot-grid waffle pattern)
-    const rows = Math.round(totalDots / dotsPerRow);
+    const actualColumns = this.grid
+      ? Math.max(
+          1,
+          window.getComputedStyle(this.grid).gridTemplateColumns.split(' ').filter(Boolean).length
+        )
+      : dotsPerRow;
+    const actualRows = Math.ceil(totalDots / actualColumns);
+    const isDesktopOrder = actualColumns === dotsPerRow;
     const order: number[] = [];
-    for (let row = rows - 1; row >= 0; row--) {
-      for (let col = 0; col < dotsPerRow; col++) {
-        order.push(row * dotsPerRow + col);
+
+    if (isDesktopOrder) {
+      for (let row = 0; row < actualRows; row++) {
+        for (let col = 0; col < actualColumns; col++) {
+          const index = row * actualColumns + col;
+          if (index < totalDots) order.push(index);
+        }
+      }
+    } else {
+      for (let row = 0; row < actualRows; row++) {
+        for (let col = 0; col < actualColumns; col++) {
+          const index = row * actualColumns + col;
+          if (index < totalDots) order.push(index);
+        }
       }
     }
+
     return order;
   }
 

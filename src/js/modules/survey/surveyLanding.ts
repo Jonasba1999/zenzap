@@ -1,12 +1,16 @@
 import surveyData from '../../data/surveyData.json';
+import { initNotificationAnimation } from './animateNotification';
 import { BarColumnChart } from './barColumnChart';
+import { initDomToImage } from './domToImage';
 import { DonutChart } from './donutChart';
 import { GaugeChart } from './gaugeChart';
 import { IconGrid } from './iconGrid';
 import { ICONS } from './icons';
 import { renderMessagingApps } from './messagingApps';
 import { RingChart } from './ringChart';
+import { stickyFilter } from './stickyFilter';
 import { renderWorkMessageFrequency } from './workMessageFrequency';
+
 const donutCharts: DonutChart[] = [];
 
 function mountDonutCharts(): void {
@@ -146,6 +150,7 @@ function mountIconGrids(): void {
       statValues: ['Unwanted work messages outside work hours'],
       labelTemplate: 'Unwanted work messages',
       layout: 'inline',
+
       dotsPerRow: 25,
       dotSize: 28,
     }),
@@ -212,7 +217,7 @@ function mountIconGrids(): void {
       containerId: 'grid-personal-time',
       svgIcon: ICONS.messageAlert,
       activeColor: '#007AFF',
-      inactiveColor: '#2c2c2a',
+      inactiveColor: '#414245',
       statKey: 'personal_time_interrupted',
       statValues: ['Sometimes', 'Often', 'Very frequently'],
       labelTemplate: '{pct}% say after-hours messages interrupted their personal time',
@@ -223,7 +228,7 @@ function mountIconGrids(): void {
       containerId: 'grid-work-life-balance',
       svgIcon: ICONS.moon,
       activeColor: '#ECBD00',
-      inactiveColor: '#2c2c2a',
+      inactiveColor: '#414245',
       statKey: 'work_life_balance_impact',
       statValues: [
         'Made it significantly harder to disconnect',
@@ -238,7 +243,7 @@ function mountIconGrids(): void {
       containerId: 'grid-wellbeing',
       svgIcon: ICONS.sadFace,
       activeColor: '#D73426',
-      inactiveColor: '#2c2c2a',
+      inactiveColor: '#414245',
       statKey: 'wellbeing_affected',
       statValues: ['Yes, very much', 'Yes, a little'],
       labelTemplate: '{pct}% say after-hours messages hurt their wellbeing',
@@ -408,98 +413,6 @@ function mountIconGrids(): void {
       dotsPerRow: 25,
       dotSize: 22,
     })
-    // Section: Personal Messaging Apps Used for Work
-
-    // new IconGrid({
-    //   containerId: 'grid-app-imessage',
-    //   svgIcon: ICONS.messageBubble,
-    //   activeColor: '#1baf7a',
-    //   inactiveColor: '#2c2c2a',
-    //   statKey: 'messaging_apps',
-    //   statValues: ['iMessage / SMS'],
-    //   labelTemplate: 'iMessage / SMS',
-    //   layout: 'below',
-    //   orientation: 'vertical',
-    //   dotsPerRow: 5,
-    //   totalDots: 65,
-    //   dotSize: 22,
-    //   gap: 4,
-    // }),
-    // new IconGrid({
-    //   containerId: 'grid-app-whatsapp',
-    //   svgIcon: ICONS.whatsapp,
-    //   activeColor: '#1baf7a',
-    //   inactiveColor: '#2c2c2a',
-    //   statKey: 'messaging_apps',
-    //   statValues: ['WhatsApp'],
-    //   labelTemplate: 'WhatsApp',
-    //   layout: 'below',
-    //   orientation: 'vertical',
-    //   dotsPerRow: 5,
-    //   totalDots: 65,
-    //   dotSize: 22,
-    //   gap: 4,
-    // }),
-    // new IconGrid({
-    //   containerId: 'grid-app-messenger',
-    //   svgIcon: ICONS.messenger,
-    //   activeColor: '#2a78d6',
-    //   inactiveColor: '#2c2c2a',
-    //   statKey: 'messaging_apps',
-    //   statValues: ['Facebook Messenger'],
-    //   labelTemplate: 'Facebook Messenger',
-    //   layout: 'below',
-    //   orientation: 'vertical',
-    //   dotsPerRow: 5,
-    //   totalDots: 65,
-    //   dotSize: 22,
-    //   gap: 4,
-    // }),
-    // new IconGrid({
-    //   containerId: 'grid-app-telegram',
-    //   svgIcon: ICONS.telegram,
-    //   activeColor: '#37b6e9',
-    //   inactiveColor: '#2c2c2a',
-    //   statKey: 'messaging_apps',
-    //   statValues: ['Telegram'],
-    //   labelTemplate: 'Telegram',
-    //   layout: 'below',
-    //   orientation: 'vertical',
-    //   dotsPerRow: 5,
-    //   totalDots: 65,
-    //   dotSize: 22,
-    //   gap: 4,
-    // }),
-    // new IconGrid({
-    //   containerId: 'grid-app-signal',
-    //   svgIcon: ICONS.signal,
-    //   activeColor: '#534AB7',
-    //   inactiveColor: '#2c2c2a',
-    //   statKey: 'messaging_apps',
-    //   statValues: ['Signal'],
-    //   labelTemplate: 'Signal',
-    //   layout: 'below',
-    //   orientation: 'vertical',
-    //   dotsPerRow: 5,
-    //   totalDots: 65,
-    //   dotSize: 22,
-    //   gap: 4,
-    // }),
-    // new IconGrid({
-    //   containerId: 'grid-app-discord',
-    //   svgIcon: ICONS.discord,
-    //   activeColor: '#7f77dd',
-    //   inactiveColor: '#2c2c2a',
-    //   statKey: 'messaging_apps',
-    //   statValues: ['Discord'],
-    //   labelTemplate: 'Discord',
-    //   layout: 'below',
-    //   orientation: 'vertical',
-    //   dotsPerRow: 5,
-    //   totalDots: 65,
-    //   dotSize: 22,
-    //   gap: 4,
-    // })
   );
 
   grids.forEach((g) => g.mount());
@@ -816,28 +729,128 @@ function updateTotalCount(respondents: Respondent[]): void {
 
 // ─── Dropdown Population ──────────────────────────────────────────────────────
 
-function populateDropdowns(): void {
-  (
-    Object.entries(surveyData.filter_options) as [
-      FilterKey,
-      (typeof surveyData.filter_options)[FilterKey],
-    ][]
-  ).forEach(([key, filter]) => {
+const MOBILE_FILTER_MODAL_ID = 'mobile-filter-modal'; // your modal element id
+
+function buildMobileModal(): HTMLElement {
+  let modal = document.getElementById(MOBILE_FILTER_MODAL_ID);
+  if (modal) return modal;
+
+  modal = document.createElement('div');
+  modal.id = MOBILE_FILTER_MODAL_ID;
+  modal.innerHTML = `
+    <div class="mobile-filter_overlay"></div>
+    <div class="mobile-filter_sheet">
+      <button class="mobile-filter_close" aria-label="Close filters">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M15 5L5 15M5 5l10 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <p class="mobile-filter_label">Filter by</p>
+      <div class="mobile-filter_groups"></div>
+      <button class="mobile-filter_clear">Clear all</button>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  // Close handlers
+  modal
+    .querySelector('.mobile-filter_overlay')!
+    .addEventListener('click', () => closeMobileModal());
+  modal.querySelector('.mobile-filter_close')!.addEventListener('click', () => closeMobileModal());
+  modal.querySelector('.mobile-filter_clear')!.addEventListener('click', () => {
+    // Reset all selects to first option and sync
+    document.querySelectorAll<HTMLSelectElement>('.survey-filter_wrap select').forEach((sel) => {
+      sel.selectedIndex = 0;
+      sel.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+    syncMobilePillsFromSelects();
+  });
+
+  return modal;
+}
+
+function syncMobilePillsFromSelects() {
+  document
+    .querySelectorAll<HTMLSelectElement>('.survey-filter_dropdown-wrap select')
+    .forEach((select) => {
+      const key = SELECT_ID_TO_KEY[select.id];
+      if (!key) return;
+      const activeValue = select.value;
+
+      // scope to THIS key's pills only
+      document.querySelectorAll<HTMLButtonElement>(`.btn[data-key="${key}"]`).forEach((pill) => {
+        pill.classList.toggle('black', pill.dataset.value === activeValue);
+      });
+    });
+}
+
+function populateMobileGroups(
+  filterEntries: [FilterKey, (typeof surveyData.filter_options)[FilterKey]][]
+) {
+  const modal = buildMobileModal();
+  const groups = modal.querySelector('.survey-filter_groups')!;
+  groups.innerHTML = '';
+
+  filterEntries.forEach(([key, filter]) => {
+    const group = document.createElement('div');
+    group.className = 'survey-filter_group-item';
+    group.innerHTML = `<p class="survey-filter_group-label">${filter.label ?? key}</p>
+                       <div class="survey-filter_pills"></div>`;
+
+    const pillsWrap = group.querySelector('.survey-filter_pills')!;
+
+    filter.options.forEach((opt, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'btn is-small';
+      btn.dataset.key = key;
+      btn.dataset.value = opt.value ?? '';
+      btn.textContent = opt.label;
+      if (i === 0) btn.classList.add('black');
+
+      btn.addEventListener('click', () => {
+        // 1. Update active pill within this group
+        pillsWrap
+          .querySelectorAll<HTMLButtonElement>('.survey-filter_pills .btn.is-small')
+          .forEach((p) => p.classList.remove('black'));
+        btn.classList.add('black');
+
+        // 2. Sync the desktop <select>
+        const selectId = Object.entries(SELECT_ID_TO_KEY).find(([, v]) => v === key)?.[0];
+        if (!selectId) return;
+        const select = document.getElementById(selectId) as HTMLSelectElement | null;
+        if (!select) return;
+        select.value = opt.value ?? '';
+        select.dispatchEvent(new Event('change', { bubbles: true }));
+      });
+
+      pillsWrap.appendChild(btn);
+    });
+
+    groups.appendChild(group);
+  });
+}
+
+export function populateDropdowns(): void {
+  const filterEntries = Object.entries(surveyData.filter_options) as [
+    FilterKey,
+    (typeof surveyData.filter_options)[FilterKey],
+  ][];
+
+  // ── Mobile first — pills must exist before selects fire 'change' ──────────
+  populateMobileGroups(filterEntries);
+
+  // ── Desktop ───────────────────────────────────────────────────────────────
+  filterEntries.forEach(([key, filter]) => {
     const selectId = Object.entries(SELECT_ID_TO_KEY).find(([, v]) => v === key)?.[0];
     if (!selectId) return;
-
     const select = document.getElementById(selectId) as HTMLSelectElement | null;
-
     if (!select) {
       console.warn(`[survey] No <select> found for filter: "${key}"`);
       return;
     }
 
-    // ── 1. Clear only the native <select> ────────────────────────────────────
-    // Let Finsweet own the nav list entirely — do NOT touch .w-dropdown-list
     select.innerHTML = '';
-
-    // ── 2. Rebuild native <option>s from JSON ─────────────────────────────────
     filter.options.forEach((opt, i) => {
       const option = document.createElement('option');
       option.value = opt.value ?? '';
@@ -846,7 +859,12 @@ function populateDropdowns(): void {
       select.appendChild(option);
     });
 
-    // ── 3. Trigger change so Finsweet syncs its UI from the native select ─────
+    if (!select.dataset.mobileSync) {
+      select.dataset.mobileSync = 'true';
+      select.addEventListener('change', () => syncMobilePillsFromSelects());
+    }
+
+    // Now pills exist, so this actually syncs them
     select.dispatchEvent(new Event('change', { bubbles: true }));
   });
 }
@@ -941,6 +959,14 @@ function bindFilterEvents(): void {
           ?.querySelector<HTMLElement>('[fs-selectcustom-element="label"]');
         if (label) label.textContent = filter.default;
       });
+
+      // ── Reset mobile pills — first pill in each group gets 'black' ──────────
+      document.querySelectorAll<HTMLElement>('.survey-filter_pills').forEach((group) => {
+        group.querySelectorAll<HTMLButtonElement>('.btn').forEach((pill, i) => {
+          pill.classList.toggle('black', i === 0);
+        });
+      });
+
       refreshData();
     });
   });
@@ -1078,4 +1104,7 @@ export function surveyLanding(): void {
   mountRingCharts();
   mountGaugeCharts();
   refreshData(); // initial render with all data
+  stickyFilter();
+  initNotificationAnimation();
+  initDomToImage();
 }

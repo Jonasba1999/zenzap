@@ -123,7 +123,8 @@ export class BarColumnChart {
 
       // ── Label ────────────────────────────────────────────────────────────
       const labelEl = document.createElement('div');
-      labelEl.style.cssText = `font-size: 13px; color: var(--text-secondary); text-align: center; max-width: ${trackWidth}px;`;
+      labelEl.style.cssText = `max-width: ${trackWidth}px;`;
+      labelEl.className = 'chart-col-label';
       labelEl.textContent = cfg.label;
       colWrap.appendChild(labelEl);
 
