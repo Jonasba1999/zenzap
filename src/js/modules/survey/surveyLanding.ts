@@ -1,3 +1,6 @@
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
 import surveyData from '../../data/surveyData.json';
 import { initNotificationAnimation } from './animateNotification';
 import { BarColumnChart } from './barColumnChart';
@@ -8,6 +11,7 @@ import { IconGrid } from './iconGrid';
 import { ICONS } from './icons';
 import { renderMessagingApps } from './messagingApps';
 import { RingChart } from './ringChart';
+import { shareResultPage } from './shareResultPage';
 import { stickyFilter } from './stickyFilter';
 import { renderWorkMessageFrequency } from './workMessageFrequency';
 
@@ -21,7 +25,7 @@ function mountDonutCharts(): void {
     new DonutChart({
       containerId: 'chart-time-searching',
       variantClass: 'donut-chart--time-searching',
-      titleTemplate: '{pct}% of workday spent searching for messages, files or info',
+      // titleTemplate: '{pct}% of workday spent searching for messages, files or info',
       titleStatKey: 'time_searching_chats',
       titleStatValues: [
         'More than 10% of my workday',
@@ -360,18 +364,18 @@ function mountIconGrids(): void {
       dotsPerRow: 25,
       dotSize: 28,
     }),
-    new IconGrid({
-      containerId: 'grid-feel-tension',
-      svgIcon: ICONS.heartCrack,
-      activeColor: '#990066',
-      inactiveColor: '#DCDCDC',
-      statKey: 'search_feelings',
-      statValues: ['A physical ache - like actual tension in my body'],
-      labelTemplate: 'Physical tension',
-      layout: 'inline',
-      dotsPerRow: 25,
-      dotSize: 28,
-    }),
+    // new IconGrid({
+    //   containerId: 'grid-feel-tension',
+    //   svgIcon: ICONS.heartCrack,
+    //   activeColor: '#990066',
+    //   inactiveColor: '#DCDCDC',
+    //   statKey: 'search_feelings',
+    //   statValues: ['A physical ache - like actual tension in my body'],
+    //   labelTemplate: 'Physical tension',
+    //   layout: 'inline',
+    //   dotsPerRow: 25,
+    //   dotSize: 28,
+    // }),
     // Section: Group Chats and Offboarding
 
     new IconGrid({
@@ -494,7 +498,6 @@ function mountRingCharts(): void {
       containerId: 'ring-always-on',
       size: 280,
       strokeWidth: 14,
-      centerIcon: ICONS.clockSleep,
       centerIconSize: 80,
       trackColor: 'rgba(255, 255, 255, 0.2)',
       rings: [
@@ -649,7 +652,7 @@ function updateStatElements(respondents: Respondent[]): void {
   document.querySelectorAll<HTMLElement>('[data-stat]').forEach((el) => {
     const key = el.dataset.stat as keyof Respondent;
     const rawValues = el.dataset.statValues ?? '';
-    const matchValues = rawValues.split('|').map((v) => v.trim()); // ← changed from ','
+    const matchValues = rawValues.split('|').map((v) => v.trim());
     const template = el.dataset.statTemplate ?? '{pct}%';
 
     if (!key) return;
@@ -663,19 +666,53 @@ function updateStatElements(respondents: Respondent[]): void {
     }).length;
 
     const targetPct = total > 0 ? Math.round((count / total) * 100) : 0;
-    const currentPct = parseInt(el.dataset.currentPct ?? '0', 10) || 0;
+    if (el.dataset.seen === 'true') {
+      // Already visible — animate from current value immediately
+      const currentPct = parseInt(el.dataset.currentPct ?? '0', 10) || 0;
+      animateNumber(
+        el,
+        currentPct,
+        targetPct,
+        (v) => {
+          el.textContent = template.replace('{pct}', String(v));
+        },
+        () => {
+          el.dataset.currentPct = String(targetPct);
+        }
+      );
+    } else {
+      // Store latest target for when element scrolls into view
+      el.dataset.pendingPct = String(targetPct);
 
-    animateNumber(
-      el,
-      currentPct,
-      targetPct,
-      (v) => {
-        el.textContent = template.replace('{pct}', String(v));
-      },
-      () => {
-        el.dataset.currentPct = String(targetPct);
-      }
-    );
+      // Reset display to 0 so nothing shows before animation
+      el.textContent = template.replace('{pct}', '0');
+
+      // Only register ScrollTrigger once — skip if already registered
+      if (el.dataset.triggerRegistered === 'true') return;
+      el.dataset.triggerRegistered = 'true';
+
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top 75%',
+        once: true,
+        onEnter: () => {
+          el.dataset.seen = 'true';
+          // Read pendingPct at trigger time, not at registration time
+          const pending = parseInt(el.dataset.pendingPct ?? '0', 10) || 0;
+          animateNumber(
+            el,
+            0,
+            pending,
+            (v) => {
+              el.textContent = template.replace('{pct}', String(v));
+            },
+            () => {
+              el.dataset.currentPct = String(pending);
+            }
+          );
+        },
+      });
+    }
   });
 }
 
@@ -869,10 +906,70 @@ export function populateDropdowns(): void {
   });
 }
 
+// ─── URL Sync ─────────────────────────────────────────────────────────────────
+
+function filtersToURL(filters: ActiveFilters): void {
+  const params = new URLSearchParams();
+  (Object.entries(filters) as [keyof ActiveFilters, string | null][]).forEach(([key, value]) => {
+    if (value) params.set(key, value);
+  });
+  const newURL = params.toString()
+    ? `${window.location.pathname}?${params.toString()}`
+    : window.location.pathname;
+  window.history.replaceState(null, '', newURL);
+}
+
+function loadFiltersFromURL(): void {
+  const params = new URLSearchParams(window.location.search);
+  (Object.keys(activeFilters) as (keyof ActiveFilters)[]).forEach((key) => {
+    const value = params.get(key);
+    if (value) activeFilters[key] = value;
+  });
+}
+
+function applyFiltersToUI(): void {
+  // Sync native selects
+  Object.entries(SELECT_ID_TO_KEY).forEach(([selectId, key]) => {
+    const select = document.getElementById(selectId) as HTMLSelectElement | null;
+    if (select && activeFilters[key]) select.value = activeFilters[key]!;
+  });
+
+  // Sync Finsweet custom dropdown labels and nav items
+  (
+    Object.entries(surveyData.filter_options) as [
+      FilterKey,
+      (typeof surveyData.filter_options)[FilterKey],
+    ][]
+  ).forEach(([key, filter]) => {
+    const value = activeFilters[key];
+    if (!value) return;
+
+    const selectId = Object.entries(SELECT_ID_TO_KEY).find(([, v]) => v === key)?.[0];
+    if (!selectId) return;
+
+    const dropdown = document.getElementById(selectId)?.closest('.w-dropdown');
+    if (!dropdown) return;
+
+    // Update label text
+    const matchingOption = filter.options.find((o) => o.value === value);
+    if (matchingOption) {
+      const label = dropdown.querySelector<HTMLElement>('[fs-selectcustom-element="label"]');
+      if (label) label.textContent = matchingOption.label;
+    }
+
+    // Update nav item active states
+    dropdown.querySelectorAll<HTMLElement>('[data-filter-key]').forEach((el) => {
+      const isSelected = el.dataset.filterValue === value;
+      el.classList.toggle('w--current', isSelected);
+      el.setAttribute('aria-selected', String(isSelected));
+      el.tabIndex = isSelected ? 0 : -1;
+    });
+  });
+}
+
 // ─── Event Wiring ─────────────────────────────────────────────────────────────
 
 function bindFilterEvents(): void {
-  // Listen on the custom Webflow nav links
   let isSyncingFromClick = false;
 
   document.addEventListener('click', (e) => {
@@ -890,7 +987,7 @@ function bindFilterEvents(): void {
     if (selectId) {
       const select = document.getElementById(selectId) as HTMLSelectElement | null;
       if (select) {
-        isSyncingFromClick = true; // ← block the change listener below
+        isSyncingFromClick = true;
         select.value = value ?? '';
         isSyncingFromClick = false;
       }
@@ -913,38 +1010,38 @@ function bindFilterEvents(): void {
       label.textContent = target.querySelector('div')?.textContent ?? '';
     }
 
+    filtersToURL(activeFilters); // ← sync URL
     refreshData();
   });
 
   document.addEventListener('change', (e) => {
-    if (isSyncingFromClick) return; // ← skip duplicate refresh triggered by our own click handler
-
+    if (isSyncingFromClick) return;
     const select = e.target as HTMLSelectElement;
     const key = SELECT_ID_TO_KEY[select.id];
     if (!key) return;
     activeFilters[key] = select.value || null;
+    filtersToURL(activeFilters); // ← sync URL
     refreshData();
   });
 
-  // Clear all button: <button data-clear-filters>Clear all</button>
   document.querySelectorAll<HTMLElement>('[data-clear-filters]').forEach((btn) => {
     btn.addEventListener('click', () => {
       (Object.keys(activeFilters) as FilterKey[]).forEach((k) => {
         activeFilters[k] = null;
       });
-      // Reset all native selects to first option
+
       Object.keys(SELECT_ID_TO_KEY).forEach((id) => {
         const s = document.getElementById(id) as HTMLSelectElement | null;
         if (s) s.selectedIndex = 0;
       });
-      // Reset all custom nav links to first item
+
       document.querySelectorAll<HTMLElement>('[data-filter-key]').forEach((el) => {
         const isFirst = !el.previousElementSibling;
         el.classList.toggle('w--current', isFirst);
         el.setAttribute('aria-selected', String(isFirst));
         el.tabIndex = isFirst ? 0 : -1;
       });
-      // Reset all labels to default text
+
       (
         Object.entries(surveyData.filter_options) as [
           FilterKey,
@@ -960,13 +1057,13 @@ function bindFilterEvents(): void {
         if (label) label.textContent = filter.default;
       });
 
-      // ── Reset mobile pills — first pill in each group gets 'black' ──────────
       document.querySelectorAll<HTMLElement>('.survey-filter_pills').forEach((group) => {
         group.querySelectorAll<HTMLButtonElement>('.btn').forEach((pill, i) => {
           pill.classList.toggle('black', i === 0);
         });
       });
 
+      filtersToURL(activeFilters); // ← clears URL params
       refreshData();
     });
   });
@@ -1021,14 +1118,16 @@ function animateNumber(
   const interval = setInterval(() => {
     step++;
     current += stepSize;
-    onStep(Math.round(current));
 
     if (step >= ANIMATION_STEPS) {
       clearInterval(interval);
       activeAnimations.delete(el);
-      onStep(to);
+      onStep(to); // snap to exact final value
       onDone();
+      return; // ← return early, don't also call onStep(Math.round(current))
     }
+
+    onStep(Math.round(current));
   }, stepInterval);
 
   activeAnimations.set(el, interval);
@@ -1054,57 +1153,70 @@ export function updateProgressStats(respondents: Respondent[]): void {
     const fillEl = el.querySelector<HTMLElement>('[data-progress-fill]');
 
     if (fillEl) {
-      // Trigger transition on next frame so CSS transition fires
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          fillEl!.style.width = `${targetPct}%`;
-        });
+      // Ensure it starts at 0 so the transition has something to animate from
+      fillEl.style.width = '0%';
+      fillEl.style.transition = 'width 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top 75%',
+        once: true,
+        onEnter: () => {
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              fillEl.style.width = `${targetPct}%`;
+            });
+          });
+        },
       });
     }
   });
 
-  // ── Stat text with template ────────────────────────────────────────────────
-  document.querySelectorAll<HTMLElement>('[data-stat][data-stat-template]').forEach((el) => {
-    const key = el.dataset.stat as keyof Respondent;
-    const matchValues = (el.dataset.statValues ?? '').split('|').map((v) => v.trim());
-    const template = el.dataset.statTemplate ?? '{pct}%';
+  // // ── Stat text with template ────────────────────────────────────────────────
+  // document.querySelectorAll<HTMLElement>('[data-stat][data-stat-template]').forEach((el) => {
+  //   const key = el.dataset.stat as keyof Respondent;
+  //   const matchValues = (el.dataset.statValues ?? '').split('|').map((v) => v.trim());
+  //   const template = el.dataset.statTemplate ?? '{pct}%';
 
-    if (!key) return;
+  //   if (!key) return;
 
-    const count = respondents.filter((r) => {
-      const val = r[key];
-      return typeof val === 'string' && matchValues.includes(val);
-    }).length;
+  //   const count = respondents.filter((r) => {
+  //     const val = r[key];
+  //     return typeof val === 'string' && matchValues.includes(val);
+  //   }).length;
 
-    const targetPct = total > 0 ? Math.round((count / total) * 100) : 0;
-    const currentPct = parseInt(el.dataset.currentPct ?? '0', 10) || 0;
+  //   const targetPct = total > 0 ? Math.round((count / total) * 100) : 0;
+  //   const currentPct = parseInt(el.dataset.currentPct ?? '0', 10) || 0;
 
-    animateNumber(
-      el,
-      currentPct,
-      targetPct,
-      (v) => {
-        el.textContent = template.replace('{pct}', String(v));
-      },
-      () => {
-        el.dataset.currentPct = String(targetPct);
-      }
-    );
-  });
+  //   animateNumber(
+  //     el,
+  //     currentPct,
+  //     targetPct,
+  //     (v) => {
+  //       el.textContent = template.replace('{pct}', String(v));
+  //     },
+  //     () => {
+  //       el.dataset.currentPct = String(targetPct);
+  //     }
+  //   );
+  // });
 }
 // ─── Init ─────────────────────────────────────────────────────────────────────
 
 export function surveyLanding(): void {
   if (!document.querySelector('.section_survey-filter')) return;
+  loadFiltersFromURL();
   populateDropdowns();
   bindFilterEvents();
+  applyFiltersToUI();
   mountIconGrids();
   mountDonutCharts();
   mountBarCharts();
   mountRingCharts();
   mountGaugeCharts();
-  refreshData(); // initial render with all data
   stickyFilter();
   initNotificationAnimation();
-  initDomToImage();
+  refreshData(); // initial render with all data
+  // initDomToImage(); // download chart image
+  shareResultPage(); // copy page url
 }

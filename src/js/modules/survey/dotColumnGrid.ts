@@ -1,4 +1,6 @@
-// dotColumnGrid.ts
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
 
 export interface DotColumnConfig {
   key: string;
@@ -208,10 +210,8 @@ export function renderDotColumnGrid(
 
     labelWrap.appendChild(pctEl);
     labelWrap.appendChild(labelEl);
-
     colEl.appendChild(grid);
     colEl.appendChild(labelWrap);
-
     container.appendChild(colEl);
 
     const actualColumns = Math.max(
@@ -223,49 +223,50 @@ export function renderDotColumnGrid(
     clearDotColumnGridTimer(stateKey);
 
     const order = buildDotColumnFillOrder(totalDots, dotsPerRow, actualColumns);
-    let step = startFilled;
-    const direction = filled >= step ? 1 : -1;
 
-    for (let i = 0; i < step; i++) {
-      const dot = dots[order[i]];
-      if (cfg.icon) {
-        setDotIconColor(dot, cfg.color);
-      } else {
-        dot.style.background = cfg.color;
+    const runAnimation = () => {
+      let step = startFilled;
+      const direction = filled >= step ? 1 : -1;
+
+      for (let i = 0; i < step; i++) {
+        const dot = dots[order[i]];
+        if (cfg.icon) setDotIconColor(dot, cfg.color);
+        else dot.style.background = cfg.color;
       }
-    }
-    pctEl.textContent = Math.round((step / totalDots) * 100) + '%';
+      pctEl.textContent = Math.round((step / totalDots) * 100) + '%';
 
-    const interval = window.setInterval(() => {
-      if (step === filled) {
-        window.clearInterval(interval);
-        setDotColumnGridState(stateKey, filled, null);
-        pctEl.textContent = pct + '%';
-        return;
-      }
-
-      step += direction;
-
-      if (direction === 1) {
-        const dot = dots[order[step - 1]];
-        if (cfg.icon) {
-          setDotIconColor(dot, cfg.color);
-        } else {
-          dot.style.background = cfg.color;
+      const interval = window.setInterval(() => {
+        if (step === filled) {
+          window.clearInterval(interval);
+          setDotColumnGridState(stateKey, filled, null);
+          pctEl.textContent = pct + '%';
+          return;
         }
-      } else {
-        const dot = dots[order[step]];
-        if (cfg.icon) {
-          setDotIconColor(dot, inactiveColor);
-        } else {
-          dot.style.background = inactiveColor;
-        }
-      }
 
-      const currentPct = Math.round((step / totalDots) * 100);
-      pctEl.textContent = `${currentPct}%`;
+        step += direction;
+
+        if (direction === 1) {
+          const dot = dots[order[step - 1]];
+          if (cfg.icon) setDotIconColor(dot, cfg.color);
+          else dot.style.background = cfg.color;
+        } else {
+          const dot = dots[order[step]];
+          if (cfg.icon) setDotIconColor(dot, inactiveColor);
+          else dot.style.background = inactiveColor;
+        }
+
+        pctEl.textContent = `${Math.round((step / totalDots) * 100)}%`;
+        setDotColumnGridState(stateKey, step, interval);
+      }, animationInterval);
+
       setDotColumnGridState(stateKey, step, interval);
-    }, animationInterval);
-    setDotColumnGridState(stateKey, step, interval);
+    };
+
+    ScrollTrigger.create({
+      trigger: container,
+      start: 'top 75%',
+      once: true,
+      onEnter: runAnimation,
+    });
   });
 }

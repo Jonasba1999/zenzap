@@ -1,5 +1,7 @@
 // barColumnChart.ts
-
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/all';
+gsap.registerPlugin(ScrollTrigger);
 export interface BarColumnConfig {
   statKey: keyof Respondent;
   statValues: string[];
@@ -23,6 +25,8 @@ export class BarColumnChart {
   private fillEls: HTMLElement[] = [];
   private pctEls: HTMLElement[] = [];
   private iconEls: HTMLElement[] = [];
+  private container: HTMLElement | null = null;
+  private pendingRespondents: Respondent[] | null = null;
 
   constructor(options: BarColumnChartOptions) {
     this.options = {
@@ -41,6 +45,7 @@ export class BarColumnChart {
       console.warn(`[BarColumnChart] No element found with id "${this.options.containerId}"`);
       return;
     }
+    this.container = container;
     container.innerHTML = '';
 
     container.style.cssText = `
@@ -131,10 +136,32 @@ export class BarColumnChart {
       container.appendChild(colWrap);
     });
 
+    // ── ScrollTrigger ────────────────────────────────────────────────────────
+    ScrollTrigger.create({
+      trigger: container,
+      start: 'top 80%',
+      once: true,
+      onEnter: () => {
+        container.dataset.seen = 'true';
+        if (this.pendingRespondents) {
+          this.applyUpdate(this.pendingRespondents);
+          this.pendingRespondents = null;
+        }
+      },
+    });
+
     if (respondents) this.update(respondents);
   }
 
   update(respondents: Respondent[]): void {
+    if (this.container?.dataset.seen === 'true') {
+      this.applyUpdate(respondents);
+    } else {
+      this.pendingRespondents = respondents;
+    }
+  }
+
+  private applyUpdate(respondents: Respondent[]): void {
     const total = respondents.length;
 
     this.options.columns.forEach((cfg, i) => {
@@ -177,7 +204,5 @@ export class BarColumnChart {
     }, duration / steps);
   }
 
-  destroy(): void {
-    // No timers held outside animateNumber's local interval — nothing persistent to clean up
-  }
+  destroy(): void {}
 }

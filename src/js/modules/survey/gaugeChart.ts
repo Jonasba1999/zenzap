@@ -1,5 +1,8 @@
 // gaugeChart.ts
 import Chart from 'chart.js/auto';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/all';
+gsap.registerPlugin(ScrollTrigger);
 
 export interface GaugeChartOptions {
   containerId: string;
@@ -17,6 +20,8 @@ export class GaugeChart {
   private needleEl: HTMLElement | null = null;
   private labelEl: HTMLElement | null = null;
   private currentPct = 0;
+  private container: HTMLElement | null = null;
+  private pendingRespondents: Respondent[] | null = null;
 
   constructor(options: GaugeChartOptions) {
     this.options = {
@@ -33,11 +38,10 @@ export class GaugeChart {
       console.warn(`[GaugeChart] No element found with id "${this.options.containerId}"`);
       return;
     }
+
+    this.container = container;
     container.innerHTML = '';
     container.className = 'gauge-chart';
-
-    const { size } = this.options;
-    const height = size / 2 + 40;
 
     const canvasWrap = document.createElement('div');
     canvasWrap.className = 'gauge-chart__canvas-wrap';
@@ -102,6 +106,19 @@ export class GaugeChart {
       },
     });
 
+    ScrollTrigger.create({
+      trigger: container,
+      start: 'top 80%',
+      once: true,
+      onEnter: () => {
+        container.dataset.seen = 'true';
+        if (this.pendingRespondents) {
+          this.applyUpdate(this.pendingRespondents);
+          this.pendingRespondents = null;
+        }
+      },
+    });
+
     if (respondents) this.update(respondents);
   }
 
@@ -111,6 +128,15 @@ export class GaugeChart {
       return;
     }
 
+    if (this.container?.dataset.seen === 'true') {
+      this.applyUpdate(respondents);
+    } else {
+      this.pendingRespondents = respondents;
+    }
+  }
+
+  private applyUpdate(respondents: Respondent[]): void {
+    if (!this.chart) return;
     const total = respondents.length;
     const count = respondents.filter((r) => {
       const val = r[this.options.statKey];

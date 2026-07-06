@@ -1,4 +1,8 @@
 // donutChart.ts
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/all';
+gsap.registerPlugin(ScrollTrigger);
+
 import Chart from 'chart.js/auto';
 
 export interface DonutSegment {
@@ -28,6 +32,8 @@ export class DonutChart {
   private chart: Chart<'doughnut'> | null = null;
   private pctEls: HTMLElement[] = [];
   private titleEl: HTMLElement | null = null;
+  private container: HTMLElement | null = null;
+  private pendingRespondents: Respondent[] | null = null;
 
   constructor(config: DonutChartConfig) {
     this.config = {
@@ -44,6 +50,8 @@ export class DonutChart {
       console.warn(`[DonutChart] No element found with id "${this.config.containerId}"`);
       return;
     }
+
+    this.container = container;
 
     container.innerHTML = '';
     container.classList.add('donut-chart');
@@ -140,6 +148,19 @@ export class DonutChart {
       },
     });
 
+    ScrollTrigger.create({
+      trigger: container,
+      start: 'top 75%',
+      once: true,
+      onEnter: () => {
+        container.dataset.seen = 'true';
+        if (this.pendingRespondents) {
+          this.applyUpdate(this.pendingRespondents);
+          this.pendingRespondents = null;
+        }
+      },
+    });
+
     if (respondents) this.update(respondents);
   }
 
@@ -148,6 +169,15 @@ export class DonutChart {
       console.warn('[DonutChart] update() called before mount()');
       return;
     }
+
+    if (this.container?.dataset.seen === 'true') {
+      this.applyUpdate(respondents);
+    } else {
+      this.pendingRespondents = respondents;
+    }
+  }
+  private applyUpdate(respondents: Respondent[]): void {
+    if (!this.chart) return;
 
     const total = respondents.length;
 

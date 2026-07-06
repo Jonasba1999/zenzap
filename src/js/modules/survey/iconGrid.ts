@@ -1,4 +1,7 @@
 // iconGrid.ts
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/all';
+gsap.registerPlugin(ScrollTrigger);
 
 export interface IconGridConfig {
   /** Container element id */
@@ -53,12 +56,19 @@ export class IconGrid {
     };
   }
 
+  private container: HTMLElement | null = null;
+
+  private pendingPct: number | null = null;
+  private pendingFilled: number | null = null;
+
   mount(respondents?: Respondent[]): void {
     const container = document.getElementById(this.config.containerId);
     if (!container) {
       console.warn(`[IconGrid] No element found with id "${this.config.containerId}"`);
       return;
     }
+
+    this.container = container;
 
     container.innerHTML = '';
     const { layout, orientation, dotsPerRow, dotSize, gap } = this.config;
@@ -151,7 +161,19 @@ export class IconGrid {
       container.appendChild(this.labelEl);
     }
 
-    if (respondents) this.update(respondents);
+    ScrollTrigger.create({
+      trigger: container,
+      start: 'top 80%',
+      once: true,
+      onEnter: () => {
+        container.dataset.seen = 'true';
+        if (this.pendingPct !== null && this.pendingFilled !== null) {
+          this.animateTo(this.pendingPct, this.pendingFilled);
+          this.pendingPct = null;
+          this.pendingFilled = null;
+        }
+      },
+    });
   }
 
   update(respondents: Respondent[]): void {
@@ -167,7 +189,14 @@ export class IconGrid {
     const targetPct = total > 0 ? Math.round((count / total) * 100) : 0;
     const targetFilled = Math.round((targetPct / 100) * this.config.totalDots);
 
-    this.animateTo(targetPct, targetFilled);
+    if (this.container?.dataset.seen === 'true') {
+      // Already visible — animate immediately (filter change or post-scroll)
+      this.animateTo(targetPct, targetFilled);
+    } else {
+      // Not yet visible — store pending values, fire when ScrollTrigger marks as seen
+      this.pendingPct = targetPct;
+      this.pendingFilled = targetFilled;
+    }
   }
 
   private animateTo(targetPct: number, targetFilled: number): void {
