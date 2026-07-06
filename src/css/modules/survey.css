@@ -822,3 +822,11 @@
   width: 100% !important;
   height: auto !important;
 }
+
+.export-logo {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  width: 48px;
+  z-index: 9999;
+}

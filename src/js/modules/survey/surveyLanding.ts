@@ -1217,6 +1217,6 @@ export function surveyLanding(): void {
   stickyFilter();
   initNotificationAnimation();
   refreshData(); // initial render with all data
-  // initDomToImage(); // download chart image
-  shareResultPage(); // copy page url
+  initDomToImage(); // download chart image
+  // shareResultPage(); // copy page url
 }
