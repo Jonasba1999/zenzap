@@ -11,17 +11,19 @@ async function domToImage(node: HTMLElement): Promise<void> {
 
   setTimeout(async () => {
     try {
-      const dataUrl = await domtoimage.toJpeg(node, {
-        quality: 0.95,
+      const blob = await domtoimage.toBlob(node, {
         filter: (element) => {
           return !(element instanceof HTMLElement && element.classList.contains('cta_copy-btn'));
         },
       });
 
-      const link = document.createElement('a');
-      link.download = 'survey-data-section.jpeg';
-      link.href = dataUrl;
-      link.click();
+      await navigator.clipboard.write([
+        new ClipboardItem({
+          'image/png': blob,
+        }),
+      ]);
+    } catch (err) {
+      console.error('Failed to copy image:', err);
     } finally {
       logo.remove();
     }
@@ -34,22 +36,30 @@ export function initDomToImage(): void {
   if (!buttons.length) return;
 
   buttons.forEach((button) => {
-    button.addEventListener('click', () => {
+    button.addEventListener('click', async () => {
       const node = button.closest('[data-print-wrapper]') as HTMLElement;
-      if (node) {
-        domToImage(node);
 
-        const textWrapper = button.querySelector('.cta_copy-btn-text');
+      if (!node) return;
+
+      const textWrapper = button.querySelector('.cta_copy-btn-text');
+
+      try {
+        await domToImage(node);
+
         if (textWrapper) {
           textWrapper.textContent = 'Copied!';
         }
-
-        setTimeout(() => {
-          if (textWrapper) {
-            textWrapper.textContent = 'Copy';
-          }
-        }, 2000);
+      } catch {
+        if (textWrapper) {
+          textWrapper.textContent = 'Failed';
+        }
       }
+
+      setTimeout(() => {
+        if (textWrapper) {
+          textWrapper.textContent = 'Copy';
+        }
+      }, 2000);
     });
   });
 }
