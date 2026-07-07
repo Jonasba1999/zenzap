@@ -599,9 +599,16 @@ function getFilteredRespondents(): Respondent[] {
       (!activeFilters.gender || r.gender === activeFilters.gender) &&
       (!activeFilters.employment_type || r.employment_type === activeFilters.employment_type) &&
       (!activeFilters.role_level || r.role_level === activeFilters.role_level) &&
-      (!activeFilters.industry || r.industry === activeFilters.industry)
+      matchesIndustry(r.industry, activeFilters.industry)
     );
   });
+}
+
+function matchesIndustry(respondentIndustry: string | null, filterValue: string | null): boolean {
+  if (!filterValue) return true; // "All industries"
+  if (!respondentIndustry) return false;
+  const groupValues = filterValue.split('|');
+  return groupValues.includes(respondentIndustry);
 }
 
 // Count values for a single-choice question key across filtered respondents

@@ -1,3 +1,7 @@
+.survey-filter_dropdown-wrap a {
+  max-width: 100%;
+  white-space: break-spaces;
+}
 #arriveAfterHoursGrid,
 #messagingAppsGrid {
   padding-left: 2.5rem;
