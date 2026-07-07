@@ -2,8 +2,13 @@ import domtoimage from 'dom-to-image';
 
 async function domToImage(node: HTMLElement): Promise<void> {
   const logo = document.createElement('img');
-  logo.src =
-    'https://cdn.prod.website-files.com/6559c53afcb17d5a5995bfc0/68e2959ea276b3c16c64fa7b_logo%20zenzap.svg';
+
+  const whiteLogo =
+    'https://cdn.prod.website-files.com/6559c53afcb17d5a5995bfc0/65d50e69ac02829f9c8d4ef8_Zenzap.svg';
+  const blackLogo =
+    'https://cdn.prod.website-files.com/6559c53afcb17d5a5995bfc0/66b1269daaf4163a0b1bc9c1_zenzap%20black.svg';
+
+  logo.src = node.getAttribute('data-print-wrapper') === 'black' ? whiteLogo : blackLogo;
   logo.className = 'export-logo';
 
   node.style.position = 'relative';

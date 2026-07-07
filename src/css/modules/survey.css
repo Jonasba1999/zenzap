@@ -831,6 +831,7 @@
   position: absolute;
   bottom: 24px;
   right: 24px;
-  width: 48px;
+  height: 32px;
+  width: auto;
   z-index: 9999;
 }
