@@ -3,6 +3,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 import surveyData from '../../data/surveyData.json';
 import { initNotificationAnimation } from './animateNotification';
+import { animateRive } from './animateRive';
 import { BarColumnChart } from './barColumnChart';
 import { initDomToImage } from './domToImage';
 import { DonutChart } from './donutChart';
@@ -1223,6 +1224,7 @@ export function surveyLanding(): void {
   mountGaugeCharts();
   stickyFilter();
   initNotificationAnimation();
+  animateRive();
   refreshData(); // initial render with all data
   initDomToImage(); // download chart image
   // shareResultPage(); // copy page url
