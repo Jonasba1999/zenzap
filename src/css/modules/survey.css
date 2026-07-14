@@ -162,6 +162,13 @@
   letter-spacing: -0.8px;
   margin-right: 0.75rem;
 }
+
+@media (min-width: 768px) {
+  #chart-old-messages-access .donut-chart__pct {
+    min-width: 6rem;
+    text-align: left !important;
+  }
+}
 #chart-time-searching .donut-chart__label,
 #chart-time-searching .donut-chart__pct {
   font-family: 'Figtree';
@@ -726,6 +733,7 @@ canvas {
   font-size: 18px;
   font-weight: 500;
   color: var(--segment-color);
+  width: 100%;
 }
 
 .donut-chart__pct {

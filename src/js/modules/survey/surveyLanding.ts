@@ -26,7 +26,7 @@ function mountDonutCharts(): void {
     new DonutChart({
       containerId: 'chart-time-searching',
       variantClass: 'donut-chart--time-searching',
-      // titleTemplate: '{pct}% of workday spent searching for messages, files or info',
+      titleTemplate: '{pct}% of workday spent searching for messages, files or info',
       titleStatKey: 'time_searching_chats',
       titleStatValues: [
         'More than 10% of my workday',
@@ -62,7 +62,7 @@ function mountDonutCharts(): void {
     new DonutChart({
       containerId: 'chart-group-chats-offboarding',
       variantClass: 'donut-chart--group-chats-offboarding',
-      title: 'How many work related group chats you are in?',
+      // title: 'How many work related group chats you are in?',
       centerIconSize: 90,
       legendPosition: 'left',
       cutout: 0.35,
@@ -108,14 +108,13 @@ function mountDonutCharts(): void {
       cutout: 0.35,
       segments: [
         {
-          label: 'Yes, I still have access to group chats and messages',
+          label: 'Still have access',
           statKey: 'old_messages_stored',
           statValues: ['Yes - I still have access to the group chats and new messages'],
           color: '#8A0B00',
         },
         {
-          label:
-            'Yes, I can access the chat history from when I was part of the group (until I left)',
+          label: 'Can access the chat history from when I was part of the group',
           statKey: 'old_messages_stored',
           statValues: [
             'Yes - I can access the chat history from when I was part of the group (until I left)',
