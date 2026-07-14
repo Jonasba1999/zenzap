@@ -92,9 +92,11 @@
 #chart-group-chats-offboarding .donut-chart__legend {
   width: 40%;
 }
-#chart-group-chats-offboarding canvas[data-rive-canvas] {
-  margin-left: 4rem;
-  transform: translate(-50%, -50%) scale(160%) !important;
+@media (min-width: 768px) {
+  #chart-group-chats-offboarding canvas[data-rive-canvas] {
+    margin-left: 4rem;
+    transform: translate(-50%, -50%) scale(160%) !important;
+  }
 }
 #chart-group-chats-offboarding .donut-chart__label,
 #chart-group-chats-offboarding .donut-chart__pct {
@@ -430,8 +432,10 @@
   transform: translate(-50%, -50%) scale(180%) !important;
 }
 
-#chart-old-messages-access .donut-chart__canvas-wrap canvas[data-rive-canvas] {
-  transform: translate(-50%, -50%) scale(180%) !important;
+@media (min-width: 768px) {
+  #chart-old-messages-access .donut-chart__canvas-wrap canvas[data-rive-canvas] {
+    transform: translate(-50%, -50%) scale(180%) !important;
+  }
 }
 .wm-label-wrap {
   text-align: center;
@@ -608,6 +612,10 @@
   #chart-old-messages-access .donut-chart__canvas-wrap canvas[data-rive-canvas] {
     padding: 0;
   }
+}
+
+canvas {
+  max-width: 100% !important;
 }
 /* .offboarding_chart-embed .donut-chart__canvas-wrap::before {
   content: '';

@@ -21,7 +21,8 @@ export function stickyFilter() {
     if (stuck) {
       filterSection?.classList.add('is-stuck');
       gsap.to(filterSection, {
-        paddingTop: '100px',
+        paddingTop: '84px',
+        paddingBottom: '1rem',
         top: 0,
         borderRadius: 0,
         duration: 0.3,
@@ -30,7 +31,9 @@ export function stickyFilter() {
     } else {
       filterSection?.classList.remove('is-stuck');
       gsap.to(filterSection, {
-        paddingTop: '2rem',
+        paddingTop: '1.5rem',
+        paddingBottom: '1.5rem',
+
         borderTopLeftRadius: '3.75rem',
         borderTopRightRadius: '3.75rem',
         duration: 0.6,
