@@ -16,7 +16,7 @@ export function shareResultPage(): void {
 
         setTimeout(() => {
           if (textWrapper) {
-            textWrapper.textContent = 'Copy';
+            textWrapper.textContent = 'Copy Image';
           }
         }, 2000);
       } catch (error) {
@@ -28,7 +28,7 @@ export function shareResultPage(): void {
 
         setTimeout(() => {
           if (textWrapper) {
-            textWrapper.textContent = 'Copy';
+            textWrapper.textContent = 'Copy Image';
           }
         }, 2000);
       }
