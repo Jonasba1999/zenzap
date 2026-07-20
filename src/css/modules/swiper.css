@@ -17,3 +17,24 @@
 .swiper-pagination-bullets.swiper-pagination-horizontal {
   width: auto !important;
 }
+
+.pricing_swiper-pagination {
+  position: static !important;
+  display: flex;
+  justify-content: center !important;
+  gap: 1rem;
+  width: 100% !important;
+}
+.pricing_swiper-pagination .swiper-pagination-bullet {
+  min-width: 0.75rem;
+  min-height: 0.75rem;
+  max-width: 0.75rem;
+  max-height: 0.75rem;
+  display: flex;
+  background-color: #d6d6d6;
+  opacity: 100;
+}
+
+.pricing_swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background-color: #2b2b2b;
+}

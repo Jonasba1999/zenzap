@@ -40,3 +40,25 @@
   transform: scaleX(1);
   transform-origin: left; /* in: expands from left to right */
 }
+.tippy-box[data-theme~='zenzap'] {
+  background-color: #2b2b2b;
+  color: #fff;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+/* Arrow color must match background per placement */
+.tippy-box[data-theme~='zenzap'][data-placement^='top'] > .tippy-arrow::before {
+  border-top-color: #2b2b2b;
+}
+.tippy-box[data-theme~='zenzap'][data-placement^='bottom'] > .tippy-arrow::before {
+  border-bottom-color: #2b2b2b;
+}
+.tippy-box[data-theme~='zenzap'][data-placement^='left'] > .tippy-arrow::before {
+  border-left-color: #2b2b2b;
+}
+.tippy-box[data-theme~='zenzap'][data-placement^='right'] > .tippy-arrow::before {
+  border-right-color: #2b2b2b;
+}

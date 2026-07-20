@@ -110,3 +110,7 @@
 .book-lp-hero_video-trigger:hover .book-lp-hero_play-btn {
   transform: scale(0.9);
 }
+
+.pricing-plans_pill-btn {
+  display: flex !important;
+}

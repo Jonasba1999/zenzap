@@ -24,6 +24,8 @@ import { mobileMenu } from './modules/mobileMenu';
 import { partnersLogos, partnersLogosSequential } from './modules/partnersLogos';
 import { popup } from './modules/popup';
 import { pricingCards } from './modules/pricingCards';
+import { pricingCardsV2 } from './modules/pricingCardsV2';
+import { pricingTable } from './modules/pricingTable';
 import { stickyCta } from './modules/stickyCta';
 import { surveyLanding } from './modules/survey/surveyLanding';
 import { testimonialsSlider } from './modules/testimonialsSlider';
@@ -37,6 +39,8 @@ window.Webflow ||= [];
 window.Webflow.push(() => {
   refreshScrollTriggers();
   pricingCards();
+  pricingCardsV2();
+  pricingTable();
   aiSetup();
   compareTableMobileScroll();
   copyButton();
