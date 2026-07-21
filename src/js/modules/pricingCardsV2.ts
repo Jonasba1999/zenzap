@@ -376,7 +376,7 @@ function createSliders(containers: HTMLElement[], onChange: (index: number) => v
 
     if (!swiperEl) return;
 
-    const MOBILE_BREAKPOINT = 768;
+    const MOBILE_BREAKPOINT = 991;
     let swiperInstance: Swiper | null = null;
     let resizeTimeout: ReturnType<typeof setTimeout>;
 
