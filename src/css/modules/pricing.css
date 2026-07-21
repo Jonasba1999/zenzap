@@ -41,4 +41,9 @@
   .pricing-plans_slider-wrap {
     max-width: 100%;
   }
+  .pricing-plans_slider {
+    argin-left: 12px;
+    margin-right: 12px;
+    width: calc(100% - 24px);
+  }
 }
