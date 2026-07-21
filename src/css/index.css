@@ -4,7 +4,7 @@
 @import './modules/marquee.css';
 @import './modules/typography.css';
 @import './modules/survey.css';
-
+@import './modules/pricing.css';
 @import 'swiper/css';
 @import 'swiper/css/navigation';
 @import 'swiper/css/pagination';

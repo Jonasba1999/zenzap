@@ -1,0 +1,9 @@
+@media (max-width: 768px) {
+  .section_pricing-cta .cta-banner {
+    gap: 0;
+  }
+
+  .section_pricing-cta .cta-banner3_cta-wrap {
+    gap: 6px;
+  }
+}

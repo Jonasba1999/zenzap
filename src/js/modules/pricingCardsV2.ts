@@ -17,13 +17,13 @@ export async function pricingCardsV2(): Promise<void> {
   const pricingData = getPricingData(isUk);
 
   const tiersData = [
-    { plan: '20-users', label: 'Up to 20 users' },
-    { plan: '50-users', label: 'Up to 50 users' },
-    { plan: '100-users', label: 'Up to 100 users' },
-    { plan: '250-users', label: 'Up to 250 users' },
-    { plan: '500-users', label: 'Up to 500 users' },
-    { plan: '1000-users', label: 'Up to 1000 users' },
-    { plan: 'custom-pricing', label: '1000+ users' },
+    { plan: '20-users', label: 'Up to 20', count: 20 },
+    { plan: '50-users', label: 'Up to 50', count: 50 },
+    { plan: '100-users', label: 'Up to 100', count: 100 },
+    { plan: '250-users', label: 'Up to 250', count: 250 },
+    { plan: '500-users', label: 'Up to 500', count: 500 },
+    { plan: '1000-users', label: 'Up to 1000', count: 1000 },
+    { plan: 'custom-pricing', label: '1000+' },
   ];
 
   function updatePrices(
@@ -35,6 +35,22 @@ export async function pricingCardsV2(): Promise<void> {
     const currency = isUk ? '£' : '$';
     proEls.forEach((el) => (el.textContent = currency + pricingData.pro[period][tier]));
     businessEls.forEach((el) => (el.textContent = currency + pricingData.business[period][tier]));
+
+    const pricesElPro = document.querySelector<HTMLElement>('[data-user-count-price="pro"]');
+    const pricesElBusiness = document.querySelector<HTMLElement>(
+      '[data-user-count-price="business"]'
+    );
+
+    const userCount = tier.replace('-users', '');
+    if (pricesElPro) {
+      const pricePro = pricingData.pro[period][tier] / userCount;
+      pricesElPro.textContent = currency + pricePro;
+    }
+
+    if (pricesElBusiness) {
+      const priceBusiness = pricingData.business[period][tier] / userCount;
+      pricesElBusiness.textContent = currency + priceBusiness;
+    }
   }
 
   function toggleCustomPricing(
@@ -51,8 +67,26 @@ export async function pricingCardsV2(): Promise<void> {
   }
 
   function updateUserCountText(userCountEl: NodeListOf<HTMLElement>, tierIndex: number): void {
+    const prefixes = document.querySelectorAll<HTMLElement>('[data-user-count-prefix]');
+
     userCountEl.forEach((el) => {
-      el.textContent = tiersData[tierIndex].label;
+      if (el.getAttribute('data-user-count-el') === 'no-prefix') {
+        el.textContent = tiersData[tierIndex].label.replace('Up to ', '');
+      } else {
+        el.textContent = tiersData[tierIndex].label + ' ';
+      }
+
+      if (prefixes) {
+        if (tiersData[tierIndex].plan == 'custom-pricing') {
+          prefixes.forEach((prefix) => {
+            prefix.style.display = 'none';
+          });
+        } else {
+          prefixes.forEach((prefix) => {
+            prefix.style.display = 'inline-block';
+          });
+        }
+      }
     });
   }
 
@@ -287,7 +321,7 @@ function createSliders(containers: HTMLElement[], onChange: (index: number) => v
       if (!thumb || !fill) return;
 
       const percent = (index / (SNAP_POINTS - 1)) * 100;
-      thumb.style.left = percent === 0 ? `${percent}%` : `calc(${percent}% - 12px)`;
+      thumb.style.left = `${percent}%`;
       fill.style.width = percent === 0 ? `${percent}%` : `calc(${percent}% + 12px)`;
       currentIndex = index;
     }
