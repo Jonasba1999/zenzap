@@ -2,6 +2,7 @@ import 'tippy.js/dist/tippy.css';
 import 'tippy.js/themes/light.css';
 import 'tippy.js/animations/scale.css';
 
+import gsap from 'gsap';
 import Swiper from 'swiper';
 import { Pagination } from 'swiper/modules';
 import tippy from 'tippy.js';
@@ -322,7 +323,8 @@ function createSliders(containers: HTMLElement[], onChange: (index: number) => v
 
       const percent = (index / (SNAP_POINTS - 1)) * 100;
       thumb.style.left = `${percent}%`;
-      fill.style.width = percent === 0 ? `${percent}%` : `calc(${percent}% + 12px)`;
+      fill.style.left = '-12px';
+      fill.style.width = percent === 0 ? `${percent}%` : `calc(${percent}% + 24px)`;
       currentIndex = index;
     }
 
@@ -457,5 +459,61 @@ function createSliders(containers: HTMLElement[], onChange: (index: number) => v
       destroySwiper();
     };
   }
+
+  function initCollapsedTable() {
+    const wrap = document.querySelector('[data-pricing-table]');
+
+    if (!wrap) return;
+    const table = wrap.querySelector('[data-collapsed-table]');
+    const fade = wrap.querySelector('.pricing-copmarison_fade');
+    const toggleBtn = document.querySelector('[data-collapsed-table="toggle"]');
+    const toggleText = toggleBtn?.querySelector('[data-collapsed-table="toggle-text"]');
+
+    const COLLAPSED_HEIGHT = 200;
+    let isExpanded = false;
+
+    // set initial state
+    gsap.set(table, { height: COLLAPSED_HEIGHT, overflow: 'hidden' });
+
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', () => {
+        const fullHeight = table.scrollHeight;
+
+        if (!isExpanded) {
+          // expand
+          gsap.to(table, {
+            height: fullHeight,
+            duration: 0.5,
+            ease: 'power2.inOut',
+          });
+          gsap.to(fade, {
+            opacity: 0,
+            duration: 0.4,
+            ease: 'power1.out',
+          });
+          toggleText.textContent = 'Show less';
+        } else {
+          // collapse
+          gsap.to(table, {
+            height: COLLAPSED_HEIGHT,
+            duration: 0.5,
+            ease: 'power2.inOut',
+          });
+          gsap.to(fade, {
+            opacity: 1,
+            duration: 0.4,
+            delay: 0.1,
+            ease: 'power1.in',
+          });
+          toggleText.textContent = 'Show full comparison';
+
+          wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        isExpanded = !isExpanded;
+      });
+    }
+  }
+  initCollapsedTable();
   initPricingSwiper();
 }
