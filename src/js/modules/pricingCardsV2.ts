@@ -137,7 +137,7 @@ export async function pricingCardsV2(): Promise<void> {
 
   sections.forEach((section) => {
     let currentPeriod = 'yearly';
-    let tierPlan = tiersData[0].plan;
+    let tierPlan = tiersData[1].plan;
 
     // Fixed package price placeholders
     const proFixedPriceEl = section.querySelectorAll<HTMLElement>('[data-fixed-price="pro"]');
@@ -277,7 +277,7 @@ export async function pricingCardsV2(): Promise<void> {
       el.style.display = el.dataset.periodText === currentPeriod ? 'block' : 'none';
     });
     updatePrices(currentPeriod, tierPlan, proFixedPriceEl, businessFixedPriceEl);
-    updateUserCountText(userCountEl, 0);
+    updateUserCountText(userCountEl, 1);
     togglePackageType('fixed', fixedPackageEl, userPackageEl);
     toggleCustomPricing(false, customPricingEl, tierPricingEl);
     if (proUserPriceEl.length && businessUserPriceEl.length) {
@@ -310,7 +310,7 @@ function createSliders(containers: HTMLElement[], onChange: (index: number) => v
 
     const SNAP_POINTS = 7;
     let isDragging = false;
-    let currentIndex = 0;
+    let currentIndex = 1;
 
     function getIndexFromX(clientX: number): number {
       const rect = track!.getBoundingClientRect();
@@ -366,7 +366,7 @@ function createSliders(containers: HTMLElement[], onChange: (index: number) => v
       updateAll(index, container);
     });
 
-    update(0);
+    update(1);
 
     return { container, update };
   }
@@ -392,6 +392,8 @@ function createSliders(containers: HTMLElement[], onChange: (index: number) => v
         spaceBetween: 12,
         slidesPerGroup: 1,
         speed: 600,
+        initialSlide: 2,
+        centeredSlides: true,
 
         breakpoints: {
           768: {
