@@ -62,3 +62,26 @@
 .tippy-box[data-theme~='zenzap'][data-placement^='right'] > .tippy-arrow::before {
   border-right-color: #2b2b2b;
 }
+
+/* About Us page */
+.get-to-know_cta-icon,
+.get-to-know_grid-item,
+.press_card {
+  transition: all 0.2s ease-in;
+}
+.get-to-know_grid-item {
+  background-size: 100% !important;
+}
+.get-to-know_grid-item:hover {
+  background-size: 110% !important;
+}
+.get-to-know_grid-item.how-to {
+  transform-origin: left;
+  background-position: 50% 100%;
+}
+.get-to-know_grid-item:hover .get-to-know_cta-icon {
+  transform: scale(1.1);
+}
+.press_card:hover {
+  transform: scale(1.02);
+}
