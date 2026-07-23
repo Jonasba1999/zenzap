@@ -45,12 +45,12 @@ export async function pricingCardsV2(): Promise<void> {
     const userCount = tier.replace('-users', '');
     if (pricesElPro) {
       const pricePro = pricingData.pro[period][tier] / userCount;
-      pricesElPro.textContent = currency + pricePro;
+      pricesElPro.textContent = currency + pricePro.toFixed(2);
     }
 
     if (pricesElBusiness) {
       const priceBusiness = pricingData.business[period][tier] / userCount;
-      pricesElBusiness.textContent = currency + priceBusiness;
+      pricesElBusiness.textContent = currency + priceBusiness.toFixed(2);
     }
   }
 
