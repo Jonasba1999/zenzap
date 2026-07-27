@@ -205,7 +205,9 @@
   padding-left: 7.625rem;
   padding-right: 7.625rem;
 }
-
+#chart-group-chat-fate .chart-col-label {
+  text-align: center;
+}
 @media (max-width: 768px) {
   #chart-group-chat-fate {
     padding-left: 0;
