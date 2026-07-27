@@ -26,7 +26,7 @@ function mountDonutCharts(): void {
     new DonutChart({
       containerId: 'chart-time-searching',
       variantClass: 'donut-chart--time-searching',
-      titleTemplate: '{pct}% of workday spent searching for messages, files or info',
+      titleTemplate: 'Part of the workday spent searching for messages, files, or information',
       titleStatKey: 'time_searching_chats',
       titleStatValues: [
         'More than 10% of my workday',
@@ -62,7 +62,7 @@ function mountDonutCharts(): void {
     new DonutChart({
       containerId: 'chart-group-chats-offboarding',
       variantClass: 'donut-chart--group-chats-offboarding',
-      // title: 'How many work related group chats you are in?',
+      title: 'Former Employees Remaining in Work Group Chats',
       centerIconSize: 90,
       legendPosition: 'left',
       cutout: 0.35,
@@ -108,7 +108,7 @@ function mountDonutCharts(): void {
       cutout: 0.35,
       segments: [
         {
-          label: 'Still have access',
+          label: 'Still have access to new messages',
           statKey: 'old_messages_stored',
           statValues: ['Yes - I still have access to the group chats and new messages'],
           color: '#8A0B00',
@@ -286,8 +286,21 @@ function mountIconGrids(): void {
       inactiveColor: '#DCDCDC',
       statKey: 'messages_after_leaving',
       statValues: ['Yes'],
+      labelTemplate: '{pct}% say they received work messages from a previous work after leaving',
+      dotsPerRow: 25,
+      dotSize: 40,
+    }),
+
+    new IconGrid({
+      containerId: 'grid-messages-weeks-months',
+      svgIcon: ICONS.message,
+      activeColor: '#299E47',
+      inactiveColor: '#DCDCDC',
+      statKey: 'messages_after_leaving',
+      statValues: ['Yes, for weeks/months'],
       labelTemplate:
-        "{pct}% say they are still actively receiving new messages from a previous employer's chat",
+        '{pct}% say they received work messages from a previous employer for weeks/months after leaving',
+      layout: 'below',
       dotsPerRow: 25,
       dotSize: 40,
     }),
@@ -304,6 +317,7 @@ function mountIconGrids(): void {
       dotsPerRow: 25,
       dotSize: 28,
     }),
+
     new IconGrid({
       containerId: 'grid-feel-frustrated',
       svgIcon: ICONS.faceAngry,
@@ -411,8 +425,21 @@ function mountIconGrids(): void {
       inactiveColor: '#DCDCDC',
       statKey: 'messages_after_leaving',
       statValues: ['Yes, for a few days', 'Yes, for weeks/months'],
+      labelTemplate: '{pct}% say they received work messages from a previous work after leaving',
+      layout: 'below',
+      dotsPerRow: 25,
+      dotSize: 22,
+    }),
+
+    new IconGrid({
+      containerId: 'grid-messages-weeks-months',
+      svgIcon: ICONS.message,
+      activeColor: '#299E47',
+      inactiveColor: '#DCDCDC',
+      statKey: 'messages_after_leaving',
+      statValues: ['Yes, for weeks/months'],
       labelTemplate:
-        "{pct}% say they are still actively receiving new messages from a previous employer's chat",
+        '{pct}% say they received work messages from a previous employer for weeks/months after leaving',
       layout: 'below',
       dotsPerRow: 25,
       dotSize: 22,
@@ -542,7 +569,7 @@ function mountGaugeCharts(): void {
       statKey: 'missed_important_message',
       statValues: ['Yes'],
       labelTemplate:
-        '{pct}% have missed an important work message because it was buried in personal conversations',
+        '{pct}% have missed an important work message because it was buried in personal conversations on a messaging app',
     })
   );
 

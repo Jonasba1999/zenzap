@@ -11,14 +11,14 @@ const COLS_CONFIG = [
   },
   { key: 'Often (daily)', label: 'Often', sub: 'Daily', color: '#D63426', icon: ICONS.message },
   {
-    key: 'Sometimes (A few times a week)',
+    key: 'Sometimes (a few times a week)',
     label: 'Sometimes',
     sub: 'A few times per week',
     color: '#FF7B23',
     icon: ICONS.message,
   },
   {
-    key: 'Rarely (A few times per month)',
+    key: 'Rarely (a few times a month)',
     label: 'Rarely',
     sub: 'A few times per month',
     color: '#5393D7',
