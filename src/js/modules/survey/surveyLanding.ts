@@ -29,19 +29,31 @@ function mountDonutCharts(): void {
       titleTemplate: 'Part of the workday spent searching for messages, files, or information',
       titleStatKey: 'time_searching_chats',
       titleStatValues: [
-        'More than 10% of my workday',
-        '5–10% of my workday',
         'Less than 5% of my workday',
+        '5–10% of my workday',
+        '10–20% of my workday',
+        '20–30% of my workday',
+        'More than 30% of my workday',
       ],
       segments: [
         {
-          label: 'More than 10%',
+          label: 'More than 30%',
           statKey: 'time_searching_chats',
-          statValues: [
-            '10–20% of my workday',
-            '20–30% of my workday',
-            'More than 30% of my workday',
-          ],
+          statValues: ['More than 30% of my workday'],
+          color: '#8A0B00',
+        },
+
+        {
+          label: '20–30%',
+          statKey: 'time_searching_chats',
+          statValues: ['20–30% of my workday'],
+          color: '#CC3399',
+        },
+
+        {
+          label: '10–20%',
+          statKey: 'time_searching_chats',
+          statValues: ['10–20% of my workday'],
           color: '#8A0B00',
         },
         {
