@@ -32358,24 +32358,7 @@
         }
       ]
     },
-    "employment_type": {
-      "label": "Employment type",
-      "default": "All types",
-      "options": [
-        {
-          "label": "All types",
-          "value": null
-        },
-        {
-          "label": "Full-time",
-          "value": "Employed full-time"
-        },
-        {
-          "label": "Part-time",
-          "value": "Employed part-time"
-        }
-      ]
-    },
+
     "role_level": {
       "label": "Role level",
       "default": "All roles",
