@@ -657,14 +657,42 @@ const activeFilters: ActiveFilters = {
 
 function getFilteredRespondents(): Respondent[] {
   return surveyData.respondents.filter((r) => {
+    // Test responses
+    // console.log({
+    //   respondentAge: r.age,
+    //   filterAge: activeFilters.age,
+    //   match: matchesAgeRange(r.age, activeFilters.age),
+    // });
+
     return (
-      (!activeFilters.age || r.age === activeFilters.age) &&
+      // (!activeFilters.age || r.age === activeFilters.age) &&
       (!activeFilters.gender || r.gender === activeFilters.gender) &&
       (!activeFilters.employment_type || r.employment_type === activeFilters.employment_type) &&
       (!activeFilters.role_level || r.role_level === activeFilters.role_level) &&
-      matchesIndustry(r.industry, activeFilters.industry)
+      matchesIndustry(r.industry, activeFilters.industry) &&
+      matchesAgeRange(r.age, activeFilters.age)
     );
   });
+}
+
+function parseRange(value: string): [number, number] {
+  if (value.endsWith('+')) {
+    return [Number(value.replace('+', '')), Infinity];
+  }
+
+  const [min, max] = value.split(/[-–]/).map(Number);
+  return [min, max];
+}
+
+function matchesAgeRange(respondentAge: string | null, filterValue: string | null): boolean {
+  if (!filterValue) return true;
+  if (!respondentAge) return false;
+
+  const [respondentMin, respondentMax] = parseRange(respondentAge);
+  const [filterMin, filterMax] = parseRange(filterValue);
+
+  // ranges overlap
+  return respondentMax >= filterMin && respondentMin <= filterMax;
 }
 
 function matchesIndustry(respondentIndustry: string | null, filterValue: string | null): boolean {
