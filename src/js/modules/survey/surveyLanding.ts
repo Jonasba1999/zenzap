@@ -630,7 +630,7 @@ type FilterKey = keyof typeof surveyData.filter_options;
 interface ActiveFilters {
   age: string | null;
   gender: string | null;
-  employment_type: string | null;
+  // employment_type: string | null;
   role_level: string | null;
   industry: string | null;
 }
@@ -648,7 +648,7 @@ const SELECT_ID_TO_KEY: Record<string, FilterKey> = {
 const activeFilters: ActiveFilters = {
   age: null,
   gender: null,
-  employment_type: null,
+  // employment_type: null,
   role_level: null,
   industry: null,
 };
@@ -667,7 +667,7 @@ function getFilteredRespondents(): Respondent[] {
     return (
       // (!activeFilters.age || r.age === activeFilters.age) &&
       (!activeFilters.gender || r.gender === activeFilters.gender) &&
-      (!activeFilters.employment_type || r.employment_type === activeFilters.employment_type) &&
+      // (!activeFilters.employment_type || r.employment_type === activeFilters.employment_type) &&
       (!activeFilters.role_level || r.role_level === activeFilters.role_level) &&
       matchesIndustry(r.industry, activeFilters.industry) &&
       matchesAgeRange(r.age, activeFilters.age)
