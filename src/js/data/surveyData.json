@@ -2,7 +2,7 @@
   "meta": {
     "total_responses": 1003,
     "description": "Survey on personal messaging apps used for work communication",
-    "filter_dimensions": ["age", "gender", "employment_type", "role_level", "industry"]
+    "filter_dimensions": ["age", "gender", "role_level", "industry"]
   },
   "summary": {
     "total_responses": 1003,
