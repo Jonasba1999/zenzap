@@ -638,7 +638,7 @@ interface ActiveFilters {
 const SELECT_ID_TO_KEY: Record<string, FilterKey> = {
   age: 'age',
   gender: 'gender',
-  'employment-type': 'employment_type',
+  // 'employment-type': 'employment_type',
   'role-level': 'role_level',
   industry: 'industry',
 };
