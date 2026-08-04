@@ -126,7 +126,7 @@ function mountDonutCharts(): void {
           color: '#8A0B00',
         },
         {
-          label: 'Can access the chat history from when I was part of the group',
+          label: 'Can access the chat history from when they were part of the group',
           statKey: 'old_messages_stored',
           statValues: [
             'Yes - I can access the chat history from when I was part of the group (until I left)',
@@ -157,19 +157,19 @@ function mountIconGrids(): void {
 
   grids.push(
     // Unwanted work messages
-    new IconGrid({
-      containerId: 'grid-harassment-unwanted',
-      svgIcon: ICONS.messageAlert,
-      activeColor: '#007AFF',
-      inactiveColor: '#DCDCDC',
-      statKey: 'group_chat_experiences',
-      statValues: ['Unwanted work messages outside work hours'],
-      labelTemplate: 'Unwanted work messages',
-      layout: 'inline',
+    // new IconGrid({
+    //   containerId: 'grid-harassment-unwanted',
+    //   svgIcon: ICONS.messageAlert,
+    //   activeColor: '#007AFF',
+    //   inactiveColor: '#DCDCDC',
+    //   statKey: 'group_chat_experiences',
+    //   statValues: ['Unwanted work messages outside work hours'],
+    //   labelTemplate: 'Unwanted work messages',
+    //   layout: 'inline',
 
-      dotsPerRow: 25,
-      dotSize: 28,
-    }),
+    //   dotsPerRow: 25,
+    //   dotSize: 28,
+    // }),
 
     // Contact after leaving
     new IconGrid({
@@ -179,7 +179,7 @@ function mountIconGrids(): void {
       inactiveColor: '#DCDCDC',
       statKey: 'group_chat_experiences',
       statValues: ['Being contacted after leaving the company'],
-      labelTemplate: 'Contact after leaving',
+      labelTemplate: 'Contact after leaving the company',
       layout: 'inline',
       dotsPerRow: 25,
       dotSize: 28,
@@ -207,7 +207,7 @@ function mountIconGrids(): void {
       inactiveColor: '#DCDCDC',
       statKey: 'group_chat_experiences',
       statValues: ['Persistent contact after asking them to stop'],
-      labelTemplate: 'Persistent contact',
+      labelTemplate: 'Persistent contact after asking them to stop',
       layout: 'inline',
       dotsPerRow: 25,
       dotSize: 28,
@@ -274,7 +274,7 @@ function mountIconGrids(): void {
       inactiveColor: '#DCDCDC',
       statKey: 'former_employees_in_chats',
       statValues: ['Yes'],
-      labelTemplate: '{pct}% say they are in work group chats that still include ex-employees',
+      labelTemplate: "{pct}% say they're in work group chats that still include former employees",
       dotsPerRow: 25,
       dotSize: 40,
     }),
@@ -286,7 +286,8 @@ function mountIconGrids(): void {
       inactiveColor: '#DCDCDC',
       statKey: 'remained_after_leaving',
       statValues: ['Yes'],
-      labelTemplate: '{pct}% say they are still in a work group chat from a previous employer',
+      labelTemplate:
+        '{pct}% say they remained in a work group chat after leaving a previous employer',
       dotsPerRow: 25,
       dotSize: 40,
     }),
@@ -298,7 +299,8 @@ function mountIconGrids(): void {
       inactiveColor: '#DCDCDC',
       statKey: 'messages_after_leaving',
       statValues: ['Yes'],
-      labelTemplate: '{pct}% say they received work messages from a previous work after leaving',
+      labelTemplate:
+        '{pct}% say they continued receiving work messages after leaving a previous employer',
       dotsPerRow: 25,
       dotSize: 40,
     }),
@@ -311,7 +313,7 @@ function mountIconGrids(): void {
       statKey: 'messages_after_leaving',
       statValues: ['Yes, for weeks/months'],
       labelTemplate:
-        '{pct}% say they received work messages from a previous employer for weeks/months after leaving',
+        '{pct}% say they received work messages for weeks or months after leaving a previous employer',
       layout: 'below',
       dotsPerRow: 25,
       dotSize: 40,
@@ -409,7 +411,7 @@ function mountIconGrids(): void {
       inactiveColor: '#DCDCDC',
       statKey: 'search_feelings',
       statValues: ["Like I'm wasting my life"],
-      labelTemplate: 'Feel like I waste my life',
+      labelTemplate: "Feel like they're wasting their life",
       layout: 'inline',
       dotsPerRow: 25,
       dotSize: 22,
@@ -435,7 +437,7 @@ function mountIconGrids(): void {
       inactiveColor: '#DCDCDC',
       statKey: 'former_employees_in_chats',
       statValues: ['Yes, in one group', 'Yes, in multiple groups'],
-      labelTemplate: '{pct}% say they are in work group chats that still include ex-employees',
+      labelTemplate: "{pct}% say they're in work group chats that still include former employees",
       layout: 'below',
       dotsPerRow: 25,
       dotSize: 22,
@@ -448,7 +450,8 @@ function mountIconGrids(): void {
       inactiveColor: '#DCDCDC',
       statKey: 'remained_after_leaving',
       statValues: ['Yes'],
-      labelTemplate: '{pct}% say they are still in a work group chat from a previous employer',
+      labelTemplate:
+        '{pct}% say they remained in a work group chat after leaving a previous employer',
       layout: 'below',
       dotsPerRow: 25,
       dotSize: 22,
@@ -461,7 +464,8 @@ function mountIconGrids(): void {
       inactiveColor: '#DCDCDC',
       statKey: 'messages_after_leaving',
       statValues: ['Yes, for a few days', 'Yes, for weeks/months'],
-      labelTemplate: '{pct}% say they received work messages from a previous work after leaving',
+      labelTemplate:
+        '{pct}% say they continued receiving work messages after leaving a previous employer',
       layout: 'below',
       dotsPerRow: 25,
       dotSize: 22,
@@ -475,7 +479,7 @@ function mountIconGrids(): void {
       statKey: 'messages_after_leaving',
       statValues: ['Yes, for weeks/months'],
       labelTemplate:
-        '{pct}% say they received work messages from a previous employer for weeks/months after leaving',
+        '{pct}% say they received work messages for weeks or months after leaving a previous employer',
       layout: 'below',
       dotsPerRow: 25,
       dotSize: 22,
@@ -605,7 +609,7 @@ function mountGaugeCharts(): void {
       statKey: 'missed_important_message',
       statValues: ['Yes'],
       labelTemplate:
-        '{pct}% have missed an important work message because it was buried in personal conversations on a messaging app',
+        '{pct}% have missed an important work message because it was mixed in with personal conversations on a messaging app',
     })
   );
 
