@@ -85,3 +85,27 @@
 .press_card:hover {
   transform: scale(1.02);
 }
+
+.zenzap-glass-fx {
+  position: relative;
+}
+.zenzap-glass-fx::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px; /* this becomes the border thickness */
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.5) 15%,
+    rgba(255, 255, 255, 0.1) 35%,
+    rgba(255, 255, 255, 0.1) 55%,
+    rgba(255, 255, 255, 0.5) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
