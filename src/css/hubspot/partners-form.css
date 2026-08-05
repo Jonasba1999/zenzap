@@ -1,0 +1,71 @@
+.always-on_form-embed [data-hsfc-id='Renderer'] .hsfc-Step {
+  background-color: transparent !important;
+  width: 80% !important;
+  padding: 1.5rem !important;
+  border-radius: 20px !important;
+  border: 1px solid #fff !important;
+}
+
+@media (max-width: 991px) {
+  .always-on_form-embed [data-hsfc-id='Renderer'] .hsfc-Step {
+    width: 100% !important;
+  }
+}
+.always-on_form-embed [data-hsfc-id='Renderer'] .hsfc-Step .hsfc-Step__Content {
+  padding: 0 !important;
+}
+
+.always-on_form-embed .hsfc-FieldLabel {
+  color: #fff !important;
+  opacity: 0.8 !important;
+  font-size: 14px !important;
+  line-height: 20px !important;
+}
+.always-on_form-embed .hsfc-FieldLabel__RequiredIndicator,
+.always-on_form-embed .hsfc-ErrorAlert {
+  color: #fc0303 !important;
+  font-size: 14px !important;
+  line-height: 20px !important;
+}
+.always-on_form-embed .hsfc-TextInput {
+  border-radius: 20px !important;
+  color: #111111 !important;
+  padding: 1rem 1.5rem !important;
+  height: 3.5rem !important;
+  border: 1px solid #fff !important;
+}
+
+.always-on_form-embed .hsfc-TextInput:placeholder {
+  color: #808180 !important;
+}
+.always-on_form-embed .hsfc-FieldLabel__RequiredIndicator,
+.always-on_form-embed .hsfc-ErrorAlert {
+  color: #fc0303 !important;
+}
+
+.always-on_form-embed button[type='submit'] {
+  color: var(--_zenzap---text--white) !important;
+  white-space: nowrap !important;
+  background-color: #111 !important;
+
+  height: 3.5rem !important;
+  justify-content: center;
+  align-items: center;
+  font-family: Figtree, sans-serif;
+  font-weight: 600;
+  line-height: 24px;
+  display: flex;
+  border-radius: 100px;
+  padding: 16px 32px;
+  transition: background-color 0.2s;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.always-on_form-embed button[type='submit']:hover {
+  background-color: #292929 !important;
+}
+
+.always-on_form-embed .hsfc-RichText * {
+  color: #fff !important;
+}
