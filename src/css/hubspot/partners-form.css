@@ -1,4 +1,4 @@
-.always-on_form-embed [data-hsfc-id='Renderer'] .hsfc-Step {
+/* .always-on_form-embed [data-hsfc-id='Renderer'] .hsfc-Step {
   background-color: transparent !important;
   width: 80% !important;
   padding: 1.5rem !important;
@@ -68,8 +68,9 @@
 
 .always-on_form-embed .hsfc-RichText * {
   color: #fff !important;
-}
+} */
 
+.always-on_form-embed button[type='submit'],
 .form-partners-popup_embed [data-hsfc-id='Renderer'] .hsfc-Button {
   background: rgb(245, 210, 115) !important;
   color: rgb(17, 24, 39) !important;
