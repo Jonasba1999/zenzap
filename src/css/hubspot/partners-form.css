@@ -69,3 +69,11 @@
 .always-on_form-embed .hsfc-RichText * {
   color: #fff !important;
 }
+
+.form-partners-popup_embed [data-hsfc-id='Renderer'] .hsfc-Button {
+  background: rgb(245, 210, 115) !important;
+  color: rgb(17, 24, 39) !important;
+  font-size: 1rem !important;
+  line-height: 1.4em !important;
+  font-weight: 500 !important;
+}
