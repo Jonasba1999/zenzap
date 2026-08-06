@@ -72,7 +72,7 @@ export function trackFormSubmit(): void {
     const isBusinessEmail = !isPersonalEmail(email);
 
     // Meta lead event
-    if (companySize && companySize !== '0-20' && isBusinessEmail) {
+    if (companySize && companySize !== '0-20' && companySize !== '1-20' && isBusinessEmail) {
       window.dataLayer.push({ event: 'bookDemoFormMetaLead' });
       console.log('✅ bookDemoFormMetaLead pushed, company size:', companySize);
     }
