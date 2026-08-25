@@ -43,6 +43,94 @@ export const aiWorkflows = () => {
   }
 
   // ---------------------------------------------------------------------------
+  // Availability — disable/hide options that would yield 0 results
+  // ---------------------------------------------------------------------------
+
+  function wouldMatch(
+    wf: WorkflowRecord,
+    overrides: {
+      industry?: string;
+      subVertical?: string;
+      role?: string;
+    }
+  ): boolean {
+    const industry = overrides.industry ?? getSelectValue('industry');
+    const subVertical = overrides.subVertical ?? getSelectValue('sub-vertical');
+    const role = overrides.role ?? getSelectValue('role');
+
+    const industryMatch =
+      !industry || wf.industry === 'General / Any Industry' || wf.industry === industry;
+    if (!industryMatch) return false;
+
+    if (industry === 'Healthcare' && subVertical) {
+      if (!wf.subVertical.includes(subVertical)) return false;
+    }
+
+    if (role) {
+      if (!wf.roles.includes(role)) return false;
+    }
+
+    return true;
+  }
+
+  function onFilterSelectionChanged(): void {
+    // Filters just update option availability + healthcare UI.
+    // They do NOT trigger a re-render of the cards.
+    refreshAllOptionAvailability();
+  }
+
+  function bindShowWorkflowsButton(): void {
+    const showBtn = document.querySelector<HTMLElement>('[data-show-workflows]');
+    showBtn?.addEventListener('click', (e) => {
+      console.log('ClicK: [data-show-workflows]');
+      e.preventDefault();
+      visibleCount = PAGE_SIZE;
+      renderPage();
+    });
+  }
+
+  function updateOptionAvailability(
+    select: HTMLSelectElement,
+    field: 'industry' | 'sub-vertical' | 'role'
+  ): void {
+    const dropdown = select.closest('.w-dropdown');
+    const links = Array.from(
+      dropdown?.querySelectorAll<HTMLAnchorElement>('.w-dropdown-list a') ?? []
+    );
+
+    Array.from(select.options).forEach((opt, i) => {
+      const link = links[i];
+      if (!opt.value) {
+        // "All ..." option is always available
+        opt.disabled = false;
+        link?.classList.remove('is-disabled');
+        return;
+      }
+
+      const hasMatch = workflows.some((wf) => {
+        const overrides: { industry?: string; subVertical?: string; role?: string } = {};
+        if (field === 'industry') overrides.industry = opt.value;
+        if (field === 'sub-vertical') overrides.subVertical = opt.value;
+        if (field === 'role') overrides.role = opt.value;
+        return wouldMatch(wf, overrides);
+      });
+
+      opt.disabled = !hasMatch;
+      link?.classList.toggle('is-disabled', !hasMatch);
+    });
+  }
+
+  function refreshAllOptionAvailability(): void {
+    const industrySelect = document.querySelector<HTMLSelectElement>('select#industry');
+    const businessTypeSelect = document.querySelector<HTMLSelectElement>('select#sub-vertical');
+    const roleSelect = document.querySelector<HTMLSelectElement>('select#role');
+
+    if (industrySelect) updateOptionAvailability(industrySelect, 'industry');
+    if (businessTypeSelect) updateOptionAvailability(businessTypeSelect, 'sub-vertical');
+    if (roleSelect) updateOptionAvailability(roleSelect, 'role');
+  }
+
+  // ---------------------------------------------------------------------------
   // Filtering — pure, operates on the in-memory array
   // ---------------------------------------------------------------------------
 
@@ -100,6 +188,8 @@ export const aiWorkflows = () => {
   function buildCard(wf: WorkflowRecord): HTMLElement {
     const card = cardTemplate!.cloneNode(true) as HTMLElement;
     card.setAttribute('data-workflow-id', wf.id);
+    card.setAttribute('data-item', '');
+    card.style.display = 'flex';
 
     // ── Main content ─────────────────────────────────────────────────────────
     const titleEl = card.querySelector<HTMLElement>('[data-usecase-title]');
@@ -113,12 +203,40 @@ export const aiWorkflows = () => {
 
     const toolsEl = card.querySelector<HTMLElement>('[data-usecase-tools]');
     if (toolsEl) {
+      const toolsWrap = toolsEl.closest<HTMLElement>('.ai-workflow_item-tools');
+
       if (wf.tools.length > 0) {
-        toolsEl.textContent = wf.tools.join(', ');
-        toolsEl.closest<HTMLElement>('.ai-workflow_item-tools')!.style.display = 'flex';
+        const badge = toolsEl.closest<HTMLElement>('.ai-workflow_tool-badge');
+
+        if (badge) {
+          toolsWrap?.querySelectorAll('.ai-workflow_tool-badge').forEach((el, index) => {
+            if (index > 0) el.remove();
+          });
+
+          const tools = wf.tools
+            .flatMap((tool) => tool.split(','))
+            .map((tool) => tool.trim())
+            .filter(Boolean);
+
+          tools.forEach((tool, index) => {
+            const currentBadge = index === 0 ? badge : (badge.cloneNode(true) as HTMLElement);
+            const textEl = currentBadge.querySelector<HTMLElement>('[data-usecase-tools]');
+
+            if (textEl) {
+              textEl.innerHTML = '';
+              const span = document.createElement('span');
+              span.textContent = tool;
+              textEl.appendChild(span);
+            }
+
+            if (index > 0) {
+              toolsWrap?.appendChild(currentBadge);
+            }
+          });
+
+          if (toolsWrap) toolsWrap.style.display = 'flex';
+        }
       } else {
-        // No tools for this row — hide the whole tools block rather than show empty
-        const toolsWrap = toolsEl.closest<HTMLElement>('.ai-workflow_item-tools');
         if (toolsWrap) toolsWrap.style.display = 'none';
       }
     }
@@ -126,29 +244,16 @@ export const aiWorkflows = () => {
     const exampleEl = card.querySelector<HTMLElement>('[data-usecase-example]');
     if (exampleEl) exampleEl.innerHTML = `<p>${escapeHtml(wf.exampleMessage)}</p>`;
 
-    // ── Reset expand state on every fresh render ────────────────────────────
+    // ── Reset accordion state on every fresh render ─────────────────────────
+    // (accordion.ts owns opening/closing; we just make sure a freshly built
+    //  card always starts closed, matching a fresh height:0 state)
+    card.classList.remove('is-open');
     const expandEl = card.querySelector<HTMLElement>('[data-expand]');
     if (expandEl) {
-      expandEl.classList.remove('is-open');
-      expandEl.style.maxHeight = '';
+      expandEl.style.height = '0px';
     }
 
-    // ── Bind the expand/collapse trigger ────────────────────────────────────
-    const trigger = card.querySelector<HTMLElement>('[data-trigger]');
-    trigger?.addEventListener('click', () => {
-      if (!expandEl) return;
-      const isOpen = expandEl.classList.toggle('is-open');
-      expandEl.style.maxHeight = isOpen ? `${expandEl.scrollHeight}px` : '';
-      trigger.classList.toggle('is-open', isOpen);
-    });
-
     return card;
-  }
-
-  function setFieldValue(testItem: HTMLElement, value: string): void {
-    // The test item has two divs: a <strong> label div, then the value div.
-    const valueDiv = testItem.children[1] as HTMLElement | undefined;
-    if (valueDiv) valueDiv.textContent = value || '—';
   }
 
   function escapeHtml(str: string): string {
@@ -161,7 +266,7 @@ export const aiWorkflows = () => {
     const wrap = document.querySelector<HTMLElement>('[data-workflows-wrap]');
     const listContainer = wrap?.querySelector<HTMLElement>('.ai-workflow_list');
 
-    if (!listContainer || !cardTemplate) {
+    if (!listContainer) {
       console.warn('[AI Workflows] Missing list container or template');
       return;
     }
@@ -180,7 +285,7 @@ export const aiWorkflows = () => {
 
     setTimeout(() => {
       accordion();
-    }, 100);
+    }, 300);
   }
 
   function updateLoadMoreVisibility(totalMatching: number): void {
@@ -205,11 +310,6 @@ export const aiWorkflows = () => {
       visibleCount += PAGE_SIZE;
       renderPage();
     });
-  }
-
-  function onFilterChanged(): void {
-    visibleCount = PAGE_SIZE;
-    renderPage();
   }
 
   // ---------------------------------------------------------------------------
@@ -298,11 +398,11 @@ export const aiWorkflows = () => {
 
     industrySelect.addEventListener('change', () => {
       update();
-      onFilterChanged();
+      onFilterSelectionChanged(); // ← was onFilterChanged() — no longer renders
     });
 
-    businessTypeSelect?.addEventListener('change', onFilterChanged);
-    roleSelect.addEventListener('change', onFilterChanged);
+    businessTypeSelect?.addEventListener('change', onFilterSelectionChanged); // ← was onFilterChanged
+    roleSelect.addEventListener('change', onFilterSelectionChanged); // ← was onFilterChanged
 
     update();
   }
@@ -313,7 +413,7 @@ export const aiWorkflows = () => {
 
   function init(): void {
     captureTemplate();
-    if (!cardTemplate) return; // nothing to render without a template
+    if (!cardTemplate) return;
 
     const industrySelect = document.querySelector<HTMLSelectElement>('select#industry');
     const businessTypeSelect = document.querySelector<HTMLSelectElement>('select#sub-vertical');
@@ -325,7 +425,10 @@ export const aiWorkflows = () => {
 
     initHealthcareConditionalLogic();
     bindLoadMore();
-    renderPage();
+    bindShowWorkflowsButton();
+
+    updateLoadMoreVisibility(0);
+    refreshAllOptionAvailability(); //  all options available since no filters set
   }
 
   if (document.readyState === 'loading') {

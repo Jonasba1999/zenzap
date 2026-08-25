@@ -41,6 +41,6 @@
   display: block;
 }
 
-.ai-workflow_list-item-wrap.is-open .workflow-chevron {
+[data-accordion] .btn.is-open .workflow-chevron {
   transform: rotate(-180deg);
 }
