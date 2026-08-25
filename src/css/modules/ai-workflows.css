@@ -1,0 +1,69 @@
+.ai-workflow_workflows ol {
+  list-style: none;
+  padding-left: 0;
+}
+
+.ai-workflow_workflows ol li {
+  position: relative;
+  padding-left: 2rem;
+}
+.ai-workflow_workflows ol li:not(:last-child) {
+  margin-bottom: 1rem;
+}
+.ai-workflow_workflows ol li::before {
+  content: counter(list-item);
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 122, 255, 0.12);
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 100%;
+  color: #007aff;
+  text-align: center;
+  font-feature-settings:
+    'liga' off,
+    'clig' off;
+  font-family: 'Figtree', sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px;
+  text-transform: uppercase;
+}
+
+.ai-workflow_example-card {
+  position: relative;
+  border-radius: 0.5rem;
+  background: linear-gradient(0deg, rgba(182, 148, 255, 0.12) 0%, rgba(89, 186, 246, 0.12) 100%);
+
+  z-index: 10;
+}
+
+.ai-workflow_example-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 0.5rem;
+  padding: 1.5px;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 122, 255, 0.7) 0%,
+    rgba(234, 235, 237, 0.8) 24%,
+    rgba(0, 122, 255, 0.7) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.9;
+  z-index: 15;
+}

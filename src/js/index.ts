@@ -6,6 +6,7 @@ import { SplitText } from 'gsap/SplitText';
 
 import { accordion } from './modules/accordion';
 import { aiSetup, compareTableMobileScroll } from './modules/aiDropLanding';
+import { aiWorkflows } from './modules/aiWorkflows';
 import { fadeUpAnimation, textLineReveal } from './modules/animations';
 import { assessmentOfHIPAA } from './modules/assessmentOfHIPAA';
 import { controlSync } from './modules/controlSync';
@@ -32,7 +33,6 @@ import { testimonialsSlider } from './modules/testimonialsSlider';
 import { textFill } from './modules/textFill';
 import { videoFallback } from './modules/videoFallback';
 import { wistiaLazyLoad } from './modules/wistiaLazyLoad';
-
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 window.Webflow ||= [];
@@ -70,4 +70,5 @@ window.Webflow.push(() => {
   clearTopicsOnSearch();
   assessmentOfHIPAA();
   surveyLanding();
+  aiWorkflows();
 });
