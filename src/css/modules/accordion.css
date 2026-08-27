@@ -40,7 +40,6 @@
 .assessment-result_questions-accordion-item.is-open .show-when-open {
   display: block;
 }
-
-[data-accordion] .btn.is-open .workflow-chevron {
+.ai-workflow_list-item.is-open .btn .workflow-chevron {
   transform: rotate(-180deg);
 }

@@ -73,21 +73,25 @@ export const aiWorkflows = () => {
     return true;
   }
 
-  function onFilterSelectionChanged(): void {
-    // Filters just update option availability + healthcare UI.
-    // They do NOT trigger a re-render of the cards.
-    refreshAllOptionAvailability();
-  }
+  // function onFilterSelectionChanged(): void {
+  //   // Filters just update option availability + healthcare UI.
+  //   // They do NOT trigger a re-render of the cards.
+  //   refreshAllOptionAvailability();
+  // }
 
-  function bindShowWorkflowsButton(): void {
-    const showBtn = document.querySelector<HTMLElement>('[data-show-workflows]');
-    showBtn?.addEventListener('click', (e) => {
-      console.log('ClicK: [data-show-workflows]');
-      e.preventDefault();
-      visibleCount = PAGE_SIZE;
-      renderPage();
-    });
-  }
+  // function bindShowWorkflowsButton(): void {
+  //   const showBtn = document.querySelector<HTMLElement>('[data-show-workflows]');
+  //   showBtn?.addEventListener('click', (e) => {
+  //     console.log('ClicK: [data-show-workflows]');
+  //     e.preventDefault();
+  //     visibleCount = PAGE_SIZE;
+  //     renderPage();
+  //   });
+  // }
+
+  // ---------------------------------------------------------------------------
+  // Availability — HIDE options that would yield 0 results (not just disable)
+  // ---------------------------------------------------------------------------
 
   function updateOptionAvailability(
     select: HTMLSelectElement,
@@ -102,8 +106,9 @@ export const aiWorkflows = () => {
       const link = links[i];
       if (!opt.value) {
         // "All ..." option is always available
+        opt.hidden = false;
         opt.disabled = false;
-        link?.classList.remove('is-disabled');
+        if (link) link.style.display = '';
         return;
       }
 
@@ -115,9 +120,15 @@ export const aiWorkflows = () => {
         return wouldMatch(wf, overrides);
       });
 
+      opt.hidden = !hasMatch;
       opt.disabled = !hasMatch;
-      link?.classList.toggle('is-disabled', !hasMatch);
+      if (link) link.style.display = hasMatch ? '' : 'none';
     });
+
+    // If the currently selected value just became unavailable, reset to "All"
+    if (select.value && select.options[select.selectedIndex]?.hidden) {
+      resetSelectToDefault(select);
+    }
   }
 
   function refreshAllOptionAvailability(): void {
@@ -254,6 +265,12 @@ export const aiWorkflows = () => {
     }
 
     return card;
+  }
+
+  function onFilterChanged(): void {
+    visibleCount = PAGE_SIZE;
+    renderPage();
+    refreshAllOptionAvailability();
   }
 
   function escapeHtml(str: string): string {
@@ -398,15 +415,14 @@ export const aiWorkflows = () => {
 
     industrySelect.addEventListener('change', () => {
       update();
-      onFilterSelectionChanged(); // ← was onFilterChanged() — no longer renders
+      onFilterChanged();
     });
 
-    businessTypeSelect?.addEventListener('change', onFilterSelectionChanged); // ← was onFilterChanged
-    roleSelect.addEventListener('change', onFilterSelectionChanged); // ← was onFilterChanged
+    businessTypeSelect?.addEventListener('change', onFilterChanged); // ← now wired
+    roleSelect.addEventListener('change', onFilterChanged); // ← now wired
 
     update();
   }
-
   // ---------------------------------------------------------------------------
   // Init
   // ---------------------------------------------------------------------------
@@ -425,10 +441,14 @@ export const aiWorkflows = () => {
 
     initHealthcareConditionalLogic();
     bindLoadMore();
-    bindShowWorkflowsButton();
 
-    updateLoadMoreVisibility(0);
-    refreshAllOptionAvailability(); //  all options available since no filters set
+    renderPage(); // Render cards on page load
+    refreshAllOptionAvailability(); // hide zero-match options from the start
+
+    // Render cards only after settings chosen ⬇️
+    // bindShowWorkflowsButton();
+    // updateLoadMoreVisibility(0);
+    // refreshAllOptionAvailability(); //  all options available since no filters set
   }
 
   if (document.readyState === 'loading') {
