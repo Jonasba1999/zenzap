@@ -1,7 +1,7 @@
 {
   "meta": {
     "totalRecords": 344,
-    "generatedFrom": "Workflow_use_cases_-_Use_Cases.csv",
+    "generatedFrom": "Workflow_use_cases_-_Use_Cases__2_.csv",
     "description": "AI workflow use cases library — source of truth for the AI Workflows Library page"
   },
   "workflows": [
@@ -9,7 +9,14 @@
       "id": "wf-0000",
       "sourceRowIndex": 0,
       "industry": "Healthcare",
-      "subVertical": [],
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Operations", "Finance"],
       "useCase": "Receipt Expense Sync",
       "description": "Extracts pricing details from any receipt photo, figures out the right expense category, and syncs it straight into the accounting software.",
@@ -22,7 +29,12 @@
       "id": "wf-0001",
       "sourceRowIndex": 1,
       "industry": "Healthcare",
-      "subVertical": ["Hospitals & Health Systems", "Urgent Care", "Care Homes & Home Health"],
+      "subVertical": [
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Care Homes & Home Health",
+        "Behavioral Health"
+      ],
       "roles": ["Clinical Staff", "Operations"],
       "useCase": "Pre-Shift Checklist Delivery",
       "description": "Sends the correct opening or closing checklist of to-dos to nursing staff 30 minutes before their shift begins.",
@@ -35,7 +47,14 @@
       "id": "wf-0002",
       "sourceRowIndex": 2,
       "industry": "Healthcare",
-      "subVertical": [],
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["HR"],
       "useCase": "Day One Protocol Walkthrough",
       "description": "Messages new hires on their first day to walk them through HIPAA and patient safety protocols, and creates a to-do for each onboarding task so nothing gets missed.",
@@ -48,7 +67,14 @@
       "id": "wf-0003",
       "sourceRowIndex": 3,
       "industry": "Healthcare",
-      "subVertical": [],
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Team Member", "Operations"],
       "useCase": "Group Chat To-Do Extraction",
       "description": "The moment someone asks me to turn a chaotic, back-and-forth group chat into to-dos, I scan the conversation and create one for each action item.",
@@ -61,7 +87,14 @@
       "id": "wf-0004",
       "sourceRowIndex": 4,
       "industry": "Healthcare",
-      "subVertical": [],
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["HR", "Compliance/Legal"],
       "useCase": "Chat Compliance Monitoring",
       "description": "Flags inappropriate language or unauthorized file sharing in chat channels and alerts HR.",
@@ -74,7 +107,14 @@
       "id": "wf-0005",
       "sourceRowIndex": 5,
       "industry": "Healthcare",
-      "subVertical": [],
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Operations", "Compliance/Legal"],
       "useCase": "Recurring To-Dos",
       "description": "Sets up a to-do that repeats on whatever schedule you give it, and creates a new one automatically each time it comes around, like a to-do for the compliance lead to renew CPR certifications, once a month.",
@@ -87,7 +127,11 @@
       "id": "wf-0006",
       "sourceRowIndex": 6,
       "industry": "Healthcare",
-      "subVertical": ["Hospitals & Health Systems", "Urgent Care", "Care Homes & Home Health"],
+      "subVertical": [
+        "Hospitals & Health Systems",
+        "Care Homes & Home Health",
+        "Behavioral Health"
+      ],
       "roles": ["Operations", "Clinical Staff"],
       "useCase": "New Patient Admission Chat Setup",
       "description": "Creates a new chat the moment a patient is admitted and adds the assigned care team based on the EHR.",
@@ -100,7 +144,13 @@
       "id": "wf-0007",
       "sourceRowIndex": 7,
       "industry": "Healthcare",
-      "subVertical": ["Hospitals & Health Systems", "Urgent Care", "Care Homes & Home Health"],
+      "subVertical": [
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Specialty Practice",
+        "Care Homes & Home Health",
+        "Behavioral Health"
+      ],
       "roles": ["Clinical Staff"],
       "useCase": "Lab Result Chat Routing",
       "description": "Sends new lab results to the relevant patient chat the moment they come in to the EHR.",
@@ -113,7 +163,13 @@
       "id": "wf-0008",
       "sourceRowIndex": 8,
       "industry": "Healthcare",
-      "subVertical": ["Hospitals & Health Systems", "Urgent Care", "Care Homes & Home Health"],
+      "subVertical": [
+        "Dental Clinics",
+        "Hospitals & Health Systems",
+        "Specialty Practice",
+        "Care Homes & Home Health",
+        "Behavioral Health"
+      ],
       "roles": ["Clinical Staff"],
       "useCase": "Patient Call Note Transcription",
       "description": "Turns a patient call transcription into standardized notes and adds them to the patient's record in the EHR.",
@@ -126,7 +182,14 @@
       "id": "wf-0009",
       "sourceRowIndex": 9,
       "industry": "Healthcare",
-      "subVertical": [],
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Operations"],
       "useCase": "Low Stock Auto-Reorder",
       "description": "Checks whether a reorder is already scheduled the moment any tracked item drops below its threshold, and places one with the supplier if not.",
@@ -139,7 +202,14 @@
       "id": "wf-0010",
       "sourceRowIndex": 10,
       "industry": "Healthcare",
-      "subVertical": [],
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Operations"],
       "useCase": "PO / Order Status Lookup",
       "description": "Looks up a purchase order's status the moment someone asks in chat, without needing to log into the ordering system.",
@@ -152,7 +222,14 @@
       "id": "wf-0011",
       "sourceRowIndex": 11,
       "industry": "Healthcare",
-      "subVertical": [],
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Leadership", "Operations"],
       "useCase": "Overtime Threshold Alerts",
       "description": "Notifies managers the moment a staff member crosses into overtime hours.",
@@ -165,7 +242,14 @@
       "id": "wf-0012",
       "sourceRowIndex": 12,
       "industry": "Healthcare",
-      "subVertical": [],
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Operations", "Team Member"],
       "useCase": "Post-Call Action Item To-Dos",
       "description": "Reads the transcription of any Zenzap call for action items, creates a to-do for each one assigned to whoever it belongs to, and takes on any it can complete itself.",
@@ -178,7 +262,14 @@
       "id": "wf-0013",
       "sourceRowIndex": 13,
       "industry": "Healthcare",
-      "subVertical": [],
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["IT"],
       "useCase": "IT Ticket Auto-Triage",
       "description": "Reads a tech issue reported in chat, figures out urgency, and creates a ticket assigned to the right person.",
@@ -191,7 +282,14 @@
       "id": "wf-0014",
       "sourceRowIndex": 14,
       "industry": "Healthcare",
-      "subVertical": [],
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["IT", "Operations"],
       "useCase": "System Access Request Routing",
       "description": "Routes a request for system access to the right approver, and grants or provisions it once approved.",
@@ -204,7 +302,14 @@
       "id": "wf-0015",
       "sourceRowIndex": 15,
       "industry": "Healthcare",
-      "subVertical": [],
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Finance", "Operations"],
       "useCase": "Expense Approval Routing",
       "description": "Routes any expense over your approval threshold to the right approver before it's logged.",
@@ -217,7 +322,14 @@
       "id": "wf-0016",
       "sourceRowIndex": 16,
       "industry": "Healthcare",
-      "subVertical": [],
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Finance", "Leadership"],
       "useCase": "Budget Threshold Alert",
       "description": "Flags any expense category that's approaching or has crossed its monthly budget.",
@@ -230,7 +342,14 @@
       "id": "wf-0017",
       "sourceRowIndex": 17,
       "industry": "Healthcare",
-      "subVertical": [],
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Compliance/Legal", "HR"],
       "useCase": "Certification & License Expiration Tracker",
       "description": "Tracks staff certifications and licenses nearing expiration, and reminds the person until it's renewed.",
@@ -243,7 +362,14 @@
       "id": "wf-0018",
       "sourceRowIndex": 18,
       "industry": "Healthcare",
-      "subVertical": [],
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Compliance/Legal", "Operations"],
       "useCase": "Safety Incident Report Routing",
       "description": "Logs a safety incident reported in chat and routes it to the safety or compliance lead.",
@@ -256,7 +382,14 @@
       "id": "wf-0019",
       "sourceRowIndex": 19,
       "industry": "Healthcare",
-      "subVertical": [],
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Compliance/Legal", "Finance"],
       "useCase": "Contract Renewal Reminder",
       "description": "Reminds the right person ahead of a contract or lease auto-renewal deadline.",
@@ -269,7 +402,14 @@
       "id": "wf-0020",
       "sourceRowIndex": 20,
       "industry": "Healthcare",
-      "subVertical": [],
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Finance", "Operations"],
       "useCase": "New Vendor Setup Request",
       "description": "Checks that the required documents are on file, then creates a new vendor in the accounting software.",
@@ -282,7 +422,12 @@
       "id": "wf-0021",
       "sourceRowIndex": 21,
       "industry": "Healthcare",
-      "subVertical": ["Hospitals & Health Systems", "Urgent Care", "Care Homes & Home Health"],
+      "subVertical": [
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Care Homes & Home Health",
+        "Behavioral Health"
+      ],
       "roles": ["Clinical Staff", "Operations"],
       "useCase": "Shift Coverage Request Broadcast",
       "description": "Broadcasts an open shift to eligible staff the moment someone requests coverage, and assigns it to whoever claims it first.",
@@ -295,7 +440,14 @@
       "id": "wf-0022",
       "sourceRowIndex": 22,
       "industry": "Healthcare",
-      "subVertical": [],
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["IT", "Operations"],
       "useCase": "IT Asset Inventory Sync",
       "description": "Tracks devices and equipment issued to staff, and flags anything overdue to be returned.",
@@ -308,7 +460,14 @@
       "id": "wf-0023",
       "sourceRowIndex": 23,
       "industry": "Healthcare",
-      "subVertical": [],
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["IT", "Finance"],
       "useCase": "Software License Renewal Tracker",
       "description": "Tracks upcoming software license renewal dates and reminds the right person before they lapse.",
@@ -321,7 +480,14 @@
       "id": "wf-0024",
       "sourceRowIndex": 24,
       "industry": "Healthcare",
-      "subVertical": [],
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["IT", "HR"],
       "useCase": "New Employee IT Setup Checklist",
       "description": "Creates a to-do for every IT setup task a new hire needs, and assigns them to IT.",
@@ -334,7 +500,14 @@
       "id": "wf-0025",
       "sourceRowIndex": 25,
       "industry": "Healthcare",
-      "subVertical": [],
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["IT", "Compliance/Legal"],
       "useCase": "IT Access Audit Reminder",
       "description": "Reviews who has access to which systems every quarter and flags anything that looks outdated.",
@@ -347,7 +520,14 @@
       "id": "wf-0026",
       "sourceRowIndex": 26,
       "industry": "Healthcare",
-      "subVertical": [],
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["HR", "Compliance/Legal"],
       "useCase": "New Hire Paperwork Tracker",
       "description": "Tracks which required new hire forms are still outstanding and follows up directly.",
@@ -360,7 +540,14 @@
       "id": "wf-0027",
       "sourceRowIndex": 27,
       "industry": "Healthcare",
-      "subVertical": [],
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Leadership", "Operations"],
       "useCase": "Weekly Leadership KPI Digest",
       "description": "Pulls last week's key numbers from your connected tools and posts a short digest to leadership.",
@@ -373,7 +560,14 @@
       "id": "wf-0028",
       "sourceRowIndex": 28,
       "industry": "Healthcare",
-      "subVertical": [],
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Leadership", "Finance"],
       "useCase": "Vendor Performance Review Reminder",
       "description": "Flags vendors with rising costs or repeated issues every quarter, and reminds leadership to review them.",
@@ -386,7 +580,14 @@
       "id": "wf-0029",
       "sourceRowIndex": 29,
       "industry": "Healthcare",
-      "subVertical": [],
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Compliance/Legal", "Finance"],
       "useCase": "Vendor Compliance Document Tracker",
       "description": "Checks vendor compliance documents for expiration every month and requests updated copies.",
@@ -399,7 +600,14 @@
       "id": "wf-0030",
       "sourceRowIndex": 30,
       "industry": "Healthcare",
-      "subVertical": [],
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Finance", "Operations"],
       "useCase": "Reorder-to-Expense Sync",
       "description": "The moment a reorder is placed in the inventory system, creates the matching pending expense entry in the accounting software.",
@@ -412,7 +620,14 @@
       "id": "wf-0031",
       "sourceRowIndex": 31,
       "industry": "Healthcare",
-      "subVertical": [],
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["HR", "Finance"],
       "useCase": "New Hire Payroll Setup Sync",
       "description": "The moment a new hire is added in the HR system, syncs their role and pay rate straight into the payroll software.",
@@ -425,7 +640,14 @@
       "id": "wf-0032",
       "sourceRowIndex": 32,
       "industry": "Healthcare",
-      "subVertical": [],
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Leadership", "Finance"],
       "useCase": "Weekly Financial Snapshot",
       "description": "Checks both the CRM and the accounting software every week to compare revenue booked against cash actually collected.",
@@ -438,7 +660,14 @@
       "id": "wf-0033",
       "sourceRowIndex": 33,
       "industry": "Healthcare",
-      "subVertical": [],
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Leadership", "Finance"],
       "useCase": "Monthly Vendor Spend vs Stock Report",
       "description": "Checks both the accounting software and the inventory system every month to compare vendor spend against actual stock levels, catching overordering early.",
@@ -3544,8 +3773,15 @@
     {
       "id": "wf-0272",
       "sourceRowIndex": 272,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Operations", "Finance"],
       "useCase": "Receipt Expense Sync",
       "description": "Extracts pricing details from any receipt photo, figures out the right expense category, and syncs it straight into the accounting software.",
@@ -3557,8 +3793,15 @@
     {
       "id": "wf-0273",
       "sourceRowIndex": 273,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["HR"],
       "useCase": "Day One Protocol Walkthrough",
       "description": "Messages new hires on their first day to walk them through company protocols, and creates a to-do for each onboarding task so nothing gets missed.",
@@ -3570,8 +3813,15 @@
     {
       "id": "wf-0274",
       "sourceRowIndex": 274,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Leadership", "Operations"],
       "useCase": "POS Labor Reports",
       "description": "Feeds daily sales and hours worked from the point of sale system straight into the management chat.",
@@ -3583,8 +3833,15 @@
     {
       "id": "wf-0275",
       "sourceRowIndex": 275,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Team Member", "Operations"],
       "useCase": "Group Chat To-Do Extraction",
       "description": "The moment someone asks me to turn a chaotic, back-and-forth group chat into to-dos, I scan the conversation and create one for each action item.",
@@ -3596,8 +3853,15 @@
     {
       "id": "wf-0276",
       "sourceRowIndex": 276,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["HR", "Compliance/Legal"],
       "useCase": "Chat Compliance Monitoring",
       "description": "Flags inappropriate language or unauthorized file sharing in chat channels and alerts HR.",
@@ -3609,8 +3873,15 @@
     {
       "id": "wf-0277",
       "sourceRowIndex": 277,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Operations", "Team Member"],
       "useCase": "Recurring To-Dos",
       "description": "Sets up a to-do that repeats on whatever schedule you give it, and creates a new one automatically each time it comes around, like a to-do for the ops manager to check the fire extinguishers, once a month.",
@@ -3622,8 +3893,15 @@
     {
       "id": "wf-0278",
       "sourceRowIndex": 278,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Operations"],
       "useCase": "Low Stock Auto-Reorder",
       "description": "Checks whether a reorder is already scheduled the moment any tracked item drops below its threshold, and places one with the supplier if not.",
@@ -3635,8 +3913,15 @@
     {
       "id": "wf-0279",
       "sourceRowIndex": 279,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Operations"],
       "useCase": "Pre-Pickup Task Completion Reminder",
       "description": "Reminds staff to complete whatever prep steps are still outstanding before a scheduled pickup.",
@@ -3648,8 +3933,15 @@
     {
       "id": "wf-0280",
       "sourceRowIndex": 280,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Operations"],
       "useCase": "Sequential Job Dispatch",
       "description": "Marks a job complete the moment a team member finishes it and assigns them the next priority job nearby.",
@@ -3661,8 +3953,15 @@
     {
       "id": "wf-0281",
       "sourceRowIndex": 281,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Operations"],
       "useCase": "PO / Order Status Lookup",
       "description": "Looks up a purchase order's status the moment someone asks in chat, without needing to log into the ordering system.",
@@ -3674,8 +3973,15 @@
     {
       "id": "wf-0282",
       "sourceRowIndex": 282,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Leadership", "Operations"],
       "useCase": "Overtime Threshold Alerts",
       "description": "Notifies managers the moment a staff member crosses into overtime hours.",
@@ -3687,8 +3993,15 @@
     {
       "id": "wf-0283",
       "sourceRowIndex": 283,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Operations", "Team Member"],
       "useCase": "Post-Call Action Item To-Dos",
       "description": "Reads the transcription of any Zenzap call for action items, creates a to-do for each one assigned to whoever it belongs to, and takes on any it can complete itself.",
@@ -3700,8 +4013,15 @@
     {
       "id": "wf-0284",
       "sourceRowIndex": 284,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["IT"],
       "useCase": "IT Ticket Auto-Triage",
       "description": "Reads a tech issue reported in chat, figures out urgency, and creates a ticket assigned to the right person.",
@@ -3713,8 +4033,15 @@
     {
       "id": "wf-0285",
       "sourceRowIndex": 285,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["IT", "Operations"],
       "useCase": "System Access Request Routing",
       "description": "Routes a request for system access to the right approver, and grants or provisions it once approved.",
@@ -3726,8 +4053,15 @@
     {
       "id": "wf-0286",
       "sourceRowIndex": 286,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Finance", "Operations"],
       "useCase": "Expense Approval Routing",
       "description": "Routes any expense over your approval threshold to the right approver before it's logged.",
@@ -3739,8 +4073,15 @@
     {
       "id": "wf-0287",
       "sourceRowIndex": 287,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Finance", "Leadership"],
       "useCase": "Budget Threshold Alert",
       "description": "Flags any expense category that's approaching or has crossed its monthly budget.",
@@ -3752,8 +4093,15 @@
     {
       "id": "wf-0288",
       "sourceRowIndex": 288,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Compliance/Legal", "HR"],
       "useCase": "Certification & License Expiration Tracker",
       "description": "Tracks staff certifications and licenses nearing expiration, and reminds the person until it's renewed.",
@@ -3765,8 +4113,15 @@
     {
       "id": "wf-0289",
       "sourceRowIndex": 289,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Compliance/Legal", "Operations"],
       "useCase": "Safety Incident Report Routing",
       "description": "Logs a safety incident reported in chat and routes it to the safety or compliance lead.",
@@ -3778,8 +4133,15 @@
     {
       "id": "wf-0290",
       "sourceRowIndex": 290,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Compliance/Legal", "Finance"],
       "useCase": "Contract Renewal Reminder",
       "description": "Reminds the right person ahead of a contract or lease auto-renewal deadline.",
@@ -3791,8 +4153,15 @@
     {
       "id": "wf-0291",
       "sourceRowIndex": 291,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Finance", "Operations"],
       "useCase": "New Vendor Setup Request",
       "description": "Checks that the required documents are on file, then creates a new vendor in the accounting software.",
@@ -3804,8 +4173,15 @@
     {
       "id": "wf-0292",
       "sourceRowIndex": 292,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Operations", "Team Member"],
       "useCase": "Creating Quotes",
       "description": "Reads the scope details someone writes in a Zenzap chat, structures the raw estimate into a standard draft, and creates the quote in the CRM.",
@@ -3817,8 +4193,15 @@
     {
       "id": "wf-0293",
       "sourceRowIndex": 293,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["IT", "Operations"],
       "useCase": "IT Asset Inventory Sync",
       "description": "Tracks devices and equipment issued to staff, and flags anything overdue to be returned.",
@@ -3830,8 +4213,15 @@
     {
       "id": "wf-0294",
       "sourceRowIndex": 294,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["IT", "Finance"],
       "useCase": "Software License Renewal Tracker",
       "description": "Tracks upcoming software license renewal dates and reminds the right person before they lapse.",
@@ -3843,8 +4233,15 @@
     {
       "id": "wf-0295",
       "sourceRowIndex": 295,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["IT", "HR"],
       "useCase": "New Employee IT Setup Checklist",
       "description": "Creates a to-do for every IT setup task a new hire needs, and assigns them to IT.",
@@ -3856,8 +4253,15 @@
     {
       "id": "wf-0296",
       "sourceRowIndex": 296,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["IT", "Compliance/Legal"],
       "useCase": "IT Access Audit Reminder",
       "description": "Reviews who has access to which systems every quarter and flags anything that looks outdated.",
@@ -3869,8 +4273,15 @@
     {
       "id": "wf-0297",
       "sourceRowIndex": 297,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["HR", "Compliance/Legal"],
       "useCase": "New Hire Paperwork Tracker",
       "description": "Tracks which required new hire forms are still outstanding and follows up directly.",
@@ -3882,8 +4293,15 @@
     {
       "id": "wf-0298",
       "sourceRowIndex": 298,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Leadership", "Operations"],
       "useCase": "Weekly Leadership KPI Digest",
       "description": "Pulls last week's key numbers from your connected tools and posts a short digest to leadership.",
@@ -3895,8 +4313,15 @@
     {
       "id": "wf-0299",
       "sourceRowIndex": 299,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Leadership", "Finance"],
       "useCase": "Vendor Performance Review Reminder",
       "description": "Flags vendors with rising costs or repeated issues every quarter, and reminds leadership to review them.",
@@ -3908,8 +4333,15 @@
     {
       "id": "wf-0300",
       "sourceRowIndex": 300,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Compliance/Legal", "Finance"],
       "useCase": "Vendor Compliance Document Tracker",
       "description": "Checks vendor compliance documents for expiration every month and requests updated copies.",
@@ -3921,8 +4353,15 @@
     {
       "id": "wf-0301",
       "sourceRowIndex": 301,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Finance", "Operations"],
       "useCase": "Quote-to-Invoice Sync",
       "description": "The moment a quote is marked won in the CRM, creates the matching invoice in the accounting software automatically.",
@@ -3934,8 +4373,15 @@
     {
       "id": "wf-0302",
       "sourceRowIndex": 302,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Finance", "Operations"],
       "useCase": "Reorder-to-Expense Sync",
       "description": "The moment a reorder is placed in the inventory system, creates the matching pending expense entry in the accounting software.",
@@ -3947,8 +4393,15 @@
     {
       "id": "wf-0303",
       "sourceRowIndex": 303,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["HR", "Finance"],
       "useCase": "New Hire Payroll Setup Sync",
       "description": "The moment a new hire is added in the HR system, syncs their role and pay rate straight into the payroll software.",
@@ -3960,8 +4413,15 @@
     {
       "id": "wf-0304",
       "sourceRowIndex": 304,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Operations"],
       "useCase": "Job Parts Auto-Deduct & Reorder",
       "description": "The moment parts are logged as used on a job in the field service software, deducts them from the inventory system, and reorders automatically if that drops it below threshold.",
@@ -3973,8 +4433,15 @@
     {
       "id": "wf-0305",
       "sourceRowIndex": 305,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Finance", "Operations"],
       "useCase": "Payment Status Sync",
       "description": "The moment a payment is marked received in the accounting software, updates the matching deal's status in the CRM.",
@@ -3986,8 +4453,15 @@
     {
       "id": "wf-0306",
       "sourceRowIndex": 306,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Operations"],
       "useCase": "Job Status Sync",
       "description": "The moment a job is marked complete in the field service software, updates the matching project's status in the CRM.",
@@ -3999,8 +4473,15 @@
     {
       "id": "wf-0307",
       "sourceRowIndex": 307,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Leadership", "Finance"],
       "useCase": "Weekly Financial Snapshot",
       "description": "Checks both the CRM and the accounting software every week to compare revenue booked against cash actually collected.",
@@ -4012,8 +4493,15 @@
     {
       "id": "wf-0308",
       "sourceRowIndex": 308,
-      "industry": "General / Any Industry",
-      "subVertical": [],
+      "industry": "Healthcare, Restaurants & Food Service, Hospitality, Construction & Home Services, Retail & Ecommerce, Education, Churches & Non-Profits, Wellness & Fitness, Franchises, Other",
+      "subVertical": [
+        "Dental Clinics",
+        "Care Homes & Home Health",
+        "Specialty Practice",
+        "Hospitals & Health Systems",
+        "Urgent Care",
+        "Behavioral Health"
+      ],
       "roles": ["Leadership", "Finance"],
       "useCase": "Monthly Vendor Spend vs Stock Report",
       "description": "Checks both the accounting software and the inventory system every month to compare vendor spend against actual stock levels, catching overordering early.",
