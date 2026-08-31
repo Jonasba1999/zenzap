@@ -71,6 +71,10 @@
   -webkit-background-clip: text;
 }
 
+.line {
+  padding-bottom: 4px;
+}
+
 /* Featurre Card 2 hover gradient */
 .feature-cards2_card:hover .feature-cards2_hover-gradient {
   opacity: 100;
